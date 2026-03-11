@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Зигма Арт Летний Лагерь</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap');
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  :root{--font:'Manrope',system-ui,sans-serif;--border:#e5e7eb;--text:#1f2937;--muted:#6b7280;--radius:12px}
+  body{font-family:var(--font);color:var(--text);background:#f8fafc;font-size:14px;line-height:1.5}
+
+  /* NAV */
+  .c-nav{background:#fff;border-bottom:1px solid var(--border);position:sticky;top:0;z-index:50;padding:0 24px}
+  .c-nav-inner{max-width:1100px;margin:0 auto;display:flex;align-items:center;gap:16px;height:60px}
+  .c-agency-name{font-size:1rem;font-weight:800;color:var(--text);flex:1}
+  .c-nav-tabs{display:flex;gap:4px}
+  .c-nav-tab{padding:7px 14px;border-radius:20px;border:1.5px solid var(--border);background:#f9fafb;font-family:var(--font);font-size:12px;font-weight:600;cursor:pointer;color:var(--muted);transition:all .15s;white-space:nowrap}
+  .c-nav-tab.active{color:#fff;border-color:transparent}
+  .c-contact-btn{padding:9px 18px;border-radius:8px;border:none;font-family:var(--font);font-size:13px;font-weight:700;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;gap:6px;transition:opacity .15s;white-space:nowrap;color:#fff;background:#1f2937}
+  .c-contact-btn:hover{opacity:.85}
+
+  /* HERO */
+  .c-hero{max-width:1100px;margin:0 auto;padding:40px 24px 28px}
+  .c-hero-title{font-size:2rem;font-weight:800;letter-spacing:-0.5px;margin-bottom:6px}
+  .c-hero-date{font-size:12px;color:var(--muted)}
+
+  /* CARDS */
+  .c-cards{max-width:1100px;margin:0 auto;padding:0 24px 32px;display:grid;grid-template-columns:1fr 1fr 1fr;gap:18px}
+  .c-cards.single{grid-template-columns:1fr;max-width:560px}
+  .c-card{background:#fff;border:2px solid var(--border);border-radius:var(--radius);box-shadow:0 1px 4px rgba(0,0,0,.07);display:flex;flex-direction:column;transition:box-shadow .2s}
+  .c-card:hover{box-shadow:0 4px 20px rgba(0,0,0,.1)}
+  .c-card-head{padding:20px 20px 14px;border-bottom:1px solid var(--border)}
+  .c-badge{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1px;opacity:.7;margin-bottom:4px}
+  .c-card-title{font-size:1.35rem;font-weight:800;letter-spacing:-.4px;margin-bottom:14px}
+  .c-diamonds{font-size:1.5rem;margin-bottom:8px;display:flex;gap:4px}
+  .c-progress-track{height:10px;background:#e5e7eb;border-radius:99px;overflow:hidden;margin-bottom:5px}
+  .c-progress-fill{height:100%;border-radius:99px}
+  .c-progress-label{font-size:.75rem;color:var(--muted);font-weight:500}
+  .c-card-body{padding:16px 20px;flex:1}
+  .c-section{margin-bottom:18px}
+  .c-section-title{font-size:.875rem;font-weight:700;padding-bottom:6px;border-bottom:1px solid #f3f4f6;margin-bottom:8px}
+  .c-item{display:flex;gap:7px;padding:4px 0 4px 4px;font-size:13px;align-items:flex-start}
+  .c-subitems{padding-left:28px}
+  .c-subitem{font-size:11.5px;color:var(--muted);padding:2px 0}
+  .c-bonus{background:#d1fae5;border:1px solid #6ee7b7;border-radius:10px;padding:12px 14px;margin-bottom:12px}
+  .c-bonus-title{font-size:.875rem;font-weight:700;color:#065f46;margin-bottom:6px}
+  .c-bonus-item{font-size:12.5px;color:#065f46;padding:2px 0}
+
+  /* BOTTOM */
+  .c-bottom{max-width:1100px;margin:0 auto;padding:0 24px 48px}
+  .c-section-head{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.8px;color:var(--muted);margin-bottom:12px;padding-bottom:8px;border-bottom:1px solid var(--border)}
+  .c-bottom-block{margin-bottom:28px}
+  .c-lists-row{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  .c-list-card{background:#f9fafb;border:1px solid var(--border);border-radius:var(--radius);padding:16px}
+  .c-list-card-title{font-size:12px;font-weight:700;margin-bottom:8px}
+  .c-list-item{font-size:13px;display:flex;gap:7px;padding:4px 0;align-items:flex-start}
+  .c-expect{background:#fffbeb;border:1px solid #fde68a;border-radius:var(--radius);padding:16px}
+  .c-expect-title{font-size:12px;font-weight:700;color:#92400e;margin-bottom:6px}
+  .c-expect p{font-size:13px;color:#78350f;line-height:1.6}
+  .c-3col{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px}
+  .c-term-block{background:#f9fafb;border:1px solid var(--border);border-radius:var(--radius);padding:14px 16px}
+  .c-term-label{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.6px;margin-bottom:5px}
+  .c-term-val{font-size:13px;font-weight:600}
+  .c-price-block{border-radius:var(--radius);padding:18px;border:2px solid;display:flex;flex-direction:column;gap:4px}
+  .c-price-label{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.6px;margin-bottom:2px}
+  .c-price-val{font-size:1.5rem;font-weight:800;letter-spacing:-.5px}
+  .c-price-sub{font-size:12px;color:var(--muted)}
+  .c-budget-row{margin-top:10px;padding-top:10px;border-top:1px solid rgba(0,0,0,.08);display:flex;flex-direction:column;gap:2px}
+  .c-budget-label{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.6px;color:var(--muted)}
+  .c-budget-val{font-size:13px;font-weight:600;color:var(--text)}
+  .c-contract{background:#f9fafb;border:1px solid var(--border);border-radius:var(--radius);padding:16px}
+  .c-contract-title{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.7px;color:var(--muted);margin-bottom:8px}
+  .c-contract p{font-size:13px;line-height:1.6}
+
+  /* FOOTER */
+  .c-footer{background:#1f2937;color:#9ca3af;text-align:center;padding:24px;font-size:12px}
+  .c-footer a{color:#60a5fa;text-decoration:none}
+
+  /* MOBILE */
+  @media(max-width:768px){
+    .c-cards{grid-template-columns:1fr!important;padding:0 14px 24px}
+    .c-3col{grid-template-columns:1fr}
+    .c-lists-row{grid-template-columns:1fr}
+    .c-hero{padding:24px 14px 16px}
+    .c-bottom{padding:0 14px 32px}
+    .c-hero-title{font-size:1.4rem}
+    .c-nav-tabs{display:none}
+  }
+  @media(max-width:480px){
+    .c-nav-inner{gap:10px}
+    .c-agency-name{font-size:.875rem}
+    .c-contact-btn{font-size:12px;padding:8px 12px}
+  }
+</style>
+</head>
+<body>
+
+<nav class="c-nav">
+  <div class="c-nav-inner">
+    <div class="c-agency-name">Зигма Арт Летний Лагерь</div>
+    <div class="c-nav-tabs" id="cnav-tabs"></div>
+    
+  </div>
+</nav>
+
+<div class="c-hero">
+  <div class="c-hero-title">Зигма Арт Летний Лагерь</div>
+  <div class="c-hero-date">Подготовлено 11 марта 2026 г.</div>
+</div>
+
+<div class="c-cards" id="c-cards-wrap"><div class="c-card" style="border-top:4px solid #8b5cf6">
+      <div class="c-card-head">
+        <div class="c-badge" style="color:#8b5cf6">Максимальный</div>
+        <div class="c-card-title" style="color:#8b5cf6">Максимальный</div>
+        <div class="c-diamonds">💎💎💎💎💎</div>
+        <div class="c-progress-track"><div class="c-progress-fill" style="width:100%;background:#8b5cf6"></div></div>
+        <div class="c-progress-label">100% объёма работ</div>
+      </div>
+      <div class="c-card-body">
+      <div class="c-section">
+        <div class="c-section-title">Трёхэтапные предпроектные исследования</div>
+        <div class="c-item" ><span>✅</span><span>Исследование продукта </span></div>
+          <div class="c-item" ><span>✅</span><span>Анализ целевой аудитории </span></div>
+          <div class="c-item" ><span>✅</span><span>Анализ аудитории с помощью нейросетей </span></div>
+          <div class="c-item" ><span>✅</span><span>Анализ конкурентов</span></div>
+          
+      </div>
+      <div class="c-section">
+        <div class="c-section-title">Разработка воронки для входящего трафика с целью максимальной конверсии</div>
+        <div class="c-item" ><span>✅</span><span>Проектирование этапов взаимодействия, маршрутов пользователя и ключевых точек конверсии</span></div>
+          <div class="c-item" ><span>✅</span><span>Формулирование цепочек офферов, триггеров и CTA, основанных на психологии принятия решения.</span></div>
+          <div class="c-item" ><span>✅</span><span>Формирование матрицы продукта (если это возможно)</span></div>
+          <div class="c-item" ><span>✅</span><span>Анализ причин невовлечения на каждом этапе и устранение барьеров (UX, текст, скорость, логика перехода)</span></div>
+          
+      </div>
+      <div class="c-section">
+        <div class="c-section-title">Доработка структуры страниц имеющегося сайта / создание новых лендингов под разные сегменты</div>
+        <div class="c-item" ><span>✅</span><span>Доработка структуры страниц сайта</span></div>
+          <div class="c-item" ><span>✅</span><span>Продающий дизайн сайта - каждый пиксель на доверие и продажу</span></div>
+          <div class="c-item" ><span>✅</span><span>Вёрстка сайта под 4 размера</span></div>
+          <div class="c-item" ><span>✅</span><span>Адаптация и ускорение скорости загрузки сайта</span></div>
+          <div class="c-item" ><span>✅</span><span>Тестирование конверсий</span></div>
+          <div class="c-item" ><span>✅</span><span>Улучшение сайта, исходя из данных аналитики</span></div>
+          
+      </div>
+      <div class="c-section">
+        <div class="c-section-title">Ведение Телеграм канала + Кросспостинг в ВК  /// При блокировке - Полный переход в ВК</div>
+        <div class="c-item" ><span>✅</span><span>Создание и оформление Telegram-канала</span></div>
+          <div class="c-item" ><span>✅</span><span>Создание контент-плана для Telegram-канала</span></div>
+          <div class="c-item" ><span>✅</span><span>Ведение Telegram-канала</span></div>
+          <div class="c-item" ><span>✅</span><span>Закуп рекламы в других ТГ каналах (отдельный бюджет)</span></div>
+          
+      </div>
+      <div class="c-section">
+        <div class="c-section-title">Создание и оформление бота в ТГ канале</div>
+        <div class="c-item" ><span>✅</span><span>Определение логики сценариев, уровней взаимодействия, ветвлений и CTA-точек</span></div>
+          <div class="c-item" ><span>✅</span><span>Оформление аватара, описания, приветственных экранов и стиля коммуникации</span></div>
+          <div class="c-item" ><span>✅</span><span>Наполнение контентом</span></div>
+          <div class="c-item" ><span>✅</span><span>Проверка технической корректности, UX-потока и точности переходов между этапами</span></div>
+          
+      </div>
+      <div class="c-section">
+        <div class="c-section-title">Работа с имеющейся и пополняющейся базой</div>
+        <div class="c-item" ><span>✅</span><span>Сегментация базы</span></div>
+          <div class="c-item" ><span>✅</span><span>Разработка рассылок, учитывая сегмент</span></div>
+          <div class="c-item" ><span>✅</span><span>Формирование прогревающих сообщений, рассылок, опросов, обучающих блоков</span></div>
+          
+      </div>
+      <div class="c-section">
+        <div class="c-section-title">Привлечение клиентов (Яндекс Директ РСЯ / ретаргетинг + ВК лид-формы)</div>
+        <div class="c-item" ><span>✅</span><span>Ретаргетинг в Яндкс Директ по существующей базе на ТГ бота</span></div>
+          <div class="c-item" ><span>✅</span><span>LAL на тех кто когда-либо оставлял заявку на сайте на ТГ бота </span></div>
+          <div class="c-item" ><span>✅</span><span>VK.ads ретаргетинг по базе</span></div>
+          <div class="c-item" style="color:#9ca3af;text-decoration:line-through"><span>❌</span><span>РСЯ по АТ + ключи на ТГ канал (баз аналитики)</span></div>
+          <div class="c-item" ><span>✅</span><span>Рекламная кампания с таргетингом на основных конкурентов</span></div>
+          <div class="c-item" ><span>✅</span><span>РСЯ по ключам + АТ (автотаргетинг) на ТГ бота</span></div>
+          <div class="c-item" ><span>✅</span><span>РСЯ по ключам + АТ на лендинг</span></div>
+          <div class="c-item" ><span>✅</span><span>VK.ads - Лид-формы по ключам/инетересам/конкурентам</span></div>
+          <div class="c-item" ><span>✅</span><span>Настройка аналитики с помощью инструмента &quot;Откуда подписки Бот&quot;</span></div>
+          
+      </div>
+      <div class="c-bonus">
+        <div class="c-bonus-title">🎁Сценарии продающих видео для бота (при необходимости новых видео)🎁</div>
+        
+      </div>
+      <div class="c-bonus">
+        <div class="c-bonus-title">🎁 Анализ и докрутка скриптов входящих заявок с помощью нейросети🎁</div>
+        
+      </div>
+      <div class="c-bonus">
+        <div class="c-bonus-title">Бонусы успеем сделать при подписании договора до 14.03.2026</div>
+        
+      </div></div>
+    </div><div class="c-card" style="border-top:4px solid #10b981">
+      <div class="c-card-head">
+        <div class="c-badge" style="color:#10b981">Средний</div>
+        <div class="c-card-title" style="color:#10b981">Средний</div>
+        <div class="c-diamonds">💎💎💎</div>
+        <div class="c-progress-track"><div class="c-progress-fill" style="width:64%;background:#10b981"></div></div>
+        <div class="c-progress-label">64% объёма работ</div>
+      </div>
+      <div class="c-card-body">
+      <div class="c-section">
+        <div class="c-section-title">Трёхэтапные предпроектные исследования</div>
+        <div class="c-item" ><span>✅</span><span>Исследование продукта </span></div>
+          <div class="c-item" ><span>✅</span><span>Анализ целевой аудитории </span></div>
+          <div class="c-item" ><span>✅</span><span>Анализ аудитории с помощью нейросетей </span></div>
+          <div class="c-item" ><span>✅</span><span>Анализ конкурентов</span></div>
+          
+      </div>
+      <div class="c-section">
+        <div class="c-section-title">Разработка воронки для входящего трафика с целью максимальной конверсии</div>
+        <div class="c-item" ><span>✅</span><span>Проектирование этапов взаимодействия, маршрутов пользователя и ключевых точек конверсии</span></div>
+          <div class="c-item" ><span>✅</span><span>Формулирование цепочек офферов, триггеров и CTA, основанных на психологии принятия решения.</span></div>
+          <div class="c-item" ><span>✅</span><span>Формирование матрицы продукта (если это возможно)</span></div>
+          <div class="c-item" ><span>✅</span><span>Анализ причин невовлечения на каждом этапе и устранение барьеров (UX, текст, скорость, логика перехода)</span></div>
+          
+      </div>
+      <div class="c-section">
+        <div class="c-section-title">Доработка структуры страниц имеющегося сайта / создание новых лендингов под разные сегменты</div>
+        <div class="c-item" ><span>✅</span><span>Доработка структуры страниц сайта</span></div>
+          <div class="c-item" ><span>✅</span><span>Продающий дизайн сайта - каждый пиксель на доверие и продажу</span></div>
+          <div class="c-item" ><span>✅</span><span>Вёрстка сайта под 4 размера</span></div>
+          <div class="c-item" ><span>✅</span><span>Адаптация и ускорение скорости загрузки сайта</span></div>
+          <div class="c-item" ><span>✅</span><span>Тестирование конверсий</span></div>
+          <div class="c-item" ><span>✅</span><span>Улучшение сайта, исходя из данных аналитики</span></div>
+          
+      </div>
+      <div class="c-section">
+        <div class="c-section-title">Ведение Телеграм канала + Кросспостинг в ВК </div>
+        <div class="c-item" ><span>✅</span><span>Создание и оформление Telegram-канала</span></div>
+          <div class="c-item" ><span>✅</span><span>Создание контент-плана для Telegram-канала</span></div>
+          <div class="c-item" ><span>✅</span><span>Ведение Telegram-канала</span></div>
+          <div class="c-item" ><span>✅</span><span>Закуп рекламы в других ТГ каналах (отдельный бюджет)</span></div>
+          
+      </div>
+      <div class="c-section">
+        <div class="c-section-title">Создание и оформление бота в ТГ канале</div>
+        <div class="c-item" ><span>✅</span><span>Определение логики сценариев, уровней взаимодействия, ветвлений и CTA-точек</span></div>
+          <div class="c-item" ><span>✅</span><span>Оформление аватара, описания, приветственных экранов и стиля коммуникации</span></div>
+          <div class="c-item" ><span>✅</span><span>Наполнение контентом</span></div>
+          <div class="c-item" ><span>✅</span><span>Проверка технической корректности, UX-потока и точности переходов между этапами</span></div>
+          
+      </div>
+      <div class="c-section">
+        <div class="c-section-title">Работа с имеющейся и пополняющейся базой</div>
+        <div class="c-item" style="color:#9ca3af;text-decoration:line-through"><span>❌</span><span>Сегментация базы</span></div>
+          <div class="c-item" style="color:#9ca3af;text-decoration:line-through"><span>❌</span><span>Разработка рассылок, учитывая сегмент</span></div>
+          <div class="c-item" style="color:#9ca3af;text-decoration:line-through"><span>❌</span><span>Формирование прогревающих сообщений, рассылок, опросов, обучающих блоков</span></div>
+          
+      </div>
+      <div class="c-section">
+        <div class="c-section-title">Привлечение клиентов (Яндекс Директ РСЯ / ретаргетинг)</div>
+        <div class="c-item" ><span>✅</span><span>Ретаргетинг в Яндкс Директ по существующей базе на ТГ бота</span></div>
+          <div class="c-item" ><span>✅</span><span>LAL на тех кто когда-либо оставлял заявку на сайте на ТГ бота </span></div>
+          <div class="c-item" ><span>✅</span><span>VK.ads ретаргетинг по базе</span></div>
+          <div class="c-item" style="color:#9ca3af;text-decoration:line-through"><span>❌</span><span>РСЯ по АТ + ключи на ТГ канал (баз аналитики)</span></div>
+          <div class="c-item" style="color:#9ca3af;text-decoration:line-through"><span>❌</span><span>Рекламная кампания с таргетингом на основных конкурентов</span></div>
+          <div class="c-item" style="color:#9ca3af;text-decoration:line-through"><span>❌</span><span>РСЯ по ключам + АТ (автотаргетинг) на ТГ бота</span></div>
+          <div class="c-item" style="color:#9ca3af;text-decoration:line-through"><span>❌</span><span>РСЯ по ключам + АТ на лендинг</span></div>
+          <div class="c-item" style="color:#9ca3af;text-decoration:line-through"><span>❌</span><span>VK.ads - Лид-формы по ключам/инетересам/конкурентам</span></div>
+          <div class="c-item" style="color:#9ca3af;text-decoration:line-through"><span>❌</span><span>Настройка аналитики с помощью инструмента &quot;Откуда подписки Бот&quot;</span></div>
+          
+      </div></div>
+    </div><div class="c-card" style="border-top:4px solid #3b82f6">
+      <div class="c-card-head">
+        <div class="c-badge" style="color:#3b82f6">Минимальный</div>
+        <div class="c-card-title" style="color:#3b82f6">Минимальный</div>
+        <div class="c-diamonds">💎</div>
+        <div class="c-progress-track"><div class="c-progress-fill" style="width:25%;background:#3b82f6"></div></div>
+        <div class="c-progress-label">25% объёма работ</div>
+      </div>
+      <div class="c-card-body">
+      <div class="c-section">
+        <div class="c-section-title">Трёхэтапные предпроектные исследования</div>
+        <div class="c-item" ><span>✅</span><span>Исследование продукта </span></div>
+          <div class="c-item" ><span>✅</span><span>Анализ целевой аудитории </span></div>
+          <div class="c-item" ><span>✅</span><span>Анализ аудитории с помощью нейросетей </span></div>
+          <div class="c-item" ><span>✅</span><span>Анализ конкурентов</span></div>
+          
+      </div>
+      <div class="c-section">
+        <div class="c-section-title">Разработка воронки для входящего трафика с целью максимальной конверсии</div>
+        <div class="c-item" ><span>✅</span><span>Проектирование этапов взаимодействия, маршрутов пользователя и ключевых точек конверсии</span></div>
+          <div class="c-item" ><span>✅</span><span>Формулирование цепочек офферов, триггеров и CTA, основанных на психологии принятия решения.</span></div>
+          <div class="c-item" ><span>✅</span><span>Формирование матрицы продукта (если это возможно)</span></div>
+          <div class="c-item" ><span>✅</span><span>Анализ причин невовлечения на каждом этапе и устранение барьеров (UX, текст, скорость, логика перехода)</span></div>
+          
+      </div>
+      <div class="c-section">
+        <div class="c-section-title">Доработка структуры страниц имеющегося сайта / создание новых лендингов под разные сегменты</div>
+        <div class="c-item" style="color:#9ca3af;text-decoration:line-through"><span>❌</span><span>Доработка структуры страниц сайта</span></div>
+          <div class="c-item" style="color:#9ca3af;text-decoration:line-through"><span>❌</span><span>Продающий дизайн сайта - каждый пиксель на доверие и продажу</span></div>
+          <div class="c-item" style="color:#9ca3af;text-decoration:line-through"><span>❌</span><span>Вёрстка сайта под 4 размера</span></div>
+          <div class="c-item" style="color:#9ca3af;text-decoration:line-through"><span>❌</span><span>Адаптация и ускорение скорости загрузки сайта</span></div>
+          <div class="c-item" style="color:#9ca3af;text-decoration:line-through"><span>❌</span><span>Тестирование конверсий</span></div>
+          <div class="c-item" style="color:#9ca3af;text-decoration:line-through"><span>❌</span><span>Улучшение сайта, исходя из данных аналитики</span></div>
+          
+      </div>
+      <div class="c-section">
+        <div class="c-section-title">Ведение Телеграм канала + Кросспостинг в ВК </div>
+        <div class="c-item" style="color:#9ca3af;text-decoration:line-through"><span>❌</span><span>Создание и оформление Telegram-канала</span></div>
+          <div class="c-item" style="color:#9ca3af;text-decoration:line-through"><span>❌</span><span>Создание контент-плана для Telegram-канала</span></div>
+          <div class="c-item" style="color:#9ca3af;text-decoration:line-through"><span>❌</span><span>Ведение Telegram-канала</span></div>
+          <div class="c-item" style="color:#9ca3af;text-decoration:line-through"><span>❌</span><span>Закуп рекламы в других ТГ каналах (отдельный бюджет)</span></div>
+          
+      </div>
+      <div class="c-section">
+        <div class="c-section-title">Создание и оформление бота в ТГ канале</div>
+        <div class="c-item" style="color:#f59e0b"><span>⚠️</span><span>Определение логики сценариев, уровней взаимодействия, ветвлений и CTA-точек</span></div>
+          <div class="c-item" ><span>✅</span><span>Оформление аватара, описания, приветственных экранов и стиля коммуникации</span></div>
+          <div class="c-item" ><span>✅</span><span>Наполнение контентом</span></div>
+          <div class="c-item" ><span>✅</span><span>Проверка технической корректности, UX-потока и точности переходов между этапами</span></div>
+          
+      </div>
+      <div class="c-section">
+        <div class="c-section-title">Работа с имеющейся и пополняющейся базой</div>
+        <div class="c-item" style="color:#9ca3af;text-decoration:line-through"><span>❌</span><span>Сегментация базы</span></div>
+          <div class="c-item" style="color:#9ca3af;text-decoration:line-through"><span>❌</span><span>Разработка рассылок, учитывая сегмент</span></div>
+          <div class="c-item" style="color:#9ca3af;text-decoration:line-through"><span>❌</span><span>Формирование прогревающих сообщений, рассылок, опросов, обучающих блоков</span></div>
+          
+      </div>
+      <div class="c-section">
+        <div class="c-section-title">Привлечение клиентов (Яндекс Директ РСЯ / ретаргетинг)</div>
+        <div class="c-item" ><span>✅</span><span>Ретаргетинг в Яндкс Директ по существующей базе на ТГ бота</span></div>
+          <div class="c-item" ><span>✅</span><span>LAL на тех кто когда-либо оставлял заявку на сайте на ТГ бота </span></div>
+          <div class="c-item" style="color:#9ca3af;text-decoration:line-through"><span>❌</span><span>VK.ads ретаргетинг по базе</span></div>
+          <div class="c-item" style="color:#9ca3af;text-decoration:line-through"><span>❌</span><span>РСЯ по АТ + ключи на ТГ канал (баз аналитики)</span></div>
+          <div class="c-item" style="color:#9ca3af;text-decoration:line-through"><span>❌</span><span>Рекламная кампания с таргетингом на основных конкурентов</span></div>
+          <div class="c-item" style="color:#9ca3af;text-decoration:line-through"><span>❌</span><span>РСЯ по ключам + АТ (автотаргетинг) на ТГ бота</span></div>
+          <div class="c-item" style="color:#9ca3af;text-decoration:line-through"><span>❌</span><span>РСЯ по ключам + АТ на лендинг</span></div>
+          <div class="c-item" style="color:#9ca3af;text-decoration:line-through"><span>❌</span><span>VK.ads - Лид-формы по ключам/инетересам/конкурентам</span></div>
+          <div class="c-item" style="color:#9ca3af;text-decoration:line-through"><span>❌</span><span>Настройка аналитики с помощью инструмента &quot;Откуда подписки Бот&quot;</span></div>
+          
+      </div></div>
+    </div></div>
+
+<div class="c-bottom">
+  
+
+  <div class="c-bottom-block">
+    <div class="c-section-head">🤝 Ожидания</div>
+    <div class="c-expect"><div class="c-expect-title">⚡ Важно понимать</div><p>Мы не забьём смены полностью холодным трафиком на 100%. То что вижу сейчас - 30 человек нормально / 40-50 очень хорошо / 50-60 чудесно. На данный момент на этот продукт нет действующей воронки, поэтому здесь разработка воронки с 0 путём итераций. Можно красиво просчитать цифры, но я бы хотел опираться на факт после первого запуска.</p></div>
+  </div>
+
+  <div class="c-bottom-block">
+    <div class="c-section-head">⏰ Сроки по тарифам</div>
+    <div class="c-3col"><div class="c-term-block"><div class="c-term-label" style="color:#8b5cf6">Максимальный</div><div class="c-term-val">21-35 дней</div></div><div class="c-term-block"><div class="c-term-label" style="color:#10b981">Средний</div><div class="c-term-val">17-21 дней</div></div><div class="c-term-block"><div class="c-term-label" style="color:#3b82f6">Минимальный</div><div class="c-term-val">10-15 дней</div></div></div>
+  </div>
+
+  <div class="c-bottom-block">
+    <div class="c-section-head">💳 Условия оплаты</div>
+    <div class="c-3col"><div class="c-term-block"><div class="c-term-label" style="color:#8b5cf6">Максимальный</div><div class="c-term-val">50% предоплата, 50% через 2 недели после запуска</div></div><div class="c-term-block"><div class="c-term-label" style="color:#10b981">Средний</div><div class="c-term-val">50% предоплата, 50% через 2 недели после запуска</div></div><div class="c-term-block"><div class="c-term-label" style="color:#3b82f6">Минимальный</div><div class="c-term-val">50% предоплата, 50% через 1 неделю после запуска</div></div></div>
+  </div>
+
+  <div class="c-bottom-block">
+    <div class="c-section-head">💰 Стоимость и бюджет</div>
+    <div class="c-3col">
+    <div class="c-price-block" style="border-color:#8b5cf630;background:#8b5cf606">
+      <div class="c-price-label" style="color:#8b5cf6">Максимальный</div>
+      <div class="c-price-val" style="color:#8b5cf6">189 000 ₽</div>
+      <div class="c-price-sub">50% предоплата, 50% через 2 недели после запуска</div>
+      <div class="c-budget-row"><span class="c-budget-label">📊 Бюджет</span><span class="c-budget-val">75 000 - 100 000</span></div>
+    </div>
+    <div class="c-price-block" style="border-color:#10b98130;background:#10b98106">
+      <div class="c-price-label" style="color:#10b981">Средний</div>
+      <div class="c-price-val" style="color:#10b981">139 000 ₽</div>
+      <div class="c-price-sub">50% предоплата, 50% через 2 недели после запуска</div>
+      <div class="c-budget-row"><span class="c-budget-label">📊 Бюджет</span><span class="c-budget-val">55 000 - 65 000</span></div>
+    </div>
+    <div class="c-price-block" style="border-color:#3b82f630;background:#3b82f606">
+      <div class="c-price-label" style="color:#3b82f6">Минимальный</div>
+      <div class="c-price-val" style="color:#3b82f6">59 000 ₽</div>
+      <div class="c-price-sub">50% предоплата, 50% через 1 неделю после запуска</div>
+      <div class="c-budget-row"><span class="c-budget-label">📊 Бюджет</span><span class="c-budget-val">25 000 - 30 000</span></div>
+    </div></div>
+  </div>
+
+  <div class="c-bottom-block">
+    <div class="c-contract"><div class="c-contract-title">📄 Договор</div><p>Официальный договор с юридической ответственностью сторон. Все обязательства фиксируются письменно.</p></div>
+  </div>
+</div>
+
+<footer class="c-footer">
+   · Зигма Арт Летний Лагерь · Подготовлено 11 марта 2026 г.
+  
+</footer>
+
+<script>
+// Tab navigation
+const tariffs = [{"name":"Максимальный","color":"#8b5cf6"},{"name":"Средний","color":"#10b981"},{"name":"Минимальный","color":"#3b82f6"}];
+let activeTab = -1; // -1 = show all
+
+function renderTabs() {
+  const nav = document.getElementById('cnav-tabs');
+  nav.innerHTML = '<button class="c-nav-tab '+(activeTab===-1?'active':'')+'" style="'+(activeTab===-1?'background:#1f2937;border-color:transparent':'')+';" onclick="setTab(-1)">Все</button>'
+    + tariffs.map((t,i)=>'<button class="c-nav-tab '+(activeTab===i?'active':'')+'" style="'+(activeTab===i?'background:'+t.color+';border-color:transparent':'')+'" onclick="setTab('+i+')">'+t.name+'</button>').join('');
+}
+
+function setTab(i) {
+  activeTab = i;
+  const wrap = document.getElementById('c-cards-wrap');
+  const cards = wrap.querySelectorAll('.c-card');
+  if (i === -1) {
+    cards.forEach(c => c.style.display = '');
+    wrap.className = 'c-cards';
+  } else {
+    cards.forEach((c,ci) => c.style.display = ci===i ? '' : 'none');
+    wrap.className = 'c-cards single';
+  }
+  renderTabs();
+}
+
+renderTabs();
+</script>
+</body>
+</html>
