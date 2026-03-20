@@ -1,6 +1,4 @@
-<!DOCTYPE html>
-<html lang="ru">
-<head>
+<html lang="ru"><head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>КП Конструктор</title>
@@ -1135,15 +1133,22 @@
 <!-- ═══ MOBILE NAV (shown only on mobile) ═══ -->
 <div id="mobile-nav">
   <div class="mobile-nav-top">
-    <span class="mobile-nav-title" id="mobile-nav-title">Коммерческое предложение</span>
+    <span class="mobile-nav-title" id="mobile-nav-title">Елена Белькова, Юридические услуги</span>
     <button class="btn btn-secondary btn-xs" id="mobile-toggle-view-btn" onclick="mobileToggleView()">Все</button>
   </div>
-  <div class="mobile-tab-row" id="mobile-tab-row"></div>
+  <div class="mobile-tab-row" id="mobile-tab-row">
+    <button class="mobile-tab-btn active" data-mtab="0" onclick="mobileSwitchTab(0)">Максимальный</button>
+  
+    <button class="mobile-tab-btn " data-mtab="1" onclick="mobileSwitchTab(1)">Средний</button>
+  
+    <button class="mobile-tab-btn " data-mtab="2" onclick="mobileSwitchTab(2)">Минимальный</button>
+  </div>
 </div>
 
 <!-- ═══ MOBILE BOTTOM BAR ═══ -->
 <div id="mobile-bottom-bar">
   <button class="btn btn-secondary" onclick="downloadJSON()">⬇ JSON</button>
+  <button class="btn btn-primary" onclick="downloadHTML()">⬇ КП</button>
   <label class="btn btn-secondary" style="cursor:pointer">
     ⬆ Загрузить
     <input type="file" accept=".json" style="display:none" onchange="loadJSON(event)">
@@ -1169,17 +1174,791 @@
         <h1 style="margin-bottom:0">КП Конструктор</h1>
         <button class="btn btn-secondary btn-sm" onclick="openCopyModal()" title="Скопировать содержимое из другого тарифа">📋 Копировать из...</button>
       </div>
-      <div class="tab-row" id="tab-row"></div>
+      <div class="tab-row" id="tab-row">
+    <button class="tab-btn active" data-tab="0" onclick="switchTab(0)">Максимальный</button>
+  
+    <button class="tab-btn " data-tab="1" onclick="switchTab(1)">Средний</button>
+  
+    <button class="tab-btn " data-tab="2" onclick="switchTab(2)">Минимальный</button>
+  </div>
     </div>
 
     <div id="editor-body">
-      <!-- Dynamic content rendered by JS -->
+    <!-- Context Blocks -->
+    <div class="block-title">💬 Контекст встречи</div>
+    
+      <div class="ctx-block">
+        <div class="ctx-block-header">
+          <input type="text" value="🎯 Ваши цели" oninput="setCtxTitle(0, this.value)">
+          <button class="ctx-toggle on" onclick="toggleCtx(0)" title="Показывать в КП"></button>
+        </div>
+        <div class="ctx-toolbar">
+          <button class="ctx-fmt-btn" onclick="ctxFmt(0,'bold')" title="Жирный"><b>B</b></button>
+          <button class="ctx-fmt-btn" onclick="ctxFmt(0,'italic')" title="Курсив"><i>I</i></button>
+          <button class="ctx-fmt-btn" onclick="ctxFmt(0,'underline')" title="Подчёркнутый"><u>U</u></button>
+          <button class="ctx-fmt-btn" onclick="ctxFmt(0,'strikeThrough')" title="Зачёркнутый" style="text-decoration:line-through">S</button>
+          <button class="ctx-fmt-btn" onclick="ctxInsertList(0)" title="Список">≡</button>
+        </div>
+        <div class="ctx-editor" id="ctx-editor-0" contenteditable="true" data-placeholder="Введите текст..." oninput="saveCtxHtml(0)"><ul><li class="whitespace-normal break-words pl-2"><b>Новый сайт с разделением по направлениям</b>: БФЛ, семейные дела, наследственные дела</li><li class="whitespace-normal break-words pl-2">Запуск <b>активной контекстной рекламы</b> (Яндекс.Директ + Яндекс.Карты)</li><li class="whitespace-normal break-words pl-2"><b>15–17 договоров</b> в месяц (сейчас ~2–3)</li><li class="whitespace-normal break-words pl-2"><b>Онлайн-продукт</b>: продажа шаблонов документов + пошаговых инструкций по банкротству (внесудебному и судебному) — масштабируемая история по всей России</li><li class="whitespace-normal break-words pl-2"><b>Механика квиза/анкеты</b> "подходишь ли ты под банкротство" на сайте</li><li class="whitespace-normal break-words pl-2">Настройка сайта <b>под несколько городов/регионов</b> (геомультипликация) — <i>в перспективе</i></li></ul>
+
+
+
+
+</div>
+        
+      </div>
+    
+      <div class="ctx-block">
+        <div class="ctx-block-header">
+          <input type="text" value="📊 Текущая ситуация" oninput="setCtxTitle(1, this.value)">
+          <button class="ctx-toggle on" onclick="toggleCtx(1)" title="Показывать в КП"></button>
+        </div>
+        <div class="ctx-toolbar">
+          <button class="ctx-fmt-btn" onclick="ctxFmt(1,'bold')" title="Жирный"><b>B</b></button>
+          <button class="ctx-fmt-btn" onclick="ctxFmt(1,'italic')" title="Курсив"><i>I</i></button>
+          <button class="ctx-fmt-btn" onclick="ctxFmt(1,'underline')" title="Подчёркнутый"><u>U</u></button>
+          <button class="ctx-fmt-btn" onclick="ctxFmt(1,'strikeThrough')" title="Зачёркнутый" style="text-decoration:line-through">S</button>
+          <button class="ctx-fmt-btn" onclick="ctxInsertList(1)" title="Список">≡</button>
+        </div>
+        <div class="ctx-editor" id="ctx-editor-1" contenteditable="true" data-placeholder="Введите текст..." oninput="saveCtxHtml(1)"><ul><li class="whitespace-normal break-words pl-2">~2–3 договора в месяц (весь объём)</li><li class="whitespace-normal break-words pl-2">Средний чек по БФЛ: <b>~120 тыс. руб.</b> (в рассрочку)</li><li class="whitespace-normal break-words pl-2">Готовы вкладывать в рекламу: <b>10–15% от суммы договора</b> (~12–18 тыс. на клиента)</li><li class="whitespace-normal break-words pl-2"><b>Статистики</b> по воронке (лиды → заявки → договоры) <b>нет совсем</b></li><li class="whitespace-normal break-words pl-2">Конверсия сайта: неизвестна, <b>заявок с сайта почти нет</b></li><li><b>
+Ориентировочная стоимость клиента</b> по Яндекс.Картам ранее: ~10 тыс. руб.</li></ul>
+
+
+
+
+</div>
+        
+      </div>
+    
+      <div class="ctx-block">
+        <div class="ctx-block-header">
+          <input type="text" value="⚠️ Что может помешать" oninput="setCtxTitle(2, this.value)">
+          <button class="ctx-toggle on" onclick="toggleCtx(2)" title="Показывать в КП"></button>
+        </div>
+        <div class="ctx-toolbar">
+          <button class="ctx-fmt-btn" onclick="ctxFmt(2,'bold')" title="Жирный"><b>B</b></button>
+          <button class="ctx-fmt-btn" onclick="ctxFmt(2,'italic')" title="Курсив"><i>I</i></button>
+          <button class="ctx-fmt-btn" onclick="ctxFmt(2,'underline')" title="Подчёркнутый"><u>U</u></button>
+          <button class="ctx-fmt-btn" onclick="ctxFmt(2,'strikeThrough')" title="Зачёркнутый" style="text-decoration:line-through">S</button>
+          <button class="ctx-fmt-btn" onclick="ctxInsertList(2)" title="Список">≡</button>
+        </div>
+        <div class="ctx-editor" id="ctx-editor-2" contenteditable="true" data-placeholder="Введите текст..." oninput="saveCtxHtml(2)"><ul><li>Нет потока клиентов,<b> всё держится на личном бренде одного человека</b>&nbsp;</li><li>Нет аналитики и понимания, что работает,&nbsp;Нет CRM, нет статистики конверсий, нет понимания стоимости клиента = при запуске <b>бюджет снова может слиться</b> как в январе с Яндекс.Картами</li><li>Сайт не работает как инструмент продаж = <b>не будет запуска Директа</b> = <b>откладывается цель в 15-17 договоров</b> = нет масштабирования по России</li><li>Нет понимания базовых маркетинговых механик = если запуститься самостоятельно <b>есть большая вероятность потратить бюджет в никуда</b></li></ul></div>
+        
+      </div>
+    
+    <hr class="divider">
+
+    <!-- Volume -->
+    <div class="field-group">
+      <div class="block-title">💎 Визуализация объёма</div>
+      <label class="field-label">Количество бриллиантов</label>
+      <div class="diamond-picker">
+        
+          <button class="diamond-btn " onclick="setDiamonds(1)">
+            1
+          </button>
+        
+          <button class="diamond-btn " onclick="setDiamonds(2)">
+            2
+          </button>
+        
+          <button class="diamond-btn " onclick="setDiamonds(3)">
+            3
+          </button>
+        
+          <button class="diamond-btn " onclick="setDiamonds(4)">
+            4
+          </button>
+        
+          <button class="diamond-btn active" onclick="setDiamonds(5)">
+            5
+          </button>
+        
+      </div>
+      <div style="margin-top:12px">
+        <label class="field-label">Прогресс объёма: <b>100%</b></label>
+        <input type="range" min="0" max="100" value="100" oninput="setProgress(+this.value)">
+      </div>
     </div>
+
+    <hr class="divider">
+
+    <!-- Sections -->
+    <div class="block-title">📋 Секции и пункты</div>
+    <div id="sections-container">
+      
+    <div class="section-card">
+      <div class="section-card-header">
+        <div class="move-btns">
+          <button class="move-btn" onclick="moveSection(0,-1)" disabled="">▲</button>
+          <button class="move-btn" onclick="moveSection(0,1)">▼</button>
+        </div>
+        <input type="text" value="Трёхэтапные предпроектные исследования" placeholder="Заголовок секции" oninput="setSectionTitle(0, this.value)">
+        <button class="btn btn-ghost btn-xs" onclick="removeSection(0)">🗑️</button>
+      </div>
+      <div class="section-card-body">
+        
+    <div class="item-row">
+      <div class="item-row-top">
+        <div class="move-btns">
+          <button class="move-btn" onclick="moveItem(0,0,-1)" disabled="">▲</button>
+          <button class="move-btn" onclick="moveItem(0,0,1)">▼</button>
+        </div>
+        <input type="text" value="Исследование продукта " placeholder="Текст пункта" oninput="setItemText(0,0,this.value)">
+        <button class="btn btn-ghost btn-xs" onclick="removeItem(0,0)">🗑️</button>
+      </div>
+      <div class="style-btns">
+        
+          <button class="style-btn active-normal" onclick="setItemStyle(0,0,'normal')">✅ Обычный</button>
+        
+          <button class="style-btn " onclick="setItemStyle(0,0,'partial')">⚠️ Частично</button>
+        
+          <button class="style-btn " onclick="setItemStyle(0,0,'disabled')">❌ Отключить</button>
+        
+      </div>
+      <div>
+        
+          <div class="subitem-row">
+            <span style="color:#9ca3af;font-size:12px">↳</span>
+            <input type="text" value="Брифинг с руководителем компании, маркетологом и РОПом (длительность 2-5 часов)" placeholder="Подпункт..." oninput="setSubitem(0,0,0,this.value)">
+            <button class="btn btn-ghost btn-xs" onclick="removeSubitem(0,0,0)">🗑️</button>
+          </div>
+        
+          <div class="subitem-row">
+            <span style="color:#9ca3af;font-size:12px">↳</span>
+            <input type="text" value="Выделение топ-20 ключевых преимуществ компании в формате фактов и выгод" placeholder="Подпункт..." oninput="setSubitem(0,0,1,this.value)">
+            <button class="btn btn-ghost btn-xs" onclick="removeSubitem(0,0,1)">🗑️</button>
+          </div>
+        
+        <button class="btn btn-ghost btn-xs" style="padding-left:20px;margin-top:4px" onclick="addSubitem(0,0)">+ подпункт</button>
+      </div>
+    </div>
+  
+    <div class="item-row">
+      <div class="item-row-top">
+        <div class="move-btns">
+          <button class="move-btn" onclick="moveItem(0,1,-1)">▲</button>
+          <button class="move-btn" onclick="moveItem(0,1,1)">▼</button>
+        </div>
+        <input type="text" value="Анализ целевой аудитории " placeholder="Текст пункта" oninput="setItemText(0,1,this.value)">
+        <button class="btn btn-ghost btn-xs" onclick="removeItem(0,1)">🗑️</button>
+      </div>
+      <div class="style-btns">
+        
+          <button class="style-btn active-normal" onclick="setItemStyle(0,1,'normal')">✅ Обычный</button>
+        
+          <button class="style-btn " onclick="setItemStyle(0,1,'partial')">⚠️ Частично</button>
+        
+          <button class="style-btn " onclick="setItemStyle(0,1,'disabled')">❌ Отключить</button>
+        
+      </div>
+      <div>
+        
+          <div class="subitem-row">
+            <span style="color:#9ca3af;font-size:12px">↳</span>
+            <input type="text" value="Анализ ЖЦА по методу AJTBD + Персонажи" placeholder="Подпункт..." oninput="setSubitem(0,1,0,this.value)">
+            <button class="btn btn-ghost btn-xs" onclick="removeSubitem(0,1,0)">🗑️</button>
+          </div>
+        
+          <div class="subitem-row">
+            <span style="color:#9ca3af;font-size:12px">↳</span>
+            <input type="text" value="Выделение сегментов платежесопосбной ЦА. Вычленение триггеров. Потребностей. Критериев принятия решения. Болей. Возражений. В дальнейшем - на основе этого анализа строятся все маркетинговые активности. " placeholder="Подпункт..." oninput="setSubitem(0,1,1,this.value)">
+            <button class="btn btn-ghost btn-xs" onclick="removeSubitem(0,1,1)">🗑️</button>
+          </div>
+        
+        <button class="btn btn-ghost btn-xs" style="padding-left:20px;margin-top:4px" onclick="addSubitem(0,1)">+ подпункт</button>
+      </div>
+    </div>
+  
+    <div class="item-row">
+      <div class="item-row-top">
+        <div class="move-btns">
+          <button class="move-btn" onclick="moveItem(0,2,-1)">▲</button>
+          <button class="move-btn" onclick="moveItem(0,2,1)">▼</button>
+        </div>
+        <input type="text" value="Двухуроввневый анализ рынка и конкурентов" placeholder="Текст пункта" oninput="setItemText(0,2,this.value)">
+        <button class="btn btn-ghost btn-xs" onclick="removeItem(0,2)">🗑️</button>
+      </div>
+      <div class="style-btns">
+        
+          <button class="style-btn active-normal" onclick="setItemStyle(0,2,'normal')">✅ Обычный</button>
+        
+          <button class="style-btn " onclick="setItemStyle(0,2,'partial')">⚠️ Частично</button>
+        
+          <button class="style-btn " onclick="setItemStyle(0,2,'disabled')">❌ Отключить</button>
+        
+      </div>
+      <div>
+        
+          <div class="subitem-row">
+            <span style="color:#9ca3af;font-size:12px">↳</span>
+            <input type="text" value="Исследование рынка и инфополя (анализ площадок, которые влияют на критерии принятия решения ЦА или формируют у них базу знаний о продукте)" placeholder="Подпункт..." oninput="setSubitem(0,2,0,this.value)">
+            <button class="btn btn-ghost btn-xs" onclick="removeSubitem(0,2,0)">🗑️</button>
+          </div>
+        
+          <div class="subitem-row">
+            <span style="color:#9ca3af;font-size:12px">↳</span>
+            <input type="text" value="Формирование отчета по полученной информации с предоставлением результатов руководству компании" placeholder="Подпункт..." oninput="setSubitem(0,2,1,this.value)">
+            <button class="btn btn-ghost btn-xs" onclick="removeSubitem(0,2,1)">🗑️</button>
+          </div>
+        
+          <div class="subitem-row">
+            <span style="color:#9ca3af;font-size:12px">↳</span>
+            <input type="text" value="Анализ сайтов ТОП-10 конкурентов в нише (посадочные страницы, маркетинговые решения, ценообразование)" placeholder="Подпункт..." oninput="setSubitem(0,2,2,this.value)">
+            <button class="btn btn-ghost btn-xs" onclick="removeSubitem(0,2,2)">🗑️</button>
+          </div>
+        
+          <div class="subitem-row">
+            <span style="color:#9ca3af;font-size:12px">↳</span>
+            <input type="text" value="Рекомендации по позиционированию, УТП, выбору сегмента" placeholder="Подпункт..." oninput="setSubitem(0,2,3,this.value)">
+            <button class="btn btn-ghost btn-xs" onclick="removeSubitem(0,2,3)">🗑️</button>
+          </div>
+        
+          <div class="subitem-row">
+            <span style="color:#9ca3af;font-size:12px">↳</span>
+            <input type="text" value="Создание Цепочки принятия решения (Decision Journey)" placeholder="Подпункт..." oninput="setSubitem(0,2,4,this.value)">
+            <button class="btn btn-ghost btn-xs" onclick="removeSubitem(0,2,4)">🗑️</button>
+          </div>
+        
+        <button class="btn btn-ghost btn-xs" style="padding-left:20px;margin-top:4px" onclick="addSubitem(0,2)">+ подпункт</button>
+      </div>
+    </div>
+  
+    <div class="item-row">
+      <div class="item-row-top">
+        <div class="move-btns">
+          <button class="move-btn" onclick="moveItem(0,3,-1)">▲</button>
+          <button class="move-btn" onclick="moveItem(0,3,1)" disabled="">▼</button>
+        </div>
+        <input type="text" value="Кастдев / опрос отделом контроля качества до 5 ваших клиентов" placeholder="Текст пункта" oninput="setItemText(0,3,this.value)">
+        <button class="btn btn-ghost btn-xs" onclick="removeItem(0,3)">🗑️</button>
+      </div>
+      <div class="style-btns">
+        
+          <button class="style-btn active-normal" onclick="setItemStyle(0,3,'normal')">✅ Обычный</button>
+        
+          <button class="style-btn " onclick="setItemStyle(0,3,'partial')">⚠️ Частично</button>
+        
+          <button class="style-btn " onclick="setItemStyle(0,3,'disabled')">❌ Отключить</button>
+        
+      </div>
+      <div>
+        
+        <button class="btn btn-ghost btn-xs" style="padding-left:20px;margin-top:4px" onclick="addSubitem(0,3)">+ подпункт</button>
+      </div>
+    </div>
+  
+        <button class="btn btn-secondary btn-sm mt-8" onclick="addItem(0)">+ Добавить пункт</button>
+      </div>
+    </div>
+  
+    <div class="section-card">
+      <div class="section-card-header">
+        <div class="move-btns">
+          <button class="move-btn" onclick="moveSection(1,-1)">▲</button>
+          <button class="move-btn" onclick="moveSection(1,1)" disabled="">▼</button>
+        </div>
+        <input type="text" value="Создание 3 страниц сайта под каждое направление - БФЛ, наследственное и семейное право" placeholder="Заголовок секции" oninput="setSectionTitle(1, this.value)">
+        <button class="btn btn-ghost btn-xs" onclick="removeSection(1)">🗑️</button>
+      </div>
+      <div class="section-card-body">
+        
+    <div class="item-row">
+      <div class="item-row-top">
+        <div class="move-btns">
+          <button class="move-btn" onclick="moveItem(1,0,-1)" disabled="">▲</button>
+          <button class="move-btn" onclick="moveItem(1,0,1)">▼</button>
+        </div>
+        <input type="text" value="Разработка уникальной продающей структуры сайта, которая учитывает все критерии, возражения и потребности всех ЦА" placeholder="Текст пункта" oninput="setItemText(1,0,this.value)">
+        <button class="btn btn-ghost btn-xs" onclick="removeItem(1,0)">🗑️</button>
+      </div>
+      <div class="style-btns">
+        
+          <button class="style-btn active-normal" onclick="setItemStyle(1,0,'normal')">✅ Обычный</button>
+        
+          <button class="style-btn " onclick="setItemStyle(1,0,'partial')">⚠️ Частично</button>
+        
+          <button class="style-btn " onclick="setItemStyle(1,0,'disabled')">❌ Отключить</button>
+        
+      </div>
+      <div>
+        
+        <button class="btn btn-ghost btn-xs" style="padding-left:20px;margin-top:4px" onclick="addSubitem(1,0)">+ подпункт</button>
+      </div>
+    </div>
+  
+    <div class="item-row">
+      <div class="item-row-top">
+        <div class="move-btns">
+          <button class="move-btn" onclick="moveItem(1,1,-1)">▲</button>
+          <button class="move-btn" onclick="moveItem(1,1,1)">▼</button>
+        </div>
+        <input type="text" value="Создание скрытых и интерактивных форм захвата контактов для максимизации конверсии (в том числе квиз-опросник)" placeholder="Текст пункта" oninput="setItemText(1,1,this.value)">
+        <button class="btn btn-ghost btn-xs" onclick="removeItem(1,1)">🗑️</button>
+      </div>
+      <div class="style-btns">
+        
+          <button class="style-btn active-normal" onclick="setItemStyle(1,1,'normal')">✅ Обычный</button>
+        
+          <button class="style-btn " onclick="setItemStyle(1,1,'partial')">⚠️ Частично</button>
+        
+          <button class="style-btn " onclick="setItemStyle(1,1,'disabled')">❌ Отключить</button>
+        
+      </div>
+      <div>
+        
+          <div class="subitem-row">
+            <span style="color:#9ca3af;font-size:12px">↳</span>
+            <input type="text" value="Разработка эффективного &quot;поп-апа на выход&quot; (exit pop-up)" placeholder="Подпункт..." oninput="setSubitem(1,1,0,this.value)">
+            <button class="btn btn-ghost btn-xs" onclick="removeSubitem(1,1,0)">🗑️</button>
+          </div>
+        
+          <div class="subitem-row">
+            <span style="color:#9ca3af;font-size:12px">↳</span>
+            <input type="text" value="Квиз" placeholder="Подпункт..." oninput="setSubitem(1,1,1,this.value)">
+            <button class="btn btn-ghost btn-xs" onclick="removeSubitem(1,1,1)">🗑️</button>
+          </div>
+        
+        <button class="btn btn-ghost btn-xs" style="padding-left:20px;margin-top:4px" onclick="addSubitem(1,1)">+ подпункт</button>
+      </div>
+    </div>
+  
+    <div class="item-row">
+      <div class="item-row-top">
+        <div class="move-btns">
+          <button class="move-btn" onclick="moveItem(1,2,-1)">▲</button>
+          <button class="move-btn" onclick="moveItem(1,2,1)">▼</button>
+        </div>
+        <input type="text" value="Вёрстка сайта под 4 размера" placeholder="Текст пункта" oninput="setItemText(1,2,this.value)">
+        <button class="btn btn-ghost btn-xs" onclick="removeItem(1,2)">🗑️</button>
+      </div>
+      <div class="style-btns">
+        
+          <button class="style-btn active-normal" onclick="setItemStyle(1,2,'normal')">✅ Обычный</button>
+        
+          <button class="style-btn " onclick="setItemStyle(1,2,'partial')">⚠️ Частично</button>
+        
+          <button class="style-btn " onclick="setItemStyle(1,2,'disabled')">❌ Отключить</button>
+        
+      </div>
+      <div>
+        
+          <div class="subitem-row">
+            <span style="color:#9ca3af;font-size:12px">↳</span>
+            <input type="text" value="Разработка мобильной версии сайта" placeholder="Подпункт..." oninput="setSubitem(1,2,0,this.value)">
+            <button class="btn btn-ghost btn-xs" onclick="removeSubitem(1,2,0)">🗑️</button>
+          </div>
+        
+        <button class="btn btn-ghost btn-xs" style="padding-left:20px;margin-top:4px" onclick="addSubitem(1,2)">+ подпункт</button>
+      </div>
+    </div>
+  
+    <div class="item-row">
+      <div class="item-row-top">
+        <div class="move-btns">
+          <button class="move-btn" onclick="moveItem(1,3,-1)">▲</button>
+          <button class="move-btn" onclick="moveItem(1,3,1)">▼</button>
+        </div>
+        <input type="text" value="Адаптация и ускорение скорости загрузки сайта" placeholder="Текст пункта" oninput="setItemText(1,3,this.value)">
+        <button class="btn btn-ghost btn-xs" onclick="removeItem(1,3)">🗑️</button>
+      </div>
+      <div class="style-btns">
+        
+          <button class="style-btn active-normal" onclick="setItemStyle(1,3,'normal')">✅ Обычный</button>
+        
+          <button class="style-btn " onclick="setItemStyle(1,3,'partial')">⚠️ Частично</button>
+        
+          <button class="style-btn " onclick="setItemStyle(1,3,'disabled')">❌ Отключить</button>
+        
+      </div>
+      <div>
+        
+        <button class="btn btn-ghost btn-xs" style="padding-left:20px;margin-top:4px" onclick="addSubitem(1,3)">+ подпункт</button>
+      </div>
+    </div>
+  
+    <div class="item-row">
+      <div class="item-row-top">
+        <div class="move-btns">
+          <button class="move-btn" onclick="moveItem(1,4,-1)">▲</button>
+          <button class="move-btn" onclick="moveItem(1,4,1)">▼</button>
+        </div>
+        <input type="text" value="Разработка утепляющей страницы &quot;Спасибо за заявку&quot;" placeholder="Текст пункта" oninput="setItemText(1,4,this.value)">
+        <button class="btn btn-ghost btn-xs" onclick="removeItem(1,4)">🗑️</button>
+      </div>
+      <div class="style-btns">
+        
+          <button class="style-btn active-normal" onclick="setItemStyle(1,4,'normal')">✅ Обычный</button>
+        
+          <button class="style-btn " onclick="setItemStyle(1,4,'partial')">⚠️ Частично</button>
+        
+          <button class="style-btn " onclick="setItemStyle(1,4,'disabled')">❌ Отключить</button>
+        
+      </div>
+      <div>
+        
+        <button class="btn btn-ghost btn-xs" style="padding-left:20px;margin-top:4px" onclick="addSubitem(1,4)">+ подпункт</button>
+      </div>
+    </div>
+  
+    <div class="item-row">
+      <div class="item-row-top">
+        <div class="move-btns">
+          <button class="move-btn" onclick="moveItem(1,5,-1)">▲</button>
+          <button class="move-btn" onclick="moveItem(1,5,1)">▼</button>
+        </div>
+        <input type="text" value="Улучшение сайта, исходя из данных аналитики" placeholder="Текст пункта" oninput="setItemText(1,5,this.value)">
+        <button class="btn btn-ghost btn-xs" onclick="removeItem(1,5)">🗑️</button>
+      </div>
+      <div class="style-btns">
+        
+          <button class="style-btn active-normal" onclick="setItemStyle(1,5,'normal')">✅ Обычный</button>
+        
+          <button class="style-btn " onclick="setItemStyle(1,5,'partial')">⚠️ Частично</button>
+        
+          <button class="style-btn " onclick="setItemStyle(1,5,'disabled')">❌ Отключить</button>
+        
+      </div>
+      <div>
+        
+        <button class="btn btn-ghost btn-xs" style="padding-left:20px;margin-top:4px" onclick="addSubitem(1,5)">+ подпункт</button>
+      </div>
+    </div>
+  
+    <div class="item-row">
+      <div class="item-row-top">
+        <div class="move-btns">
+          <button class="move-btn" onclick="moveItem(1,6,-1)">▲</button>
+          <button class="move-btn" onclick="moveItem(1,6,1)">▼</button>
+        </div>
+        <input type="text" value="Неограниченное внесение правок по улучшению эффективности сайта " placeholder="Текст пункта" oninput="setItemText(1,6,this.value)">
+        <button class="btn btn-ghost btn-xs" onclick="removeItem(1,6)">🗑️</button>
+      </div>
+      <div class="style-btns">
+        
+          <button class="style-btn active-normal" onclick="setItemStyle(1,6,'normal')">✅ Обычный</button>
+        
+          <button class="style-btn " onclick="setItemStyle(1,6,'partial')">⚠️ Частично</button>
+        
+          <button class="style-btn " onclick="setItemStyle(1,6,'disabled')">❌ Отключить</button>
+        
+      </div>
+      <div>
+        
+        <button class="btn btn-ghost btn-xs" style="padding-left:20px;margin-top:4px" onclick="addSubitem(1,6)">+ подпункт</button>
+      </div>
+    </div>
+  
+    <div class="item-row">
+      <div class="item-row-top">
+        <div class="move-btns">
+          <button class="move-btn" onclick="moveItem(1,7,-1)">▲</button>
+          <button class="move-btn" onclick="moveItem(1,7,1)">▼</button>
+        </div>
+        <input type="text" value="Подбор шрифтов и цветовой гаммы в фирменном стиле" placeholder="Текст пункта" oninput="setItemText(1,7,this.value)">
+        <button class="btn btn-ghost btn-xs" onclick="removeItem(1,7)">🗑️</button>
+      </div>
+      <div class="style-btns">
+        
+          <button class="style-btn active-normal" onclick="setItemStyle(1,7,'normal')">✅ Обычный</button>
+        
+          <button class="style-btn " onclick="setItemStyle(1,7,'partial')">⚠️ Частично</button>
+        
+          <button class="style-btn " onclick="setItemStyle(1,7,'disabled')">❌ Отключить</button>
+        
+      </div>
+      <div>
+        
+        <button class="btn btn-ghost btn-xs" style="padding-left:20px;margin-top:4px" onclick="addSubitem(1,7)">+ подпункт</button>
+      </div>
+    </div>
+  
+    <div class="item-row">
+      <div class="item-row-top">
+        <div class="move-btns">
+          <button class="move-btn" onclick="moveItem(1,8,-1)">▲</button>
+          <button class="move-btn" onclick="moveItem(1,8,1)">▼</button>
+        </div>
+        <input type="text" value="Усиление продающих посылов с помощью веб-дизайна" placeholder="Текст пункта" oninput="setItemText(1,8,this.value)">
+        <button class="btn btn-ghost btn-xs" onclick="removeItem(1,8)">🗑️</button>
+      </div>
+      <div class="style-btns">
+        
+          <button class="style-btn active-normal" onclick="setItemStyle(1,8,'normal')">✅ Обычный</button>
+        
+          <button class="style-btn " onclick="setItemStyle(1,8,'partial')">⚠️ Частично</button>
+        
+          <button class="style-btn " onclick="setItemStyle(1,8,'disabled')">❌ Отключить</button>
+        
+      </div>
+      <div>
+        
+        <button class="btn btn-ghost btn-xs" style="padding-left:20px;margin-top:4px" onclick="addSubitem(1,8)">+ подпункт</button>
+      </div>
+    </div>
+  
+    <div class="item-row">
+      <div class="item-row-top">
+        <div class="move-btns">
+          <button class="move-btn" onclick="moveItem(1,9,-1)">▲</button>
+          <button class="move-btn" onclick="moveItem(1,9,1)">▼</button>
+        </div>
+        <input type="text" value="Тестирование каждой формы захвата на предмет доходимости заявок" placeholder="Текст пункта" oninput="setItemText(1,9,this.value)">
+        <button class="btn btn-ghost btn-xs" onclick="removeItem(1,9)">🗑️</button>
+      </div>
+      <div class="style-btns">
+        
+          <button class="style-btn active-normal" onclick="setItemStyle(1,9,'normal')">✅ Обычный</button>
+        
+          <button class="style-btn " onclick="setItemStyle(1,9,'partial')">⚠️ Частично</button>
+        
+          <button class="style-btn " onclick="setItemStyle(1,9,'disabled')">❌ Отключить</button>
+        
+      </div>
+      <div>
+        
+        <button class="btn btn-ghost btn-xs" style="padding-left:20px;margin-top:4px" onclick="addSubitem(1,9)">+ подпункт</button>
+      </div>
+    </div>
+  
+    <div class="item-row">
+      <div class="item-row-top">
+        <div class="move-btns">
+          <button class="move-btn" onclick="moveItem(1,10,-1)">▲</button>
+          <button class="move-btn" onclick="moveItem(1,10,1)">▼</button>
+        </div>
+        <input type="text" value="Интерактивные элементы с помощью HTML кода" placeholder="Текст пункта" oninput="setItemText(1,10,this.value)">
+        <button class="btn btn-ghost btn-xs" onclick="removeItem(1,10)">🗑️</button>
+      </div>
+      <div class="style-btns">
+        
+          <button class="style-btn active-normal" onclick="setItemStyle(1,10,'normal')">✅ Обычный</button>
+        
+          <button class="style-btn " onclick="setItemStyle(1,10,'partial')">⚠️ Частично</button>
+        
+          <button class="style-btn " onclick="setItemStyle(1,10,'disabled')">❌ Отключить</button>
+        
+      </div>
+      <div>
+        
+          <div class="subitem-row">
+            <span style="color:#9ca3af;font-size:12px">↳</span>
+            <input type="text" value="Например, калькулятор, таблицы сравнений" placeholder="Подпункт..." oninput="setSubitem(1,10,0,this.value)">
+            <button class="btn btn-ghost btn-xs" onclick="removeSubitem(1,10,0)">🗑️</button>
+          </div>
+        
+        <button class="btn btn-ghost btn-xs" style="padding-left:20px;margin-top:4px" onclick="addSubitem(1,10)">+ подпункт</button>
+      </div>
+    </div>
+  
+    <div class="item-row">
+      <div class="item-row-top">
+        <div class="move-btns">
+          <button class="move-btn" onclick="moveItem(1,11,-1)">▲</button>
+          <button class="move-btn" onclick="moveItem(1,11,1)" disabled="">▼</button>
+        </div>
+        <input type="text" value="Копирайтинг текстов, вызывающих доверие (с учётом закона)" placeholder="Текст пункта" oninput="setItemText(1,11,this.value)">
+        <button class="btn btn-ghost btn-xs" onclick="removeItem(1,11)">🗑️</button>
+      </div>
+      <div class="style-btns">
+        
+          <button class="style-btn active-normal" onclick="setItemStyle(1,11,'normal')">✅ Обычный</button>
+        
+          <button class="style-btn " onclick="setItemStyle(1,11,'partial')">⚠️ Частично</button>
+        
+          <button class="style-btn " onclick="setItemStyle(1,11,'disabled')">❌ Отключить</button>
+        
+      </div>
+      <div>
+        
+        <button class="btn btn-ghost btn-xs" style="padding-left:20px;margin-top:4px" onclick="addSubitem(1,11)">+ подпункт</button>
+      </div>
+    </div>
+  
+        <button class="btn btn-secondary btn-sm mt-8" onclick="addItem(1)">+ Добавить пункт</button>
+      </div>
+    </div>
+  
+    </div>
+    <button class="btn btn-secondary btn-sm" onclick="addSection()" style="margin-bottom:16px">+ Добавить секцию</button>
+
+    <hr class="divider">
+
+    <!-- Bonuses -->
+    <div class="block-title">🎁 Бонусы</div>
+    <div id="bonuses-container">
+      
+    <div class="section-card" style="border-left:3px solid #10b981">
+      <div class="section-card-header" style="background:#f0fdf4">
+        <input type="text" value="🎁Сопровождение на весь период рекламы БЕЗЛИМИТНО - аналитика и улучшение сайта в режиме online🎁" placeholder="Заголовок бонуса" oninput="setBonusTitle(0, this.value)">
+        <button class="btn btn-ghost btn-xs" onclick="removeBonus(0)">🗑️</button>
+      </div>
+      <div class="section-card-body">
+        
+        <button class="btn btn-secondary btn-sm mt-8" onclick="addBonusItem(0)">+ Пункт</button>
+      </div>
+    </div>
+  
+    <div class="section-card" style="border-left:3px solid #10b981">
+      <div class="section-card-header" style="background:#f0fdf4">
+        <input type="text" value="🎁 Разработка воронки с продажей шаблона договора🎁" placeholder="Заголовок бонуса" oninput="setBonusTitle(1, this.value)">
+        <button class="btn btn-ghost btn-xs" onclick="removeBonus(1)">🗑️</button>
+      </div>
+      <div class="section-card-body">
+        
+          <div class="array-item">
+            <input type="text" value="Либо поп-ап на выход" placeholder="Пункт бонуса..." oninput="setBonusItem(1, 0, this.value)">
+            <button class="btn btn-ghost btn-xs" onclick="removeBonusItem(1, 0)">🗑️</button>
+          </div>
+        
+          <div class="array-item">
+            <input type="text" value="Либо предложение не подходящим клиентам в квизе " placeholder="Пункт бонуса..." oninput="setBonusItem(1, 1, this.value)">
+            <button class="btn btn-ghost btn-xs" onclick="removeBonusItem(1, 1)">🗑️</button>
+          </div>
+        
+          <div class="array-item">
+            <input type="text" value="Либо отдельный блок" placeholder="Пункт бонуса..." oninput="setBonusItem(1, 2, this.value)">
+            <button class="btn btn-ghost btn-xs" onclick="removeBonusItem(1, 2)">🗑️</button>
+          </div>
+        
+        <button class="btn btn-secondary btn-sm mt-8" onclick="addBonusItem(1)">+ Пункт</button>
+      </div>
+    </div>
+  
+    <div class="section-card" style="border-left:3px solid #10b981">
+      <div class="section-card-header" style="background:#f0fdf4">
+        <input type="text" value="🎁 Сценарий продающего видео для поп-апа на сайте🎁" placeholder="Заголовок бонуса" oninput="setBonusTitle(2, this.value)">
+        <button class="btn btn-ghost btn-xs" onclick="removeBonus(2)">🗑️</button>
+      </div>
+      <div class="section-card-body">
+        
+        <button class="btn btn-secondary btn-sm mt-8" onclick="addBonusItem(2)">+ Пункт</button>
+      </div>
+    </div>
+  
+    <div class="section-card" style="border-left:3px solid #10b981">
+      <div class="section-card-header" style="background:#f0fdf4">
+        <input type="text" value="Бонусы успеем сделать при подписании договора до 24.03.2026" placeholder="Заголовок бонуса" oninput="setBonusTitle(3, this.value)">
+        <button class="btn btn-ghost btn-xs" onclick="removeBonus(3)">🗑️</button>
+      </div>
+      <div class="section-card-body">
+        
+        <button class="btn btn-secondary btn-sm mt-8" onclick="addBonusItem(3)">+ Пункт</button>
+      </div>
+    </div>
+  
+    </div>
+    <button class="btn btn-secondary btn-sm" onclick="addBonus()" style="margin-bottom:16px">+ Добавить бонус</button>
+
+    <hr class="divider">
+
+    <!-- Terms -->
+    <div class="block-title">📝 Условия</div>
+    <div class="field-group">
+      <label class="field-label">⏰ Сроки</label>
+      <input type="text" value="10-15 дней (с учётом правок + 2-3 дня)" oninput="setTerms(this.value)">
+    </div>
+    <div class="field-group">
+      <label class="field-label">💳 Оплата</label>
+      <input type="text" value="50% предоплата, 50% через 3 дня после передачи сайта" oninput="setPayment(this.value)">
+    </div>
+    <div class="field-group">
+      <label class="field-label">💰 Цена</label>
+      <input type="text" value="107 553 ₽" oninput="setPrice(this.value)">
+    </div>
+    <div class="field-group">
+      <label class="field-label">📊 Рекламный бюджет (необязательно)</label>
+      <input type="text" value="" placeholder="Например: от 80 000 ₽/мес" oninput="setBudget(this.value)">
+    </div>
+
+    <hr class="divider">
+
+    <!-- Common blocks -->
+    <div class="block-title">📄 Общие блоки (внизу КП)</div>
+
+    <div class="field-group">
+      <div class="block-title" style="margin-bottom:8px">✅ Что вы получаете</div>
+      
+        <div class="array-item">
+          <input type="text" value="Предсказуемый поток клиентов — сайт + директ дают управляемый трафик, не зависящий от личного канала Елены. Можно планировать загрузку команды. Постепенный рост до ТОП компаний." oninput="setCommonArrayItem('deliverables', 0, this.value)">
+          <button class="btn btn-ghost btn-xs" onclick="removeCommonArrayItem('deliverables', 0)">🗑️</button>
+        </div>
+      
+        <div class="array-item">
+          <input type="text" value="Сайт, который реально продаёт — не визитка, а инструмент с квизом, разными страницами под каждую услугу и конверсией 6–10%. Каждый рубль в рекламу даёт понятный результат" oninput="setCommonArrayItem('deliverables', 1, this.value)">
+          <button class="btn btn-ghost btn-xs" onclick="removeCommonArrayItem('deliverables', 1)">🗑️</button>
+        </div>
+      
+        <div class="array-item">
+          <input type="text" value="Аналитику и контроль — впервые появится понимание: сколько стоит один клиент, откуда он пришёл, что работает, что нет. Решения принимаются по цифрам, а не вслепую" oninput="setCommonArrayItem('deliverables', 2, this.value)">
+          <button class="btn btn-ghost btn-xs" onclick="removeCommonArrayItem('deliverables', 2)">🗑️</button>
+        </div>
+      
+        <div class="array-item">
+          <input type="text" value="Партнёра на 6 месяцев, а не разового подрядчика — сопровождение, итерации, докрутка сайта по данным. Не &quot;сделали и ушли" oninput="setCommonArrayItem('deliverables', 3, this.value)">
+          <button class="btn btn-ghost btn-xs" onclick="removeCommonArrayItem('deliverables', 3)">🗑️</button>
+        </div>
+      
+        <div class="array-item">
+          <input type="text" value="Быстрый тест и улучшение сайта на самозанятости, в дальнейшем спокойный переход на ООО" oninput="setCommonArrayItem('deliverables', 4, this.value)">
+          <button class="btn btn-ghost btn-xs" onclick="removeCommonArrayItem('deliverables', 4)">🗑️</button>
+        </div>
+      
+      <button class="btn btn-secondary btn-sm mt-8" onclick="addCommonArrayItem('deliverables')">+ Добавить</button>
+    </div>
+
+    <div class="field-group">
+      <div class="block-title" style="margin-bottom:8px">❌ Чего вы избегаете</div>
+      
+        <div class="array-item">
+          <input type="text" value="Слива бюджета как в январе. Системный подход: гипотезы → тест → аналитика → улучшение." oninput="setCommonArrayItem('whatYouAvoid', 0, this.value)">
+          <button class="btn btn-ghost btn-xs" onclick="removeCommonArrayItem('whatYouAvoid', 0)">🗑️</button>
+        </div>
+      
+        <div class="array-item">
+          <input type="text" value="Провального старта ООО — без потока клиентов запуск новой компании означает расходы без выручки, напряжение в партнёрстве и потеря команды юристов" oninput="setCommonArrayItem('whatYouAvoid', 1, this.value)">
+          <button class="btn btn-ghost btn-xs" onclick="removeCommonArrayItem('whatYouAvoid', 1)">🗑️</button>
+        </div>
+      
+        <div class="array-item">
+          <input type="text" value="Зависимости от сарафана и личного бренда — если Елена заболеет, уйдёт в отпуск или канал просядет или заблокируют вообще все соцсети — бизнес не останавливается. Начинает выстраиваться система система" oninput="setCommonArrayItem('whatYouAvoid', 2, this.value)">
+          <button class="btn btn-ghost btn-xs" onclick="removeCommonArrayItem('whatYouAvoid', 2)">🗑️</button>
+        </div>
+      
+        <div class="array-item">
+          <input type="text" value="Работы вслепую — не нужно гадать, что приносит клиентов. Есть  метрики, вебвизор. Понятно, куда вкладывать следующий рубль" oninput="setCommonArrayItem('whatYouAvoid', 3, this.value)">
+          <button class="btn btn-ghost btn-xs" onclick="removeCommonArrayItem('whatYouAvoid', 3)">🗑️</button>
+        </div>
+      
+      <button class="btn btn-secondary btn-sm mt-8" onclick="addCommonArrayItem('whatYouAvoid')">+ Добавить</button>
+    </div>
+
+    <div class="ctx-block" style="margin-bottom:16px">
+      <div class="ctx-block-header">
+        <input type="text" value="🤝 Ожидания" style="font-weight:600;font-size:13px;border:none;background:transparent;outline:none;font-family:var(--font)" readonly="">
+        <button class="ctx-toggle off" onclick="toggleExpectations()" title="Показывать в КП"></button>
+      </div>
+      <div style="padding:10px 12px">
+        <textarea rows="3" style="width:100%;border:1.5px solid var(--border);border-radius:8px;padding:8px 11px;font-family:var(--font);font-size:13px;resize:vertical;outline:none" oninput="setCommon('expectations', this.value)"></textarea>
+        <div class="ctx-hidden-notice">⚠️ Скрыт в КП — включите тогл чтобы показать</div>
+      </div>
+    </div>
+
+    <div class="field-group">
+      <label class="field-label">📄 Договор</label>
+      <textarea rows="3" oninput="setCommon('officialContract', this.value)">Официальный договор с юридической ответственностью сторон. Все обязательства фиксируются письменно
+ - Стоимость работ
+- Сроки работ
+- Объём работ
+- Ответственность сторон</textarea>
+    </div>
+  </div>
 
     <div id="editor-footer">
       <div id="autosave-indicator"><span class="dot"></span>Сохранено</div>
       <div style="flex:1"></div>
       <button class="btn btn-secondary btn-sm" onclick="downloadJSON()">⬇ JSON</button>
+      <button class="btn btn-primary btn-sm" onclick="downloadHTML()">⬇ Скачать КП</button>
       <label class="btn btn-secondary btn-sm" style="cursor:pointer">
         ⬆ Загрузить
         <input type="file" accept=".json" style="display:none" onchange="loadJSON(event)">
@@ -1197,13 +1976,310 @@
       </div>
     </div>
     <button id="mobile-editor-toggle" onclick="mobileToggleEditor()">✏️ Редактор (развернуть)</button>
-    <div id="context-preview"></div>
+    <div id="context-preview"><div class="preview-ctx-wrap">
+        <div class="preview-ctx-intro">На прошлой встрече мы с вами обсудили:</div>
+        <div class="preview-ctx-blocks">
+          
+            <div class="preview-ctx-block">
+              <div class="preview-ctx-block-title">🎯 Ваши цели</div>
+              <div class="preview-ctx-block-body"><ul><li class="whitespace-normal break-words pl-2"><b>Новый сайт с разделением по направлениям</b>: БФЛ, семейные дела, наследственные дела</li><li class="whitespace-normal break-words pl-2">Запуск <b>активной контекстной рекламы</b> (Яндекс.Директ + Яндекс.Карты)</li><li class="whitespace-normal break-words pl-2"><b>15–17 договоров</b> в месяц (сейчас ~2–3)</li><li class="whitespace-normal break-words pl-2"><b>Онлайн-продукт</b>: продажа шаблонов документов + пошаговых инструкций по банкротству (внесудебному и судебному) — масштабируемая история по всей России</li><li class="whitespace-normal break-words pl-2"><b>Механика квиза/анкеты</b> "подходишь ли ты под банкротство" на сайте</li><li class="whitespace-normal break-words pl-2">Настройка сайта <b>под несколько городов/регионов</b> (геомультипликация) — <i>в перспективе</i></li></ul>
+
+
+
+
+</div>
+            </div>
+            <div class="preview-ctx-block">
+              <div class="preview-ctx-block-title">📊 Текущая ситуация</div>
+              <div class="preview-ctx-block-body"><ul><li class="whitespace-normal break-words pl-2">~2–3 договора в месяц (весь объём)</li><li class="whitespace-normal break-words pl-2">Средний чек по БФЛ: <b>~120 тыс. руб.</b> (в рассрочку)</li><li class="whitespace-normal break-words pl-2">Готовы вкладывать в рекламу: <b>10–15% от суммы договора</b> (~12–18 тыс. на клиента)</li><li class="whitespace-normal break-words pl-2"><b>Статистики</b> по воронке (лиды → заявки → договоры) <b>нет совсем</b></li><li class="whitespace-normal break-words pl-2">Конверсия сайта: неизвестна, <b>заявок с сайта почти нет</b></li><li><b>
+Ориентировочная стоимость клиента</b> по Яндекс.Картам ранее: ~10 тыс. руб.</li></ul>
+
+
+
+
+</div>
+            </div>
+            <div class="preview-ctx-block">
+              <div class="preview-ctx-block-title">⚠️ Что может помешать</div>
+              <div class="preview-ctx-block-body"><ul><li>Нет потока клиентов,<b> всё держится на личном бренде одного человека</b>&nbsp;</li><li>Нет аналитики и понимания, что работает,&nbsp;Нет CRM, нет статистики конверсий, нет понимания стоимости клиента = при запуске <b>бюджет снова может слиться</b> как в январе с Яндекс.Картами</li><li>Сайт не работает как инструмент продаж = <b>не будет запуска Директа</b> = <b>откладывается цель в 15-17 договоров</b> = нет масштабирования по России</li><li>Нет понимания базовых маркетинговых механик = если запуститься самостоятельно <b>есть большая вероятность потратить бюджет в никуда</b></li></ul></div>
+            </div>
+        </div>
+      </div></div>
     <div id="reveal-solution-wrap" style="display:none">
       <button id="reveal-solution-btn" onclick="revealSolution()">▶ Показать решение</button>
     </div>
     <div id="solution-section">
-      <div id="cards-container"></div>
-      <div id="common-blocks-preview"></div>
+      <div id="cards-container" class="single-card">
+    <div class="tariff-card" style="border-top:3px solid #8b5cf6">
+      <div class="card-header">
+        <div class="card-tier-badge" style="color:#8b5cf6">Максимальный</div>
+        <div class="card-title" style="color:#8b5cf6">Максимальный</div>
+        <div class="volume-visual">
+          <div class="diamonds">💎💎💎💎💎</div>
+          <div class="progress-bar-wrap">
+            <div class="progress-bar-track">
+              <div class="progress-bar-fill" style="width:100%;background:#8b5cf6"></div>
+            </div>
+          </div>
+          <div class="progress-label">100% объёма работ</div>
+        </div>
+      </div>
+      <div class="card-body">
+        
+    <div class="preview-section">
+      <div class="preview-section-title">Трёхэтапные предпроектные исследования</div>
+      
+          <div class="preview-item style-normal">
+            <span class="preview-item-icon">✅</span>
+            <span>Исследование продукта </span>
+          </div>
+          
+            <div class="preview-subitems">
+              <div class="preview-subitem"><span>•</span>Брифинг с руководителем компании, маркетологом и РОПом (длительность 2-5 часов)</div><div class="preview-subitem"><span>•</span>Выделение топ-20 ключевых преимуществ компании в формате фактов и выгод</div>
+            </div>
+          
+        
+          <div class="preview-item style-normal">
+            <span class="preview-item-icon">✅</span>
+            <span>Анализ целевой аудитории </span>
+          </div>
+          
+            <div class="preview-subitems">
+              <div class="preview-subitem"><span>•</span>Анализ ЖЦА по методу AJTBD + Персонажи</div><div class="preview-subitem"><span>•</span>Выделение сегментов платежесопосбной ЦА. Вычленение триггеров. Потребностей. Критериев принятия решения. Болей. Возражений. В дальнейшем - на основе этого анализа строятся все маркетинговые активности. </div>
+            </div>
+          
+        
+          <div class="preview-item style-normal">
+            <span class="preview-item-icon">✅</span>
+            <span>Двухуроввневый анализ рынка и конкурентов</span>
+          </div>
+          
+            <div class="preview-subitems">
+              <div class="preview-subitem"><span>•</span>Исследование рынка и инфополя (анализ площадок, которые влияют на критерии принятия решения ЦА или формируют у них базу знаний о продукте)</div><div class="preview-subitem"><span>•</span>Формирование отчета по полученной информации с предоставлением результатов руководству компании</div><div class="preview-subitem"><span>•</span>Анализ сайтов ТОП-10 конкурентов в нише (посадочные страницы, маркетинговые решения, ценообразование)</div><div class="preview-subitem"><span>•</span>Рекомендации по позиционированию, УТП, выбору сегмента</div><div class="preview-subitem"><span>•</span>Создание Цепочки принятия решения (Decision Journey)</div>
+            </div>
+          
+        
+          <div class="preview-item style-normal">
+            <span class="preview-item-icon">✅</span>
+            <span>Кастдев / опрос отделом контроля качества до 5 ваших клиентов</span>
+          </div>
+          
+        
+    </div>
+  
+    <div class="preview-section">
+      <div class="preview-section-title">Создание 3 страниц сайта под каждое направление - БФЛ, наследственное и семейное право</div>
+      
+          <div class="preview-item style-normal">
+            <span class="preview-item-icon">✅</span>
+            <span>Разработка уникальной продающей структуры сайта, которая учитывает все критерии, возражения и потребности всех ЦА</span>
+          </div>
+          
+        
+          <div class="preview-item style-normal">
+            <span class="preview-item-icon">✅</span>
+            <span>Создание скрытых и интерактивных форм захвата контактов для максимизации конверсии (в том числе квиз-опросник)</span>
+          </div>
+          
+            <div class="preview-subitems">
+              <div class="preview-subitem"><span>•</span>Разработка эффективного "поп-апа на выход" (exit pop-up)</div><div class="preview-subitem"><span>•</span>Квиз</div>
+            </div>
+          
+        
+          <div class="preview-item style-normal">
+            <span class="preview-item-icon">✅</span>
+            <span>Вёрстка сайта под 4 размера</span>
+          </div>
+          
+            <div class="preview-subitems">
+              <div class="preview-subitem"><span>•</span>Разработка мобильной версии сайта</div>
+            </div>
+          
+        
+          <div class="preview-item style-normal">
+            <span class="preview-item-icon">✅</span>
+            <span>Адаптация и ускорение скорости загрузки сайта</span>
+          </div>
+          
+        
+          <div class="preview-item style-normal">
+            <span class="preview-item-icon">✅</span>
+            <span>Разработка утепляющей страницы "Спасибо за заявку"</span>
+          </div>
+          
+        
+          <div class="preview-item style-normal">
+            <span class="preview-item-icon">✅</span>
+            <span>Улучшение сайта, исходя из данных аналитики</span>
+          </div>
+          
+        
+          <div class="preview-item style-normal">
+            <span class="preview-item-icon">✅</span>
+            <span>Неограниченное внесение правок по улучшению эффективности сайта </span>
+          </div>
+          
+        
+          <div class="preview-item style-normal">
+            <span class="preview-item-icon">✅</span>
+            <span>Подбор шрифтов и цветовой гаммы в фирменном стиле</span>
+          </div>
+          
+        
+          <div class="preview-item style-normal">
+            <span class="preview-item-icon">✅</span>
+            <span>Усиление продающих посылов с помощью веб-дизайна</span>
+          </div>
+          
+        
+          <div class="preview-item style-normal">
+            <span class="preview-item-icon">✅</span>
+            <span>Тестирование каждой формы захвата на предмет доходимости заявок</span>
+          </div>
+          
+        
+          <div class="preview-item style-normal">
+            <span class="preview-item-icon">✅</span>
+            <span>Интерактивные элементы с помощью HTML кода</span>
+          </div>
+          
+            <div class="preview-subitems">
+              <div class="preview-subitem"><span>•</span>Например, калькулятор, таблицы сравнений</div>
+            </div>
+          
+        
+          <div class="preview-item style-normal">
+            <span class="preview-item-icon">✅</span>
+            <span>Копирайтинг текстов, вызывающих доверие (с учётом закона)</span>
+          </div>
+          
+        
+    </div>
+  
+        
+    <div class="bonus-block">
+      <div class="bonus-title">🎁Сопровождение на весь период рекламы БЕЗЛИМИТНО - аналитика и улучшение сайта в режиме online🎁</div>
+      
+    </div>
+  
+    <div class="bonus-block">
+      <div class="bonus-title">🎁 Разработка воронки с продажей шаблона договора🎁</div>
+      <div class="bonus-item"><span>•</span>Либо поп-ап на выход</div><div class="bonus-item"><span>•</span>Либо предложение не подходящим клиентам в квизе </div><div class="bonus-item"><span>•</span>Либо отдельный блок</div>
+    </div>
+  
+    <div class="bonus-block">
+      <div class="bonus-title">🎁 Сценарий продающего видео для поп-апа на сайте🎁</div>
+      
+    </div>
+  
+    <div class="bonus-block">
+      <div class="bonus-title">Бонусы успеем сделать при подписании договора до 24.03.2026</div>
+      
+    </div>
+  
+        
+        
+
+      </div>
+    </div>
+  </div>
+      <div id="common-blocks-preview">
+    <div class="bottom-blocks-wrap">
+
+      
+        <div class="bottom-section-title">📦 Результаты сотрудничества</div>
+        <div class="bottom-lists-row">
+          <div class="bottom-list-block">
+            <div class="bottom-list-block-title">✅ Что вы получаете</div>
+            <div class="bottom-list-item"><span>✅</span><span>Предсказуемый поток клиентов — сайт + директ дают управляемый трафик, не зависящий от личного канала Елены. Можно планировать загрузку команды. Постепенный рост до ТОП компаний.</span></div><div class="bottom-list-item"><span>✅</span><span>Сайт, который реально продаёт — не визитка, а инструмент с квизом, разными страницами под каждую услугу и конверсией 6–10%. Каждый рубль в рекламу даёт понятный результат</span></div><div class="bottom-list-item"><span>✅</span><span>Аналитику и контроль — впервые появится понимание: сколько стоит один клиент, откуда он пришёл, что работает, что нет. Решения принимаются по цифрам, а не вслепую</span></div><div class="bottom-list-item"><span>✅</span><span>Партнёра на 6 месяцев, а не разового подрядчика — сопровождение, итерации, докрутка сайта по данным. Не "сделали и ушли</span></div><div class="bottom-list-item"><span>✅</span><span>Быстрый тест и улучшение сайта на самозанятости, в дальнейшем спокойный переход на ООО</span></div>
+          </div>
+          <div class="bottom-list-block">
+            <div class="bottom-list-block-title">🚫 Чего вы избегаете</div>
+            <div class="bottom-list-item"><span>❌</span><span>Слива бюджета как в январе. Системный подход: гипотезы → тест → аналитика → улучшение.</span></div><div class="bottom-list-item"><span>❌</span><span>Провального старта ООО — без потока клиентов запуск новой компании означает расходы без выручки, напряжение в партнёрстве и потеря команды юристов</span></div><div class="bottom-list-item"><span>❌</span><span>Зависимости от сарафана и личного бренда — если Елена заболеет, уйдёт в отпуск или канал просядет или заблокируют вообще все соцсети — бизнес не останавливается. Начинает выстраиваться система система</span></div><div class="bottom-list-item"><span>❌</span><span>Работы вслепую — не нужно гадать, что приносит клиентов. Есть  метрики, вебвизор. Понятно, куда вкладывать следующий рубль</span></div>
+          </div>
+        </div>
+      
+
+      
+
+      <div class="bottom-section-title">⏰ Сроки по тарифам</div>
+      <div class="bottom-terms-row">
+    <div class="bottom-term-block">
+      <div class="bottom-term-label" style="color:#8b5cf6">Максимальный</div>
+      <div class="bottom-term-value">10-15 дней (с учётом правок + 2-3 дня)</div>
+    </div>
+  
+    <div class="bottom-term-block">
+      <div class="bottom-term-label" style="color:#10b981">Средний</div>
+      <div class="bottom-term-value">10-15 дней (с учётом правок + 2-3 дня)</div>
+    </div>
+  
+    <div class="bottom-term-block">
+      <div class="bottom-term-label" style="color:#3b82f6">Минимальный</div>
+      <div class="bottom-term-value">9-12 дней (с учётом правок + 2-3 дня)</div>
+    </div>
+  </div>
+
+      <div class="bottom-section-title">💳 Условия оплаты</div>
+      <div class="bottom-terms-row">
+    <div class="bottom-term-block">
+      <div class="bottom-term-label" style="color:#8b5cf6">Максимальный</div>
+      <div class="bottom-term-value">50% предоплата, 50% через 3 дня после передачи сайта</div>
+    </div>
+  
+    <div class="bottom-term-block">
+      <div class="bottom-term-label" style="color:#10b981">Средний</div>
+      <div class="bottom-term-value">50% предоплата, 50% по готовности передать вам сайт</div>
+    </div>
+  
+    <div class="bottom-term-block">
+      <div class="bottom-term-label" style="color:#3b82f6">Минимальный</div>
+      <div class="bottom-term-value">50% предоплата, 50% по готовности передать вам сайт</div>
+    </div>
+  </div>
+
+      <div class="bottom-section-title">💰 Стоимость и бюджет</div>
+      <div class="bottom-price-row">
+    <div class="bottom-price-block" style="border-color:#8b5cf620;background:#8b5cf606">
+      <div class="bottom-price-label" style="color:#8b5cf6">Максимальный</div>
+      <div class="bottom-price-value" style="color:#8b5cf6">107 553 ₽</div>
+      <div class="bottom-price-sub">50% предоплата, 50% через 3 дня после передачи сайта</div>
+      
+    </div>
+  
+    <div class="bottom-price-block" style="border-color:#10b98120;background:#10b98106">
+      <div class="bottom-price-label" style="color:#10b981">Средний</div>
+      <div class="bottom-price-value" style="color:#10b981">79 251 ₽</div>
+      <div class="bottom-price-sub">50% предоплата, 50% по готовности передать вам сайт</div>
+      
+    </div>
+  
+    <div class="bottom-price-block" style="border-color:#3b82f620;background:#3b82f606">
+      <div class="bottom-price-label" style="color:#3b82f6">Минимальный</div>
+      <div class="bottom-price-value" style="color:#3b82f6">48 863 ₽</div>
+      <div class="bottom-price-sub">50% предоплата, 50% по готовности передать вам сайт</div>
+      
+    </div>
+  </div>
+
+
+      <div class="common-blocks" style="margin-top:24px">
+        <div class="common-block">
+          <div class="common-block-title">📄 Договор</div>
+          <p>Официальный договор с юридической ответственностью сторон. Все обязательства фиксируются письменно
+ - Стоимость работ
+- Сроки работ
+- Объём работ
+- Ответственность сторон</p>
+        </div>
+        <div class="common-block">
+          <div class="common-block-title">🤝 О нас</div>
+          <p>Работаем официально, соблюдаем сроки, несём ответственность за результат.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
     </div>
   </div>
 </div>
@@ -1970,6 +3046,36 @@ function downloadJSON() {
   a.click();
 }
 
+function downloadHTML() {
+  // 1. Вшиваем данные через JSON.parse — безопасно, без синтаксических ошибок
+  const jsonEscaped = JSON.stringify(JSON.stringify(data));
+  let out = document.documentElement.outerHTML;
+
+  // 2. Заменяем loadFromStorage() на вшитые данные
+  out = out.replace('data = JSON.parse("{\"projectName\":\"Елена Белькова, Юридические услуги\",\"commonBlocks\":{\"officialContract\":\"Официальный договор с юридической ответственностью сторон. Все обязательства фиксируются письменно\\n - Стоимость работ\\n- Сроки работ\\n- Объём работ\\n- Ответственность сторон\",\"expectations\":\"\",\"budget\":\"55 000 - 70 000 ₽ на Директ + ВК\",\"whatYouAvoid\":[\"Слива бюджета как в январе. Системный подход: гипотезы → тест → аналитика → улучшение.\",\"Провального старта ООО — без потока клиентов запуск новой компании означает расходы без выручки, напряжение в партнёрстве и потеря команды юристов\",\"Зависимости от сарафана и личного бренда — если Елена заболеет, уйдёт в отпуск или канал просядет или заблокируют вообще все соцсети — бизнес не останавливается. Начинает выстраиваться система система\",\"Работы вслепую — не нужно гадать, что приносит клиентов. Есть  метрики, вебвизор. Понятно, куда вкладывать следующий рубль\"],\"expectationsEnabled\":false,\"deliverables\":[\"Предсказуемый поток клиентов — сайт + директ дают управляемый трафик, не зависящий от личного канала Елены. Можно планировать загрузку команды. Постепенный рост до ТОП компаний.\",\"Сайт, который реально продаёт — не визитка, а инструмент с квизом, разными страницами под каждую услугу и конверсией 6–10%. Каждый рубль в рекламу даёт понятный результат\",\"Аналитику и контроль — впервые появится понимание: сколько стоит один клиент, откуда он пришёл, что работает, что нет. Решения принимаются по цифрам, а не вслепую\",\"Партнёра на 6 месяцев, а не разового подрядчика — сопровождение, итерации, докрутка сайта по данным. Не \\\"сделали и ушли\",\"Быстрый тест и улучшение сайта на самозанятости, в дальнейшем спокойный переход на ООО\"]},\"tariffs\":[{\"name\":\"Максимальный\",\"color\":\"#8b5cf6\",\"diamondsCount\":5,\"progressPercent\":100,\"sections\":[{\"title\":\"Трёхэтапные предпроектные исследования\",\"items\":[{\"text\":\"Исследование продукта \",\"style\":\"normal\",\"subitems\":[\"Брифинг с руководителем компании, маркетологом и РОПом (длительность 2-5 часов)\",\"Выделение топ-20 ключевых преимуществ компании в формате фактов и выгод\"]},{\"text\":\"Анализ целевой аудитории \",\"style\":\"normal\",\"subitems\":[\"Анализ ЖЦА по методу AJTBD + Персонажи\",\"Выделение сегментов платежесопосбной ЦА. Вычленение триггеров. Потребностей. Критериев принятия решения. Болей. Возражений. В дальнейшем - на основе этого анализа строятся все маркетинговые активности. \"]},{\"text\":\"Двухуроввневый анализ рынка и конкурентов\",\"style\":\"normal\",\"subitems\":[\"Исследование рынка и инфополя (анализ площадок, которые влияют на критерии принятия решения ЦА или формируют у них базу знаний о продукте)\",\"Формирование отчета по полученной информации с предоставлением результатов руководству компании\",\"Анализ сайтов ТОП-10 конкурентов в нише (посадочные страницы, маркетинговые решения, ценообразование)\",\"Рекомендации по позиционированию, УТП, выбору сегмента\",\"Создание Цепочки принятия решения (Decision Journey)\"]},{\"text\":\"Кастдев / опрос отделом контроля качества до 5 ваших клиентов\",\"style\":\"normal\",\"subitems\":[]}]},{\"title\":\"Создание 3 страниц сайта под каждое направление - БФЛ, наследственное и семейное право\",\"items\":[{\"text\":\"Разработка уникальной продающей структуры сайта, которая учитывает все критерии, возражения и потребности всех ЦА\",\"style\":\"normal\",\"subitems\":[]},{\"text\":\"Создание скрытых и интерактивных форм захвата контактов для максимизации конверсии (в том числе квиз-опросник)\",\"style\":\"normal\",\"subitems\":[\"Разработка эффективного \\\"поп-апа на выход\\\" (exit pop-up)\",\"Квиз\"]},{\"text\":\"Вёрстка сайта под 4 размера\",\"style\":\"normal\",\"subitems\":[\"Разработка мобильной версии сайта\"]},{\"text\":\"Адаптация и ускорение скорости загрузки сайта\",\"style\":\"normal\",\"subitems\":[]},{\"text\":\"Разработка утепляющей страницы \\\"Спасибо за заявку\\\"\",\"style\":\"normal\",\"subitems\":[]},{\"text\":\"Улучшение сайта, исходя из данных аналитики\",\"style\":\"normal\",\"subitems\":[]},{\"text\":\"Неограниченное внесение правок по улучшению эффективности сайта \",\"style\":\"normal\",\"subitems\":[]},{\"text\":\"Подбор шрифтов и цветовой гаммы в фирменном стиле\",\"style\":\"normal\",\"subitems\":[]},{\"text\":\"Усиление продающих посылов с помощью веб-дизайна\",\"style\":\"normal\",\"subitems\":[]},{\"text\":\"Тестирование каждой формы захвата на предмет доходимости заявок\",\"style\":\"normal\",\"subitems\":[]},{\"text\":\"Интерактивные элементы с помощью HTML кода\",\"style\":\"normal\",\"subitems\":[\"Например, калькулятор, таблицы сравнений\"]},{\"text\":\"Копирайтинг текстов, вызывающих доверие (с учётом закона)\",\"style\":\"normal\",\"subitems\":[]}]}],\"bonus\":{\"enabled\":true,\"title\":\" Сценарии продающих видео для бота 🎁\",\"items\":[]},\"deliverables\":[\"Отчёт с инсайтами\",\"Настроенные кампании\"],\"whatYouAvoid\":[\"Слив бюджета\",\"Нецелевой трафик\"],\"terms\":\"10-15 дней (с учётом правок + 2-3 дня)\",\"payment\":\"50% предоплата, 50% через 3 дня после передачи сайта\",\"price\":\"107 553 ₽\",\"bonuses\":[{\"title\":\"🎁Сопровождение на весь период рекламы БЕЗЛИМИТНО - аналитика и улучшение сайта в режиме online🎁\",\"items\":[]},{\"title\":\"🎁 Разработка воронки с продажей шаблона договора🎁\",\"items\":[\"Либо поп-ап на выход\",\"Либо предложение не подходящим клиентам в квизе \",\"Либо отдельный блок\"]},{\"title\":\"🎁 Сценарий продающего видео для поп-апа на сайте🎁\",\"items\":[]},{\"title\":\"Бонусы успеем сделать при подписании договора до 24.03.2026\",\"items\":[]}],\"budget\":\"\"},{\"name\":\"Средний\",\"color\":\"#10b981\",\"diamondsCount\":3,\"progressPercent\":49,\"sections\":[{\"title\":\"Трёхэтапные предпроектные исследования\",\"items\":[{\"text\":\"Исследование продукта \",\"style\":\"normal\",\"subitems\":[\"Брифинг с руководителем компании, маркетологом и РОПом (длительность 2-5 часов)\",\"Выделение топ-20 ключевых преимуществ компании в формате фактов и выгод\"]},{\"text\":\"Анализ целевой аудитории \",\"style\":\"normal\",\"subitems\":[\"Анализ ЖЦА по методу AJTBD + Персонажи\",\"Выделение сегментов платежесопосбной ЦА. Вычленение триггеров. Потребностей. Критериев принятия решения. Болей. Возражений. В дальнейшем - на основе этого анализа строятся все маркетинговые активности. \"]},{\"text\":\"Двухуроввневый анализ рынка и конкурентов\",\"style\":\"partial\",\"subitems\":[\"Исследование рынка и инфополя (анализ площадок, которые влияют на критерии принятия решения ЦА или формируют у них базу знаний о продукте)\",\"Формирование отчета по полученной информации с предоставлением результатов руководству компании\",\"Анализ сайтов ТОП-10 конкурентов в нише (посадочные страницы, маркетинговые решения, ценообразование)\",\"Рекомендации по позиционированию, УТП, выбору сегмента\",\"Создание Цепочки принятия решения (Decision Journey)\"]},{\"text\":\"Кастдев / опрос отделом контроля качества до 5 ваших клиентов\",\"style\":\"disabled\",\"subitems\":[]}]},{\"title\":\"Создание 2 страниц сайта под каждое направление - БФЛ, наследственное / семейное право\",\"items\":[{\"text\":\"Разработка уникальной продающей структуры сайта, которая учитывает все критерии, возражения и потребности всех ЦА\",\"style\":\"normal\",\"subitems\":[]},{\"text\":\"Создание скрытых и интерактивных форм захвата контактов для максимизации конверсии (в том числе квиз-опросник)\",\"style\":\"normal\",\"subitems\":[\"Разработка эффективного \\\"поп-апа на выход\\\" (exit pop-up)\",\"Квиз\"]},{\"text\":\"Вёрстка сайта под 4 размера\",\"style\":\"normal\",\"subitems\":[\"Разработка мобильной версии сайта\"]},{\"text\":\"Адаптация и ускорение скорости загрузки сайта\",\"style\":\"normal\",\"subitems\":[]},{\"text\":\"Разработка утепляющей страницы \\\"Спасибо за заявку\\\"\",\"style\":\"normal\",\"subitems\":[]},{\"text\":\"Улучшение сайта, исходя из данных аналитики\",\"style\":\"normal\",\"subitems\":[]},{\"text\":\"Неограниченное внесение правок по улучшению эффективности сайта \",\"style\":\"normal\",\"subitems\":[]},{\"text\":\"Подбор шрифтов и цветовой гаммы в фирменном стиле\",\"style\":\"normal\",\"subitems\":[]},{\"text\":\"Усиление продающих посылов с помощью веб-дизайна\",\"style\":\"normal\",\"subitems\":[]},{\"text\":\"Тестирование каждой формы захвата на предмет доходимости заявок\",\"style\":\"normal\",\"subitems\":[]},{\"text\":\"Интерактивные элементы с помощью HTML кода\",\"style\":\"disabled\",\"subitems\":[\"Например, калькулятор, таблицы сравнений\"]},{\"text\":\"Копирайтинг текстов, вызывающих доверие (с учётом закона)\",\"style\":\"normal\",\"subitems\":[]}]}],\"bonus\":{\"enabled\":true,\"title\":\"🎁 Бесплатная консультация\",\"items\":[\"1 час стратегической сессии после запуска\"]},\"deliverables\":[\"Отчёт с инсайтами\",\"Настроенные кампании\"],\"whatYouAvoid\":[\"Слив бюджета\",\"Нецелевой трафик\"],\"terms\":\"10-15 дней (с учётом правок + 2-3 дня)\",\"payment\":\"50% предоплата, 50% по готовности передать вам сайт\",\"price\":\"79 251 ₽\",\"bonuses\":[],\"budget\":\"\"},{\"name\":\"Минимальный\",\"color\":\"#3b82f6\",\"diamondsCount\":1,\"progressPercent\":22,\"sections\":[{\"title\":\"Трёхэтапные предпроектные исследования\",\"items\":[{\"text\":\"Исследование продукта \",\"style\":\"normal\",\"subitems\":[\"Брифинг с руководителем компании, маркетологом и РОПом (длительность 2-5 часов)\",\"Выделение топ-20 ключевых преимуществ компании в формате фактов и выгод\"]},{\"text\":\"Анализ целевой аудитории \",\"style\":\"normal\",\"subitems\":[\"Анализ ЖЦА по методу AJTBD + Персонажи\",\"Выделение сегментов платежесопосбной ЦА. Вычленение триггеров. Потребностей. Критериев принятия решения. Болей. Возражений. В дальнейшем - на основе этого анализа строятся все маркетинговые активности. \"]},{\"text\":\"Двухуроввневый анализ рынка и конкурентов\",\"style\":\"partial\",\"subitems\":[\"Исследование рынка и инфополя (анализ площадок, которые влияют на критерии принятия решения ЦА или формируют у них базу знаний о продукте)\",\"Формирование отчета по полученной информации с предоставлением результатов руководству компании\",\"Анализ сайтов ТОП-10 конкурентов в нише (посадочные страницы, маркетинговые решения, ценообразование)\",\"Рекомендации по позиционированию, УТП, выбору сегмента\",\"Создание Цепочки принятия решения (Decision Journey)\"]},{\"text\":\"Кастдев / опрос отделом контроля качества до 5 ваших клиентов\",\"style\":\"disabled\",\"subitems\":[]}]},{\"title\":\"Создание 1 страницы сайта под направление - БФЛ\",\"items\":[{\"text\":\"Разработка уникальной продающей структуры сайта, которая учитывает все критерии, возражения и потребности всех ЦА\",\"style\":\"normal\",\"subitems\":[]},{\"text\":\"Создание скрытых и интерактивных форм захвата контактов для максимизации конверсии (в том числе квиз-опросник)\",\"style\":\"normal\",\"subitems\":[\"Разработка эффективного \\\"поп-апа на выход\\\" (exit pop-up)\",\"Квиз\"]},{\"text\":\"Вёрстка сайта под 4 размера\",\"style\":\"normal\",\"subitems\":[\"Разработка мобильной версии сайта\"]},{\"text\":\"Адаптация и ускорение скорости загрузки сайта\",\"style\":\"normal\",\"subitems\":[]},{\"text\":\"Разработка утепляющей страницы \\\"Спасибо за заявку\\\"\",\"style\":\"normal\",\"subitems\":[]},{\"text\":\"Улучшение сайта, исходя из данных аналитики\",\"style\":\"normal\",\"subitems\":[]},{\"text\":\"Неограниченное внесение правок по улучшению эффективности сайта \",\"style\":\"normal\",\"subitems\":[]},{\"text\":\"Подбор шрифтов и цветовой гаммы в фирменном стиле\",\"style\":\"normal\",\"subitems\":[]},{\"text\":\"Усиление продающих посылов с помощью веб-дизайна\",\"style\":\"normal\",\"subitems\":[]},{\"text\":\"Тестирование каждой формы захвата на предмет доходимости заявок\",\"style\":\"normal\",\"subitems\":[]},{\"text\":\"Интерактивные элементы с помощью HTML кода\",\"style\":\"disabled\",\"subitems\":[\"Например, калькулятор, таблицы сравнений\"]},{\"text\":\"Копирайтинг текстов, вызывающих доверие (с учётом закона)\",\"style\":\"normal\",\"subitems\":[]}]}],\"bonus\":{\"enabled\":false,\"title\":\"Бонус\",\"items\":[]},\"deliverables\":[\"Отчёт с инсайтами\",\"Настроенные кампании\"],\"whatYouAvoid\":[\"Слив бюджета\",\"Нецелевой трафик\"],\"terms\":\"9-12 дней (с учётом правок + 2-3 дня)\",\"payment\":\"50% предоплата, 50% по готовности передать вам сайт\",\"price\":\"48 863 ₽\",\"bonuses\":[],\"budget\":\"\"}],\"contextBlocks\":[{\"id\":\"goals\",\"title\":\"🎯 Ваши цели\",\"html\":\"<ul><li class=\\\"whitespace-normal break-words pl-2\\\"><b>Новый сайт с разделением по направлениям</b>: БФЛ, семейные дела, наследственные дела</li><li class=\\\"whitespace-normal break-words pl-2\\\">Запуск <b>активной контекстной рекламы</b> (Яндекс.Директ + Яндекс.Карты)</li><li class=\\\"whitespace-normal break-words pl-2\\\"><b>15–17 договоров</b> в месяц (сейчас ~2–3)</li><li class=\\\"whitespace-normal break-words pl-2\\\"><b>Онлайн-продукт</b>: продажа шаблонов документов + пошаговых инструкций по банкротству (внесудебному и судебному) — масштабируемая история по всей России</li><li class=\\\"whitespace-normal break-words pl-2\\\"><b>Механика квиза/анкеты</b> \\\"подходишь ли ты под банкротство\\\" на сайте</li><li class=\\\"whitespace-normal break-words pl-2\\\">Настройка сайта <b>под несколько городов/регионов</b> (геомультипликация) — <i>в перспективе</i></li></ul>\\n\\n\\n\\n\\n\",\"enabled\":true},{\"id\":\"current\",\"title\":\"📊 Текущая ситуация\",\"html\":\"<ul><li class=\\\"whitespace-normal break-words pl-2\\\">~2–3 договора в месяц (весь объём)</li><li class=\\\"whitespace-normal break-words pl-2\\\">Средний чек по БФЛ: <b>~120 тыс. руб.</b> (в рассрочку)</li><li class=\\\"whitespace-normal break-words pl-2\\\">Готовы вкладывать в рекламу: <b>10–15% от суммы договора</b> (~12–18 тыс. на клиента)</li><li class=\\\"whitespace-normal break-words pl-2\\\"><b>Статистики</b> по воронке (лиды → заявки → договоры) <b>нет совсем</b></li><li class=\\\"whitespace-normal break-words pl-2\\\">Конверсия сайта: неизвестна, <b>заявок с сайта почти нет</b></li><li><b>\\nОриентировочная стоимость клиента</b> по Яндекс.Картам ранее: ~10 тыс. руб.</li></ul>\\n\\n\\n\\n\\n\",\"enabled\":true},{\"id\":\"problems\",\"title\":\"⚠️ Что может помешать\",\"html\":\"<ul><li>Нет потока клиентов,<b> всё держится на личном бренде одного человека</b>&nbsp;</li><li>Нет аналитики и понимания, что работает,&nbsp;Нет CRM, нет статистики конверсий, нет понимания стоимости клиента = при запуске <b>бюджет снова может слиться</b> как в январе с Яндекс.Картами</li><li>Сайт не работает как инструмент продаж = <b>не будет запуска Директа</b> = <b>откладывается цель в 15-17 договоров</b> = нет масштабирования по России</li><li>Нет понимания базовых маркетинговых механик = если запуститься самостоятельно <b>есть большая вероятность потратить бюджет в никуда</b></li></ul>\",\"enabled\":true}],\"agency\":{\"name\":\"\",\"contactLabel\":\"\",\"contactUrl\":\"\"}}");', 'data = JSON.parse(' + jsonEscaped + ');');
+
+  // 3. Заменяем инит — убираем редактор, ставим презентацию сразу
+  const oldInit = 'renderTabs();\nrenderEditor();\nrenderPreview();\ninitMobile();\nsetTimeout(restoreCtxEditors, 0);';
+  const newInit = [
+    "document.body.classList.add('presentation-mode');",
+    "showAll = true;",
+    "renderPreview();",
+    "var sol = document.getElementById('solution-section');",
+    "if (sol) sol.classList.remove('hidden');",
+    "var rw = document.getElementById('reveal-solution-wrap');",
+    "if (rw) rw.style.display = 'none';",
+    "var eb = document.getElementById('presentation-exit');",
+    "if (eb) eb.style.display = 'none';"
+  ].join('\n');
+  out = out.replace(oldInit, newInit);
+
+  const blob = new Blob([out], {type: 'text/html;charset=utf-8'});
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  const name = (data.projectName || 'kp').replace(/[^\u0400-\u04ffa-z0-9_\- ]/gi, '').trim() || 'kp';
+  a.download = '\u041a\u041f_' + name + '.html';
+  a.click();
+}
 function loadJSON(event) {
   const file = event.target.files[0];
   if (!file) return;
@@ -2118,7 +3224,7 @@ function initMobile() {
 // ═══════════════════════════════════════════════════════════
 // INIT
 // ═══════════════════════════════════════════════════════════
-data = JSON.parse("{\n  \"projectName\": \"\u0415\u043b\u0435\u043d\u0430 \u0411\u0435\u043b\u044c\u043a\u043e\u0432\u0430, \u042e\u0440\u0438\u0434\u0438\u0447\u0435\u0441\u043a\u0438\u0435 \u0443\u0441\u043b\u0443\u0433\u0438\",\n  \"commonBlocks\": {\n    \"officialContract\": \"\u041e\u0444\u0438\u0446\u0438\u0430\u043b\u044c\u043d\u044b\u0439 \u0434\u043e\u0433\u043e\u0432\u043e\u0440 \u0441 \u044e\u0440\u0438\u0434\u0438\u0447\u0435\u0441\u043a\u043e\u0439 \u043e\u0442\u0432\u0435\u0442\u0441\u0442\u0432\u0435\u043d\u043d\u043e\u0441\u0442\u044c\u044e \u0441\u0442\u043e\u0440\u043e\u043d. \u0412\u0441\u0435 \u043e\u0431\u044f\u0437\u0430\u0442\u0435\u043b\u044c\u0441\u0442\u0432\u0430 \u0444\u0438\u043a\u0441\u0438\u0440\u0443\u044e\u0442\u0441\u044f \u043f\u0438\u0441\u044c\u043c\u0435\u043d\u043d\u043e\\n - \u0421\u0442\u043e\u0438\u043c\u043e\u0441\u0442\u044c \u0440\u0430\u0431\u043e\u0442\\n- \u0421\u0440\u043e\u043a\u0438 \u0440\u0430\u0431\u043e\u0442\\n- \u041e\u0431\u044a\u0451\u043c \u0440\u0430\u0431\u043e\u0442\\n- \u041e\u0442\u0432\u0435\u0442\u0441\u0442\u0432\u0435\u043d\u043d\u043e\u0441\u0442\u044c \u0441\u0442\u043e\u0440\u043e\u043d\",\n    \"expectations\": \"\",\n    \"budget\": \"55 000 - 70 000 \u20bd \u043d\u0430 \u0414\u0438\u0440\u0435\u043a\u0442 + \u0412\u041a\",\n    \"whatYouAvoid\": [\n      \"\u0421\u043b\u0438\u0432\u0430 \u0431\u044e\u0434\u0436\u0435\u0442\u0430 \u043a\u0430\u043a \u0432 \u044f\u043d\u0432\u0430\u0440\u0435. \u0421\u0438\u0441\u0442\u0435\u043c\u043d\u044b\u0439 \u043f\u043e\u0434\u0445\u043e\u0434: \u0433\u0438\u043f\u043e\u0442\u0435\u0437\u044b \u2192 \u0442\u0435\u0441\u0442 \u2192 \u0430\u043d\u0430\u043b\u0438\u0442\u0438\u043a\u0430 \u2192 \u0443\u043b\u0443\u0447\u0448\u0435\u043d\u0438\u0435.\",\n      \"\u041f\u0440\u043e\u0432\u0430\u043b\u044c\u043d\u043e\u0433\u043e \u0441\u0442\u0430\u0440\u0442\u0430 \u041e\u041e\u041e \u2014 \u0431\u0435\u0437 \u043f\u043e\u0442\u043e\u043a\u0430 \u043a\u043b\u0438\u0435\u043d\u0442\u043e\u0432 \u0437\u0430\u043f\u0443\u0441\u043a \u043d\u043e\u0432\u043e\u0439 \u043a\u043e\u043c\u043f\u0430\u043d\u0438\u0438 \u043e\u0437\u043d\u0430\u0447\u0430\u0435\u0442 \u0440\u0430\u0441\u0445\u043e\u0434\u044b \u0431\u0435\u0437 \u0432\u044b\u0440\u0443\u0447\u043a\u0438, \u043d\u0430\u043f\u0440\u044f\u0436\u0435\u043d\u0438\u0435 \u0432 \u043f\u0430\u0440\u0442\u043d\u0451\u0440\u0441\u0442\u0432\u0435 \u0438 \u043f\u043e\u0442\u0435\u0440\u044f \u043a\u043e\u043c\u0430\u043d\u0434\u044b \u044e\u0440\u0438\u0441\u0442\u043e\u0432\",\n      \"\u0417\u0430\u0432\u0438\u0441\u0438\u043c\u043e\u0441\u0442\u0438 \u043e\u0442 \u0441\u0430\u0440\u0430\u0444\u0430\u043d\u0430 \u0438 \u043b\u0438\u0447\u043d\u043e\u0433\u043e \u0431\u0440\u0435\u043d\u0434\u0430 \u2014 \u0435\u0441\u043b\u0438 \u0415\u043b\u0435\u043d\u0430 \u0437\u0430\u0431\u043e\u043b\u0435\u0435\u0442, \u0443\u0439\u0434\u0451\u0442 \u0432 \u043e\u0442\u043f\u0443\u0441\u043a \u0438\u043b\u0438 \u043a\u0430\u043d\u0430\u043b \u043f\u0440\u043e\u0441\u044f\u0434\u0435\u0442 \u0438\u043b\u0438 \u0437\u0430\u0431\u043b\u043e\u043a\u0438\u0440\u0443\u044e\u0442 \u0432\u043e\u043e\u0431\u0449\u0435 \u0432\u0441\u0435 \u0441\u043e\u0446\u0441\u0435\u0442\u0438 \u2014 \u0431\u0438\u0437\u043d\u0435\u0441 \u043d\u0435 \u043e\u0441\u0442\u0430\u043d\u0430\u0432\u043b\u0438\u0432\u0430\u0435\u0442\u0441\u044f. \u041d\u0430\u0447\u0438\u043d\u0430\u0435\u0442 \u0432\u044b\u0441\u0442\u0440\u0430\u0438\u0432\u0430\u0442\u044c\u0441\u044f \u0441\u0438\u0441\u0442\u0435\u043c\u0430 \u0441\u0438\u0441\u0442\u0435\u043c\u0430\",\n      \"\u0420\u0430\u0431\u043e\u0442\u044b \u0432\u0441\u043b\u0435\u043f\u0443\u044e \u2014 \u043d\u0435 \u043d\u0443\u0436\u043d\u043e \u0433\u0430\u0434\u0430\u0442\u044c, \u0447\u0442\u043e \u043f\u0440\u0438\u043d\u043e\u0441\u0438\u0442 \u043a\u043b\u0438\u0435\u043d\u0442\u043e\u0432. \u0415\u0441\u0442\u044c  \u043c\u0435\u0442\u0440\u0438\u043a\u0438, \u0432\u0435\u0431\u0432\u0438\u0437\u043e\u0440. \u041f\u043e\u043d\u044f\u0442\u043d\u043e, \u043a\u0443\u0434\u0430 \u0432\u043a\u043b\u0430\u0434\u044b\u0432\u0430\u0442\u044c \u0441\u043b\u0435\u0434\u0443\u044e\u0449\u0438\u0439 \u0440\u0443\u0431\u043b\u044c\"\n    ],\n    \"expectationsEnabled\": false,\n    \"deliverables\": [\n      \"\u041f\u0440\u0435\u0434\u0441\u043a\u0430\u0437\u0443\u0435\u043c\u044b\u0439 \u043f\u043e\u0442\u043e\u043a \u043a\u043b\u0438\u0435\u043d\u0442\u043e\u0432 \u2014 \u0441\u0430\u0439\u0442 + \u0434\u0438\u0440\u0435\u043a\u0442 \u0434\u0430\u044e\u0442 \u0443\u043f\u0440\u0430\u0432\u043b\u044f\u0435\u043c\u044b\u0439 \u0442\u0440\u0430\u0444\u0438\u043a, \u043d\u0435 \u0437\u0430\u0432\u0438\u0441\u044f\u0449\u0438\u0439 \u043e\u0442 \u043b\u0438\u0447\u043d\u043e\u0433\u043e \u043a\u0430\u043d\u0430\u043b\u0430 \u0415\u043b\u0435\u043d\u044b. \u041c\u043e\u0436\u043d\u043e \u043f\u043b\u0430\u043d\u0438\u0440\u043e\u0432\u0430\u0442\u044c \u0437\u0430\u0433\u0440\u0443\u0437\u043a\u0443 \u043a\u043e\u043c\u0430\u043d\u0434\u044b. \u041f\u043e\u0441\u0442\u0435\u043f\u0435\u043d\u043d\u044b\u0439 \u0440\u043e\u0441\u0442 \u0434\u043e \u0422\u041e\u041f \u043a\u043e\u043c\u043f\u0430\u043d\u0438\u0439.\",\n      \"\u0421\u0430\u0439\u0442, \u043a\u043e\u0442\u043e\u0440\u044b\u0439 \u0440\u0435\u0430\u043b\u044c\u043d\u043e \u043f\u0440\u043e\u0434\u0430\u0451\u0442 \u2014 \u043d\u0435 \u0432\u0438\u0437\u0438\u0442\u043a\u0430, \u0430 \u0438\u043d\u0441\u0442\u0440\u0443\u043c\u0435\u043d\u0442 \u0441 \u043a\u0432\u0438\u0437\u043e\u043c, \u0440\u0430\u0437\u043d\u044b\u043c\u0438 \u0441\u0442\u0440\u0430\u043d\u0438\u0446\u0430\u043c\u0438 \u043f\u043e\u0434 \u043a\u0430\u0436\u0434\u0443\u044e \u0443\u0441\u043b\u0443\u0433\u0443 \u0438 \u043a\u043e\u043d\u0432\u0435\u0440\u0441\u0438\u0435\u0439 6\u201310%. \u041a\u0430\u0436\u0434\u044b\u0439 \u0440\u0443\u0431\u043b\u044c \u0432 \u0440\u0435\u043a\u043b\u0430\u043c\u0443 \u0434\u0430\u0451\u0442 \u043f\u043e\u043d\u044f\u0442\u043d\u044b\u0439 \u0440\u0435\u0437\u0443\u043b\u044c\u0442\u0430\u0442\",\n      \"\u0410\u043d\u0430\u043b\u0438\u0442\u0438\u043a\u0443 \u0438 \u043a\u043e\u043d\u0442\u0440\u043e\u043b\u044c \u2014 \u0432\u043f\u0435\u0440\u0432\u044b\u0435 \u043f\u043e\u044f\u0432\u0438\u0442\u0441\u044f \u043f\u043e\u043d\u0438\u043c\u0430\u043d\u0438\u0435: \u0441\u043a\u043e\u043b\u044c\u043a\u043e \u0441\u0442\u043e\u0438\u0442 \u043e\u0434\u0438\u043d \u043a\u043b\u0438\u0435\u043d\u0442, \u043e\u0442\u043a\u0443\u0434\u0430 \u043e\u043d \u043f\u0440\u0438\u0448\u0451\u043b, \u0447\u0442\u043e \u0440\u0430\u0431\u043e\u0442\u0430\u0435\u0442, \u0447\u0442\u043e \u043d\u0435\u0442. \u0420\u0435\u0448\u0435\u043d\u0438\u044f \u043f\u0440\u0438\u043d\u0438\u043c\u0430\u044e\u0442\u0441\u044f \u043f\u043e \u0446\u0438\u0444\u0440\u0430\u043c, \u0430 \u043d\u0435 \u0432\u0441\u043b\u0435\u043f\u0443\u044e\",\n      \"\u041f\u0430\u0440\u0442\u043d\u0451\u0440\u0430 \u043d\u0430 6 \u043c\u0435\u0441\u044f\u0446\u0435\u0432, \u0430 \u043d\u0435 \u0440\u0430\u0437\u043e\u0432\u043e\u0433\u043e \u043f\u043e\u0434\u0440\u044f\u0434\u0447\u0438\u043a\u0430 \u2014 \u0441\u043e\u043f\u0440\u043e\u0432\u043e\u0436\u0434\u0435\u043d\u0438\u0435, \u0438\u0442\u0435\u0440\u0430\u0446\u0438\u0438, \u0434\u043e\u043a\u0440\u0443\u0442\u043a\u0430 \u0441\u0430\u0439\u0442\u0430 \u043f\u043e \u0434\u0430\u043d\u043d\u044b\u043c. \u041d\u0435 \\\"\u0441\u0434\u0435\u043b\u0430\u043b\u0438 \u0438 \u0443\u0448\u043b\u0438\",\n      \"\u0411\u044b\u0441\u0442\u0440\u044b\u0439 \u0442\u0435\u0441\u0442 \u0438 \u0443\u043b\u0443\u0447\u0448\u0435\u043d\u0438\u0435 \u0441\u0430\u0439\u0442\u0430 \u043d\u0430 \u0441\u0430\u043c\u043e\u0437\u0430\u043d\u044f\u0442\u043e\u0441\u0442\u0438, \u0432 \u0434\u0430\u043b\u044c\u043d\u0435\u0439\u0448\u0435\u043c \u0441\u043f\u043e\u043a\u043e\u0439\u043d\u044b\u0439 \u043f\u0435\u0440\u0435\u0445\u043e\u0434 \u043d\u0430 \u041e\u041e\u041e\"\n    ]\n  },\n  \"tariffs\": [\n    {\n      \"name\": \"\u041c\u0430\u043a\u0441\u0438\u043c\u0430\u043b\u044c\u043d\u044b\u0439\",\n      \"color\": \"#8b5cf6\",\n      \"diamondsCount\": 5,\n      \"progressPercent\": 100,\n      \"sections\": [\n        {\n          \"title\": \"\u0422\u0440\u0451\u0445\u044d\u0442\u0430\u043f\u043d\u044b\u0435 \u043f\u0440\u0435\u0434\u043f\u0440\u043e\u0435\u043a\u0442\u043d\u044b\u0435 \u0438\u0441\u0441\u043b\u0435\u0434\u043e\u0432\u0430\u043d\u0438\u044f\",\n          \"items\": [\n            {\n              \"text\": \"\u0418\u0441\u0441\u043b\u0435\u0434\u043e\u0432\u0430\u043d\u0438\u0435 \u043f\u0440\u043e\u0434\u0443\u043a\u0442\u0430 \",\n              \"style\": \"normal\",\n              \"subitems\": [\n                \"\u0411\u0440\u0438\u0444\u0438\u043d\u0433 \u0441 \u0440\u0443\u043a\u043e\u0432\u043e\u0434\u0438\u0442\u0435\u043b\u0435\u043c \u043a\u043e\u043c\u043f\u0430\u043d\u0438\u0438, \u043c\u0430\u0440\u043a\u0435\u0442\u043e\u043b\u043e\u0433\u043e\u043c \u0438 \u0420\u041e\u041f\u043e\u043c (\u0434\u043b\u0438\u0442\u0435\u043b\u044c\u043d\u043e\u0441\u0442\u044c 2-5 \u0447\u0430\u0441\u043e\u0432)\",\n                \"\u0412\u044b\u0434\u0435\u043b\u0435\u043d\u0438\u0435 \u0442\u043e\u043f-20 \u043a\u043b\u044e\u0447\u0435\u0432\u044b\u0445 \u043f\u0440\u0435\u0438\u043c\u0443\u0449\u0435\u0441\u0442\u0432 \u043a\u043e\u043c\u043f\u0430\u043d\u0438\u0438 \u0432 \u0444\u043e\u0440\u043c\u0430\u0442\u0435 \u0444\u0430\u043a\u0442\u043e\u0432 \u0438 \u0432\u044b\u0433\u043e\u0434\"\n              ]\n            },\n            {\n              \"text\": \"\u0410\u043d\u0430\u043b\u0438\u0437 \u0446\u0435\u043b\u0435\u0432\u043e\u0439 \u0430\u0443\u0434\u0438\u0442\u043e\u0440\u0438\u0438 \",\n              \"style\": \"normal\",\n              \"subitems\": [\n                \"\u0410\u043d\u0430\u043b\u0438\u0437 \u0416\u0426\u0410 \u043f\u043e \u043c\u0435\u0442\u043e\u0434\u0443 AJTBD + \u041f\u0435\u0440\u0441\u043e\u043d\u0430\u0436\u0438\",\n                \"\u0412\u044b\u0434\u0435\u043b\u0435\u043d\u0438\u0435 \u0441\u0435\u0433\u043c\u0435\u043d\u0442\u043e\u0432 \u043f\u043b\u0430\u0442\u0435\u0436\u0435\u0441\u043e\u043f\u043e\u0441\u0431\u043d\u043e\u0439 \u0426\u0410. \u0412\u044b\u0447\u043b\u0435\u043d\u0435\u043d\u0438\u0435 \u0442\u0440\u0438\u0433\u0433\u0435\u0440\u043e\u0432. \u041f\u043e\u0442\u0440\u0435\u0431\u043d\u043e\u0441\u0442\u0435\u0439. \u041a\u0440\u0438\u0442\u0435\u0440\u0438\u0435\u0432 \u043f\u0440\u0438\u043d\u044f\u0442\u0438\u044f \u0440\u0435\u0448\u0435\u043d\u0438\u044f. \u0411\u043e\u043b\u0435\u0439. \u0412\u043e\u0437\u0440\u0430\u0436\u0435\u043d\u0438\u0439. \u0412 \u0434\u0430\u043b\u044c\u043d\u0435\u0439\u0448\u0435\u043c - \u043d\u0430 \u043e\u0441\u043d\u043e\u0432\u0435 \u044d\u0442\u043e\u0433\u043e \u0430\u043d\u0430\u043b\u0438\u0437\u0430 \u0441\u0442\u0440\u043e\u044f\u0442\u0441\u044f \u0432\u0441\u0435 \u043c\u0430\u0440\u043a\u0435\u0442\u0438\u043d\u0433\u043e\u0432\u044b\u0435 \u0430\u043a\u0442\u0438\u0432\u043d\u043e\u0441\u0442\u0438. \"\n              ]\n            },\n            {\n              \"text\": \"\u0414\u0432\u0443\u0445\u0443\u0440\u043e\u0432\u0432\u043d\u0435\u0432\u044b\u0439 \u0430\u043d\u0430\u043b\u0438\u0437 \u0440\u044b\u043d\u043a\u0430 \u0438 \u043a\u043e\u043d\u043a\u0443\u0440\u0435\u043d\u0442\u043e\u0432\",\n              \"style\": \"normal\",\n              \"subitems\": [\n                \"\u0418\u0441\u0441\u043b\u0435\u0434\u043e\u0432\u0430\u043d\u0438\u0435 \u0440\u044b\u043d\u043a\u0430 \u0438 \u0438\u043d\u0444\u043e\u043f\u043e\u043b\u044f (\u0430\u043d\u0430\u043b\u0438\u0437 \u043f\u043b\u043e\u0449\u0430\u0434\u043e\u043a, \u043a\u043e\u0442\u043e\u0440\u044b\u0435 \u0432\u043b\u0438\u044f\u044e\u0442 \u043d\u0430 \u043a\u0440\u0438\u0442\u0435\u0440\u0438\u0438 \u043f\u0440\u0438\u043d\u044f\u0442\u0438\u044f \u0440\u0435\u0448\u0435\u043d\u0438\u044f \u0426\u0410 \u0438\u043b\u0438 \u0444\u043e\u0440\u043c\u0438\u0440\u0443\u044e\u0442 \u0443 \u043d\u0438\u0445 \u0431\u0430\u0437\u0443 \u0437\u043d\u0430\u043d\u0438\u0439 \u043e \u043f\u0440\u043e\u0434\u0443\u043a\u0442\u0435)\",\n                \"\u0424\u043e\u0440\u043c\u0438\u0440\u043e\u0432\u0430\u043d\u0438\u0435 \u043e\u0442\u0447\u0435\u0442\u0430 \u043f\u043e \u043f\u043e\u043b\u0443\u0447\u0435\u043d\u043d\u043e\u0439 \u0438\u043d\u0444\u043e\u0440\u043c\u0430\u0446\u0438\u0438 \u0441 \u043f\u0440\u0435\u0434\u043e\u0441\u0442\u0430\u0432\u043b\u0435\u043d\u0438\u0435\u043c \u0440\u0435\u0437\u0443\u043b\u044c\u0442\u0430\u0442\u043e\u0432 \u0440\u0443\u043a\u043e\u0432\u043e\u0434\u0441\u0442\u0432\u0443 \u043a\u043e\u043c\u043f\u0430\u043d\u0438\u0438\",\n                \"\u0410\u043d\u0430\u043b\u0438\u0437 \u0441\u0430\u0439\u0442\u043e\u0432 \u0422\u041e\u041f-10 \u043a\u043e\u043d\u043a\u0443\u0440\u0435\u043d\u0442\u043e\u0432 \u0432 \u043d\u0438\u0448\u0435 (\u043f\u043e\u0441\u0430\u0434\u043e\u0447\u043d\u044b\u0435 \u0441\u0442\u0440\u0430\u043d\u0438\u0446\u044b, \u043c\u0430\u0440\u043a\u0435\u0442\u0438\u043d\u0433\u043e\u0432\u044b\u0435 \u0440\u0435\u0448\u0435\u043d\u0438\u044f, \u0446\u0435\u043d\u043e\u043e\u0431\u0440\u0430\u0437\u043e\u0432\u0430\u043d\u0438\u0435)\",\n                \"\u0420\u0435\u043a\u043e\u043c\u0435\u043d\u0434\u0430\u0446\u0438\u0438 \u043f\u043e \u043f\u043e\u0437\u0438\u0446\u0438\u043e\u043d\u0438\u0440\u043e\u0432\u0430\u043d\u0438\u044e, \u0423\u0422\u041f, \u0432\u044b\u0431\u043e\u0440\u0443 \u0441\u0435\u0433\u043c\u0435\u043d\u0442\u0430\",\n                \"\u0421\u043e\u0437\u0434\u0430\u043d\u0438\u0435 \u0426\u0435\u043f\u043e\u0447\u043a\u0438 \u043f\u0440\u0438\u043d\u044f\u0442\u0438\u044f \u0440\u0435\u0448\u0435\u043d\u0438\u044f (Decision Journey)\"\n              ]\n            },\n            {\n              \"text\": \"\u041a\u0430\u0441\u0442\u0434\u0435\u0432 / \u043e\u043f\u0440\u043e\u0441 \u043e\u0442\u0434\u0435\u043b\u043e\u043c \u043a\u043e\u043d\u0442\u0440\u043e\u043b\u044f \u043a\u0430\u0447\u0435\u0441\u0442\u0432\u0430 \u0434\u043e 5 \u0432\u0430\u0448\u0438\u0445 \u043a\u043b\u0438\u0435\u043d\u0442\u043e\u0432\",\n              \"style\": \"normal\",\n              \"subitems\": []\n            }\n          ]\n        },\n        {\n          \"title\": \"\u0421\u043e\u0437\u0434\u0430\u043d\u0438\u0435 3 \u0441\u0442\u0440\u0430\u043d\u0438\u0446 \u0441\u0430\u0439\u0442\u0430 \u043f\u043e\u0434 \u043a\u0430\u0436\u0434\u043e\u0435 \u043d\u0430\u043f\u0440\u0430\u0432\u043b\u0435\u043d\u0438\u0435 - \u0411\u0424\u041b, \u043d\u0430\u0441\u043b\u0435\u0434\u0441\u0442\u0432\u0435\u043d\u043d\u043e\u0435 \u0438 \u0441\u0435\u043c\u0435\u0439\u043d\u043e\u0435 \u043f\u0440\u0430\u0432\u043e\",\n          \"items\": [\n            {\n              \"text\": \"\u0420\u0430\u0437\u0440\u0430\u0431\u043e\u0442\u043a\u0430 \u0443\u043d\u0438\u043a\u0430\u043b\u044c\u043d\u043e\u0439 \u043f\u0440\u043e\u0434\u0430\u044e\u0449\u0435\u0439 \u0441\u0442\u0440\u0443\u043a\u0442\u0443\u0440\u044b \u0441\u0430\u0439\u0442\u0430, \u043a\u043e\u0442\u043e\u0440\u0430\u044f \u0443\u0447\u0438\u0442\u044b\u0432\u0430\u0435\u0442 \u0432\u0441\u0435 \u043a\u0440\u0438\u0442\u0435\u0440\u0438\u0438, \u0432\u043e\u0437\u0440\u0430\u0436\u0435\u043d\u0438\u044f \u0438 \u043f\u043e\u0442\u0440\u0435\u0431\u043d\u043e\u0441\u0442\u0438 \u0432\u0441\u0435\u0445 \u0426\u0410\",\n              \"style\": \"normal\",\n              \"subitems\": []\n            },\n            {\n              \"text\": \"\u0421\u043e\u0437\u0434\u0430\u043d\u0438\u0435 \u0441\u043a\u0440\u044b\u0442\u044b\u0445 \u0438 \u0438\u043d\u0442\u0435\u0440\u0430\u043a\u0442\u0438\u0432\u043d\u044b\u0445 \u0444\u043e\u0440\u043c \u0437\u0430\u0445\u0432\u0430\u0442\u0430 \u043a\u043e\u043d\u0442\u0430\u043a\u0442\u043e\u0432 \u0434\u043b\u044f \u043c\u0430\u043a\u0441\u0438\u043c\u0438\u0437\u0430\u0446\u0438\u0438 \u043a\u043e\u043d\u0432\u0435\u0440\u0441\u0438\u0438 (\u0432 \u0442\u043e\u043c \u0447\u0438\u0441\u043b\u0435 \u043a\u0432\u0438\u0437-\u043e\u043f\u0440\u043e\u0441\u043d\u0438\u043a)\",\n              \"style\": \"normal\",\n              \"subitems\": [\n                \"\u0420\u0430\u0437\u0440\u0430\u0431\u043e\u0442\u043a\u0430 \u044d\u0444\u0444\u0435\u043a\u0442\u0438\u0432\u043d\u043e\u0433\u043e \\\"\u043f\u043e\u043f-\u0430\u043f\u0430 \u043d\u0430 \u0432\u044b\u0445\u043e\u0434\\\" (exit pop-up)\",\n                \"\u041a\u0432\u0438\u0437\"\n              ]\n            },\n            {\n              \"text\": \"\u0412\u0451\u0440\u0441\u0442\u043a\u0430 \u0441\u0430\u0439\u0442\u0430 \u043f\u043e\u0434 4 \u0440\u0430\u0437\u043c\u0435\u0440\u0430\",\n              \"style\": \"normal\",\n              \"subitems\": [\n                \"\u0420\u0430\u0437\u0440\u0430\u0431\u043e\u0442\u043a\u0430 \u043c\u043e\u0431\u0438\u043b\u044c\u043d\u043e\u0439 \u0432\u0435\u0440\u0441\u0438\u0438 \u0441\u0430\u0439\u0442\u0430\"\n              ]\n            },\n            {\n              \"text\": \"\u0410\u0434\u0430\u043f\u0442\u0430\u0446\u0438\u044f \u0438 \u0443\u0441\u043a\u043e\u0440\u0435\u043d\u0438\u0435 \u0441\u043a\u043e\u0440\u043e\u0441\u0442\u0438 \u0437\u0430\u0433\u0440\u0443\u0437\u043a\u0438 \u0441\u0430\u0439\u0442\u0430\",\n              \"style\": \"normal\",\n              \"subitems\": []\n            },\n            {\n              \"text\": \"\u0420\u0430\u0437\u0440\u0430\u0431\u043e\u0442\u043a\u0430 \u0443\u0442\u0435\u043f\u043b\u044f\u044e\u0449\u0435\u0439 \u0441\u0442\u0440\u0430\u043d\u0438\u0446\u044b \\\"\u0421\u043f\u0430\u0441\u0438\u0431\u043e \u0437\u0430 \u0437\u0430\u044f\u0432\u043a\u0443\\\"\",\n              \"style\": \"normal\",\n              \"subitems\": []\n            },\n            {\n              \"text\": \"\u0423\u043b\u0443\u0447\u0448\u0435\u043d\u0438\u0435 \u0441\u0430\u0439\u0442\u0430, \u0438\u0441\u0445\u043e\u0434\u044f \u0438\u0437 \u0434\u0430\u043d\u043d\u044b\u0445 \u0430\u043d\u0430\u043b\u0438\u0442\u0438\u043a\u0438\",\n              \"style\": \"normal\",\n              \"subitems\": []\n            },\n            {\n              \"text\": \"\u041d\u0435\u043e\u0433\u0440\u0430\u043d\u0438\u0447\u0435\u043d\u043d\u043e\u0435 \u0432\u043d\u0435\u0441\u0435\u043d\u0438\u0435 \u043f\u0440\u0430\u0432\u043e\u043a \u043f\u043e \u0443\u043b\u0443\u0447\u0448\u0435\u043d\u0438\u044e \u044d\u0444\u0444\u0435\u043a\u0442\u0438\u0432\u043d\u043e\u0441\u0442\u0438 \u0441\u0430\u0439\u0442\u0430 \",\n              \"style\": \"normal\",\n              \"subitems\": []\n            },\n            {\n              \"text\": \"\u041f\u043e\u0434\u0431\u043e\u0440 \u0448\u0440\u0438\u0444\u0442\u043e\u0432 \u0438 \u0446\u0432\u0435\u0442\u043e\u0432\u043e\u0439 \u0433\u0430\u043c\u043c\u044b \u0432 \u0444\u0438\u0440\u043c\u0435\u043d\u043d\u043e\u043c \u0441\u0442\u0438\u043b\u0435\",\n              \"style\": \"normal\",\n              \"subitems\": []\n            },\n            {\n              \"text\": \"\u0423\u0441\u0438\u043b\u0435\u043d\u0438\u0435 \u043f\u0440\u043e\u0434\u0430\u044e\u0449\u0438\u0445 \u043f\u043e\u0441\u044b\u043b\u043e\u0432 \u0441 \u043f\u043e\u043c\u043e\u0449\u044c\u044e \u0432\u0435\u0431-\u0434\u0438\u0437\u0430\u0439\u043d\u0430\",\n              \"style\": \"normal\",\n              \"subitems\": []\n            },\n            {\n              \"text\": \"\u0422\u0435\u0441\u0442\u0438\u0440\u043e\u0432\u0430\u043d\u0438\u0435 \u043a\u0430\u0436\u0434\u043e\u0439 \u0444\u043e\u0440\u043c\u044b \u0437\u0430\u0445\u0432\u0430\u0442\u0430 \u043d\u0430 \u043f\u0440\u0435\u0434\u043c\u0435\u0442 \u0434\u043e\u0445\u043e\u0434\u0438\u043c\u043e\u0441\u0442\u0438 \u0437\u0430\u044f\u0432\u043e\u043a\",\n              \"style\": \"normal\",\n              \"subitems\": []\n            },\n            {\n              \"text\": \"\u0418\u043d\u0442\u0435\u0440\u0430\u043a\u0442\u0438\u0432\u043d\u044b\u0435 \u044d\u043b\u0435\u043c\u0435\u043d\u0442\u044b \u0441 \u043f\u043e\u043c\u043e\u0449\u044c\u044e HTML \u043a\u043e\u0434\u0430\",\n              \"style\": \"normal\",\n              \"subitems\": [\n                \"\u041d\u0430\u043f\u0440\u0438\u043c\u0435\u0440, \u043a\u0430\u043b\u044c\u043a\u0443\u043b\u044f\u0442\u043e\u0440, \u0442\u0430\u0431\u043b\u0438\u0446\u044b \u0441\u0440\u0430\u0432\u043d\u0435\u043d\u0438\u0439\"\n              ]\n            },\n            {\n              \"text\": \"\u041a\u043e\u043f\u0438\u0440\u0430\u0439\u0442\u0438\u043d\u0433 \u0442\u0435\u043a\u0441\u0442\u043e\u0432, \u0432\u044b\u0437\u044b\u0432\u0430\u044e\u0449\u0438\u0445 \u0434\u043e\u0432\u0435\u0440\u0438\u0435 (\u0441 \u0443\u0447\u0451\u0442\u043e\u043c \u0437\u0430\u043a\u043e\u043d\u0430)\",\n              \"style\": \"normal\",\n              \"subitems\": []\n            }\n          ]\n        }\n      ],\n      \"bonus\": {\n        \"enabled\": true,\n        \"title\": \" \u0421\u0446\u0435\u043d\u0430\u0440\u0438\u0438 \u043f\u0440\u043e\u0434\u0430\u044e\u0449\u0438\u0445 \u0432\u0438\u0434\u0435\u043e \u0434\u043b\u044f \u0431\u043e\u0442\u0430 \ud83c\udf81\",\n        \"items\": []\n      },\n      \"deliverables\": [\n        \"\u041e\u0442\u0447\u0451\u0442 \u0441 \u0438\u043d\u0441\u0430\u0439\u0442\u0430\u043c\u0438\",\n        \"\u041d\u0430\u0441\u0442\u0440\u043e\u0435\u043d\u043d\u044b\u0435 \u043a\u0430\u043c\u043f\u0430\u043d\u0438\u0438\"\n      ],\n      \"whatYouAvoid\": [\n        \"\u0421\u043b\u0438\u0432 \u0431\u044e\u0434\u0436\u0435\u0442\u0430\",\n        \"\u041d\u0435\u0446\u0435\u043b\u0435\u0432\u043e\u0439 \u0442\u0440\u0430\u0444\u0438\u043a\"\n      ],\n      \"terms\": \"10-15 \u0434\u043d\u0435\u0439 (\u0441 \u0443\u0447\u0451\u0442\u043e\u043c \u043f\u0440\u0430\u0432\u043e\u043a + 2-3 \u0434\u043d\u044f)\",\n      \"payment\": \"50% \u043f\u0440\u0435\u0434\u043e\u043f\u043b\u0430\u0442\u0430, 50% \u0447\u0435\u0440\u0435\u0437 3 \u0434\u043d\u044f \u043f\u043e\u0441\u043b\u0435 \u043f\u0435\u0440\u0435\u0434\u0430\u0447\u0438 \u0441\u0430\u0439\u0442\u0430\",\n      \"price\": \"107 553 \u20bd\",\n      \"bonuses\": [\n        {\n          \"title\": \"\ud83c\udf81\u0421\u043e\u043f\u0440\u043e\u0432\u043e\u0436\u0434\u0435\u043d\u0438\u0435 \u043d\u0430 \u0432\u0435\u0441\u044c \u043f\u0435\u0440\u0438\u043e\u0434 \u0440\u0435\u043a\u043b\u0430\u043c\u044b \u0411\u0415\u0417\u041b\u0418\u041c\u0418\u0422\u041d\u041e - \u0430\u043d\u0430\u043b\u0438\u0442\u0438\u043a\u0430 \u0438 \u0443\u043b\u0443\u0447\u0448\u0435\u043d\u0438\u0435 \u0441\u0430\u0439\u0442\u0430 \u0432 \u0440\u0435\u0436\u0438\u043c\u0435 online\ud83c\udf81\",\n          \"items\": []\n        },\n        {\n          \"title\": \"\ud83c\udf81 \u0420\u0430\u0437\u0440\u0430\u0431\u043e\u0442\u043a\u0430 \u0432\u043e\u0440\u043e\u043d\u043a\u0438 \u0441 \u043f\u0440\u043e\u0434\u0430\u0436\u0435\u0439 \u0448\u0430\u0431\u043b\u043e\u043d\u0430 \u0434\u043e\u0433\u043e\u0432\u043e\u0440\u0430\ud83c\udf81\",\n          \"items\": [\n            \"\u041b\u0438\u0431\u043e \u043f\u043e\u043f-\u0430\u043f \u043d\u0430 \u0432\u044b\u0445\u043e\u0434\",\n            \"\u041b\u0438\u0431\u043e \u043f\u0440\u0435\u0434\u043b\u043e\u0436\u0435\u043d\u0438\u0435 \u043d\u0435 \u043f\u043e\u0434\u0445\u043e\u0434\u044f\u0449\u0438\u043c \u043a\u043b\u0438\u0435\u043d\u0442\u0430\u043c \u0432 \u043a\u0432\u0438\u0437\u0435 \",\n            \"\u041b\u0438\u0431\u043e \u043e\u0442\u0434\u0435\u043b\u044c\u043d\u044b\u0439 \u0431\u043b\u043e\u043a\"\n          ]\n        },\n        {\n          \"title\": \"\ud83c\udf81 \u0421\u0446\u0435\u043d\u0430\u0440\u0438\u0439 \u043f\u0440\u043e\u0434\u0430\u044e\u0449\u0435\u0433\u043e \u0432\u0438\u0434\u0435\u043e \u0434\u043b\u044f \u043f\u043e\u043f-\u0430\u043f\u0430 \u043d\u0430 \u0441\u0430\u0439\u0442\u0435\ud83c\udf81\",\n          \"items\": []\n        },\n        {\n          \"title\": \"\u0411\u043e\u043d\u0443\u0441\u044b \u0443\u0441\u043f\u0435\u0435\u043c \u0441\u0434\u0435\u043b\u0430\u0442\u044c \u043f\u0440\u0438 \u043f\u043e\u0434\u043f\u0438\u0441\u0430\u043d\u0438\u0438 \u0434\u043e\u0433\u043e\u0432\u043e\u0440\u0430 \u0434\u043e 24.03.2026\",\n          \"items\": []\n        }\n      ],\n      \"budget\": \"\"\n    },\n    {\n      \"name\": \"\u0421\u0440\u0435\u0434\u043d\u0438\u0439\",\n      \"color\": \"#10b981\",\n      \"diamondsCount\": 3,\n      \"progressPercent\": 49,\n      \"sections\": [\n        {\n          \"title\": \"\u0422\u0440\u0451\u0445\u044d\u0442\u0430\u043f\u043d\u044b\u0435 \u043f\u0440\u0435\u0434\u043f\u0440\u043e\u0435\u043a\u0442\u043d\u044b\u0435 \u0438\u0441\u0441\u043b\u0435\u0434\u043e\u0432\u0430\u043d\u0438\u044f\",\n          \"items\": [\n            {\n              \"text\": \"\u0418\u0441\u0441\u043b\u0435\u0434\u043e\u0432\u0430\u043d\u0438\u0435 \u043f\u0440\u043e\u0434\u0443\u043a\u0442\u0430 \",\n              \"style\": \"normal\",\n              \"subitems\": [\n                \"\u0411\u0440\u0438\u0444\u0438\u043d\u0433 \u0441 \u0440\u0443\u043a\u043e\u0432\u043e\u0434\u0438\u0442\u0435\u043b\u0435\u043c \u043a\u043e\u043c\u043f\u0430\u043d\u0438\u0438, \u043c\u0430\u0440\u043a\u0435\u0442\u043e\u043b\u043e\u0433\u043e\u043c \u0438 \u0420\u041e\u041f\u043e\u043c (\u0434\u043b\u0438\u0442\u0435\u043b\u044c\u043d\u043e\u0441\u0442\u044c 2-5 \u0447\u0430\u0441\u043e\u0432)\",\n                \"\u0412\u044b\u0434\u0435\u043b\u0435\u043d\u0438\u0435 \u0442\u043e\u043f-20 \u043a\u043b\u044e\u0447\u0435\u0432\u044b\u0445 \u043f\u0440\u0435\u0438\u043c\u0443\u0449\u0435\u0441\u0442\u0432 \u043a\u043e\u043c\u043f\u0430\u043d\u0438\u0438 \u0432 \u0444\u043e\u0440\u043c\u0430\u0442\u0435 \u0444\u0430\u043a\u0442\u043e\u0432 \u0438 \u0432\u044b\u0433\u043e\u0434\"\n              ]\n            },\n            {\n              \"text\": \"\u0410\u043d\u0430\u043b\u0438\u0437 \u0446\u0435\u043b\u0435\u0432\u043e\u0439 \u0430\u0443\u0434\u0438\u0442\u043e\u0440\u0438\u0438 \",\n              \"style\": \"normal\",\n              \"subitems\": [\n                \"\u0410\u043d\u0430\u043b\u0438\u0437 \u0416\u0426\u0410 \u043f\u043e \u043c\u0435\u0442\u043e\u0434\u0443 AJTBD + \u041f\u0435\u0440\u0441\u043e\u043d\u0430\u0436\u0438\",\n                \"\u0412\u044b\u0434\u0435\u043b\u0435\u043d\u0438\u0435 \u0441\u0435\u0433\u043c\u0435\u043d\u0442\u043e\u0432 \u043f\u043b\u0430\u0442\u0435\u0436\u0435\u0441\u043e\u043f\u043e\u0441\u0431\u043d\u043e\u0439 \u0426\u0410. \u0412\u044b\u0447\u043b\u0435\u043d\u0435\u043d\u0438\u0435 \u0442\u0440\u0438\u0433\u0433\u0435\u0440\u043e\u0432. \u041f\u043e\u0442\u0440\u0435\u0431\u043d\u043e\u0441\u0442\u0435\u0439. \u041a\u0440\u0438\u0442\u0435\u0440\u0438\u0435\u0432 \u043f\u0440\u0438\u043d\u044f\u0442\u0438\u044f \u0440\u0435\u0448\u0435\u043d\u0438\u044f. \u0411\u043e\u043b\u0435\u0439. \u0412\u043e\u0437\u0440\u0430\u0436\u0435\u043d\u0438\u0439. \u0412 \u0434\u0430\u043b\u044c\u043d\u0435\u0439\u0448\u0435\u043c - \u043d\u0430 \u043e\u0441\u043d\u043e\u0432\u0435 \u044d\u0442\u043e\u0433\u043e \u0430\u043d\u0430\u043b\u0438\u0437\u0430 \u0441\u0442\u0440\u043e\u044f\u0442\u0441\u044f \u0432\u0441\u0435 \u043c\u0430\u0440\u043a\u0435\u0442\u0438\u043d\u0433\u043e\u0432\u044b\u0435 \u0430\u043a\u0442\u0438\u0432\u043d\u043e\u0441\u0442\u0438. \"\n              ]\n            },\n            {\n              \"text\": \"\u0414\u0432\u0443\u0445\u0443\u0440\u043e\u0432\u0432\u043d\u0435\u0432\u044b\u0439 \u0430\u043d\u0430\u043b\u0438\u0437 \u0440\u044b\u043d\u043a\u0430 \u0438 \u043a\u043e\u043d\u043a\u0443\u0440\u0435\u043d\u0442\u043e\u0432\",\n              \"style\": \"partial\",\n              \"subitems\": [\n                \"\u0418\u0441\u0441\u043b\u0435\u0434\u043e\u0432\u0430\u043d\u0438\u0435 \u0440\u044b\u043d\u043a\u0430 \u0438 \u0438\u043d\u0444\u043e\u043f\u043e\u043b\u044f (\u0430\u043d\u0430\u043b\u0438\u0437 \u043f\u043b\u043e\u0449\u0430\u0434\u043e\u043a, \u043a\u043e\u0442\u043e\u0440\u044b\u0435 \u0432\u043b\u0438\u044f\u044e\u0442 \u043d\u0430 \u043a\u0440\u0438\u0442\u0435\u0440\u0438\u0438 \u043f\u0440\u0438\u043d\u044f\u0442\u0438\u044f \u0440\u0435\u0448\u0435\u043d\u0438\u044f \u0426\u0410 \u0438\u043b\u0438 \u0444\u043e\u0440\u043c\u0438\u0440\u0443\u044e\u0442 \u0443 \u043d\u0438\u0445 \u0431\u0430\u0437\u0443 \u0437\u043d\u0430\u043d\u0438\u0439 \u043e \u043f\u0440\u043e\u0434\u0443\u043a\u0442\u0435)\",\n                \"\u0424\u043e\u0440\u043c\u0438\u0440\u043e\u0432\u0430\u043d\u0438\u0435 \u043e\u0442\u0447\u0435\u0442\u0430 \u043f\u043e \u043f\u043e\u043b\u0443\u0447\u0435\u043d\u043d\u043e\u0439 \u0438\u043d\u0444\u043e\u0440\u043c\u0430\u0446\u0438\u0438 \u0441 \u043f\u0440\u0435\u0434\u043e\u0441\u0442\u0430\u0432\u043b\u0435\u043d\u0438\u0435\u043c \u0440\u0435\u0437\u0443\u043b\u044c\u0442\u0430\u0442\u043e\u0432 \u0440\u0443\u043a\u043e\u0432\u043e\u0434\u0441\u0442\u0432\u0443 \u043a\u043e\u043c\u043f\u0430\u043d\u0438\u0438\",\n                \"\u0410\u043d\u0430\u043b\u0438\u0437 \u0441\u0430\u0439\u0442\u043e\u0432 \u0422\u041e\u041f-10 \u043a\u043e\u043d\u043a\u0443\u0440\u0435\u043d\u0442\u043e\u0432 \u0432 \u043d\u0438\u0448\u0435 (\u043f\u043e\u0441\u0430\u0434\u043e\u0447\u043d\u044b\u0435 \u0441\u0442\u0440\u0430\u043d\u0438\u0446\u044b, \u043c\u0430\u0440\u043a\u0435\u0442\u0438\u043d\u0433\u043e\u0432\u044b\u0435 \u0440\u0435\u0448\u0435\u043d\u0438\u044f, \u0446\u0435\u043d\u043e\u043e\u0431\u0440\u0430\u0437\u043e\u0432\u0430\u043d\u0438\u0435)\",\n                \"\u0420\u0435\u043a\u043e\u043c\u0435\u043d\u0434\u0430\u0446\u0438\u0438 \u043f\u043e \u043f\u043e\u0437\u0438\u0446\u0438\u043e\u043d\u0438\u0440\u043e\u0432\u0430\u043d\u0438\u044e, \u0423\u0422\u041f, \u0432\u044b\u0431\u043e\u0440\u0443 \u0441\u0435\u0433\u043c\u0435\u043d\u0442\u0430\",\n                \"\u0421\u043e\u0437\u0434\u0430\u043d\u0438\u0435 \u0426\u0435\u043f\u043e\u0447\u043a\u0438 \u043f\u0440\u0438\u043d\u044f\u0442\u0438\u044f \u0440\u0435\u0448\u0435\u043d\u0438\u044f (Decision Journey)\"\n              ]\n            },\n            {\n              \"text\": \"\u041a\u0430\u0441\u0442\u0434\u0435\u0432 / \u043e\u043f\u0440\u043e\u0441 \u043e\u0442\u0434\u0435\u043b\u043e\u043c \u043a\u043e\u043d\u0442\u0440\u043e\u043b\u044f \u043a\u0430\u0447\u0435\u0441\u0442\u0432\u0430 \u0434\u043e 5 \u0432\u0430\u0448\u0438\u0445 \u043a\u043b\u0438\u0435\u043d\u0442\u043e\u0432\",\n              \"style\": \"disabled\",\n              \"subitems\": []\n            }\n          ]\n        },\n        {\n          \"title\": \"\u0421\u043e\u0437\u0434\u0430\u043d\u0438\u0435 2 \u0441\u0442\u0440\u0430\u043d\u0438\u0446 \u0441\u0430\u0439\u0442\u0430 \u043f\u043e\u0434 \u043a\u0430\u0436\u0434\u043e\u0435 \u043d\u0430\u043f\u0440\u0430\u0432\u043b\u0435\u043d\u0438\u0435 - \u0411\u0424\u041b, \u043d\u0430\u0441\u043b\u0435\u0434\u0441\u0442\u0432\u0435\u043d\u043d\u043e\u0435 / \u0441\u0435\u043c\u0435\u0439\u043d\u043e\u0435 \u043f\u0440\u0430\u0432\u043e\",\n          \"items\": [\n            {\n              \"text\": \"\u0420\u0430\u0437\u0440\u0430\u0431\u043e\u0442\u043a\u0430 \u0443\u043d\u0438\u043a\u0430\u043b\u044c\u043d\u043e\u0439 \u043f\u0440\u043e\u0434\u0430\u044e\u0449\u0435\u0439 \u0441\u0442\u0440\u0443\u043a\u0442\u0443\u0440\u044b \u0441\u0430\u0439\u0442\u0430, \u043a\u043e\u0442\u043e\u0440\u0430\u044f \u0443\u0447\u0438\u0442\u044b\u0432\u0430\u0435\u0442 \u0432\u0441\u0435 \u043a\u0440\u0438\u0442\u0435\u0440\u0438\u0438, \u0432\u043e\u0437\u0440\u0430\u0436\u0435\u043d\u0438\u044f \u0438 \u043f\u043e\u0442\u0440\u0435\u0431\u043d\u043e\u0441\u0442\u0438 \u0432\u0441\u0435\u0445 \u0426\u0410\",\n              \"style\": \"normal\",\n              \"subitems\": []\n            },\n            {\n              \"text\": \"\u0421\u043e\u0437\u0434\u0430\u043d\u0438\u0435 \u0441\u043a\u0440\u044b\u0442\u044b\u0445 \u0438 \u0438\u043d\u0442\u0435\u0440\u0430\u043a\u0442\u0438\u0432\u043d\u044b\u0445 \u0444\u043e\u0440\u043c \u0437\u0430\u0445\u0432\u0430\u0442\u0430 \u043a\u043e\u043d\u0442\u0430\u043a\u0442\u043e\u0432 \u0434\u043b\u044f \u043c\u0430\u043a\u0441\u0438\u043c\u0438\u0437\u0430\u0446\u0438\u0438 \u043a\u043e\u043d\u0432\u0435\u0440\u0441\u0438\u0438 (\u0432 \u0442\u043e\u043c \u0447\u0438\u0441\u043b\u0435 \u043a\u0432\u0438\u0437-\u043e\u043f\u0440\u043e\u0441\u043d\u0438\u043a)\",\n              \"style\": \"normal\",\n              \"subitems\": [\n                \"\u0420\u0430\u0437\u0440\u0430\u0431\u043e\u0442\u043a\u0430 \u044d\u0444\u0444\u0435\u043a\u0442\u0438\u0432\u043d\u043e\u0433\u043e \\\"\u043f\u043e\u043f-\u0430\u043f\u0430 \u043d\u0430 \u0432\u044b\u0445\u043e\u0434\\\" (exit pop-up)\",\n                \"\u041a\u0432\u0438\u0437\"\n              ]\n            },\n            {\n              \"text\": \"\u0412\u0451\u0440\u0441\u0442\u043a\u0430 \u0441\u0430\u0439\u0442\u0430 \u043f\u043e\u0434 4 \u0440\u0430\u0437\u043c\u0435\u0440\u0430\",\n              \"style\": \"normal\",\n              \"subitems\": [\n                \"\u0420\u0430\u0437\u0440\u0430\u0431\u043e\u0442\u043a\u0430 \u043c\u043e\u0431\u0438\u043b\u044c\u043d\u043e\u0439 \u0432\u0435\u0440\u0441\u0438\u0438 \u0441\u0430\u0439\u0442\u0430\"\n              ]\n            },\n            {\n              \"text\": \"\u0410\u0434\u0430\u043f\u0442\u0430\u0446\u0438\u044f \u0438 \u0443\u0441\u043a\u043e\u0440\u0435\u043d\u0438\u0435 \u0441\u043a\u043e\u0440\u043e\u0441\u0442\u0438 \u0437\u0430\u0433\u0440\u0443\u0437\u043a\u0438 \u0441\u0430\u0439\u0442\u0430\",\n              \"style\": \"normal\",\n              \"subitems\": []\n            },\n            {\n              \"text\": \"\u0420\u0430\u0437\u0440\u0430\u0431\u043e\u0442\u043a\u0430 \u0443\u0442\u0435\u043f\u043b\u044f\u044e\u0449\u0435\u0439 \u0441\u0442\u0440\u0430\u043d\u0438\u0446\u044b \\\"\u0421\u043f\u0430\u0441\u0438\u0431\u043e \u0437\u0430 \u0437\u0430\u044f\u0432\u043a\u0443\\\"\",\n              \"style\": \"normal\",\n              \"subitems\": []\n            },\n            {\n              \"text\": \"\u0423\u043b\u0443\u0447\u0448\u0435\u043d\u0438\u0435 \u0441\u0430\u0439\u0442\u0430, \u0438\u0441\u0445\u043e\u0434\u044f \u0438\u0437 \u0434\u0430\u043d\u043d\u044b\u0445 \u0430\u043d\u0430\u043b\u0438\u0442\u0438\u043a\u0438\",\n              \"style\": \"normal\",\n              \"subitems\": []\n            },\n            {\n              \"text\": \"\u041d\u0435\u043e\u0433\u0440\u0430\u043d\u0438\u0447\u0435\u043d\u043d\u043e\u0435 \u0432\u043d\u0435\u0441\u0435\u043d\u0438\u0435 \u043f\u0440\u0430\u0432\u043e\u043a \u043f\u043e \u0443\u043b\u0443\u0447\u0448\u0435\u043d\u0438\u044e \u044d\u0444\u0444\u0435\u043a\u0442\u0438\u0432\u043d\u043e\u0441\u0442\u0438 \u0441\u0430\u0439\u0442\u0430 \",\n              \"style\": \"normal\",\n              \"subitems\": []\n            },\n            {\n              \"text\": \"\u041f\u043e\u0434\u0431\u043e\u0440 \u0448\u0440\u0438\u0444\u0442\u043e\u0432 \u0438 \u0446\u0432\u0435\u0442\u043e\u0432\u043e\u0439 \u0433\u0430\u043c\u043c\u044b \u0432 \u0444\u0438\u0440\u043c\u0435\u043d\u043d\u043e\u043c \u0441\u0442\u0438\u043b\u0435\",\n              \"style\": \"normal\",\n              \"subitems\": []\n            },\n            {\n              \"text\": \"\u0423\u0441\u0438\u043b\u0435\u043d\u0438\u0435 \u043f\u0440\u043e\u0434\u0430\u044e\u0449\u0438\u0445 \u043f\u043e\u0441\u044b\u043b\u043e\u0432 \u0441 \u043f\u043e\u043c\u043e\u0449\u044c\u044e \u0432\u0435\u0431-\u0434\u0438\u0437\u0430\u0439\u043d\u0430\",\n              \"style\": \"normal\",\n              \"subitems\": []\n            },\n            {\n              \"text\": \"\u0422\u0435\u0441\u0442\u0438\u0440\u043e\u0432\u0430\u043d\u0438\u0435 \u043a\u0430\u0436\u0434\u043e\u0439 \u0444\u043e\u0440\u043c\u044b \u0437\u0430\u0445\u0432\u0430\u0442\u0430 \u043d\u0430 \u043f\u0440\u0435\u0434\u043c\u0435\u0442 \u0434\u043e\u0445\u043e\u0434\u0438\u043c\u043e\u0441\u0442\u0438 \u0437\u0430\u044f\u0432\u043e\u043a\",\n              \"style\": \"normal\",\n              \"subitems\": []\n            },\n            {\n              \"text\": \"\u0418\u043d\u0442\u0435\u0440\u0430\u043a\u0442\u0438\u0432\u043d\u044b\u0435 \u044d\u043b\u0435\u043c\u0435\u043d\u0442\u044b \u0441 \u043f\u043e\u043c\u043e\u0449\u044c\u044e HTML \u043a\u043e\u0434\u0430\",\n              \"style\": \"disabled\",\n              \"subitems\": [\n                \"\u041d\u0430\u043f\u0440\u0438\u043c\u0435\u0440, \u043a\u0430\u043b\u044c\u043a\u0443\u043b\u044f\u0442\u043e\u0440, \u0442\u0430\u0431\u043b\u0438\u0446\u044b \u0441\u0440\u0430\u0432\u043d\u0435\u043d\u0438\u0439\"\n              ]\n            },\n            {\n              \"text\": \"\u041a\u043e\u043f\u0438\u0440\u0430\u0439\u0442\u0438\u043d\u0433 \u0442\u0435\u043a\u0441\u0442\u043e\u0432, \u0432\u044b\u0437\u044b\u0432\u0430\u044e\u0449\u0438\u0445 \u0434\u043e\u0432\u0435\u0440\u0438\u0435 (\u0441 \u0443\u0447\u0451\u0442\u043e\u043c \u0437\u0430\u043a\u043e\u043d\u0430)\",\n              \"style\": \"normal\",\n              \"subitems\": []\n            }\n          ]\n        }\n      ],\n      \"bonus\": {\n        \"enabled\": true,\n        \"title\": \"\ud83c\udf81 \u0411\u0435\u0441\u043f\u043b\u0430\u0442\u043d\u0430\u044f \u043a\u043e\u043d\u0441\u0443\u043b\u044c\u0442\u0430\u0446\u0438\u044f\",\n        \"items\": [\n          \"1 \u0447\u0430\u0441 \u0441\u0442\u0440\u0430\u0442\u0435\u0433\u0438\u0447\u0435\u0441\u043a\u043e\u0439 \u0441\u0435\u0441\u0441\u0438\u0438 \u043f\u043e\u0441\u043b\u0435 \u0437\u0430\u043f\u0443\u0441\u043a\u0430\"\n        ]\n      },\n      \"deliverables\": [\n        \"\u041e\u0442\u0447\u0451\u0442 \u0441 \u0438\u043d\u0441\u0430\u0439\u0442\u0430\u043c\u0438\",\n        \"\u041d\u0430\u0441\u0442\u0440\u043e\u0435\u043d\u043d\u044b\u0435 \u043a\u0430\u043c\u043f\u0430\u043d\u0438\u0438\"\n      ],\n      \"whatYouAvoid\": [\n        \"\u0421\u043b\u0438\u0432 \u0431\u044e\u0434\u0436\u0435\u0442\u0430\",\n        \"\u041d\u0435\u0446\u0435\u043b\u0435\u0432\u043e\u0439 \u0442\u0440\u0430\u0444\u0438\u043a\"\n      ],\n      \"terms\": \"10-15 \u0434\u043d\u0435\u0439 (\u0441 \u0443\u0447\u0451\u0442\u043e\u043c \u043f\u0440\u0430\u0432\u043e\u043a + 2-3 \u0434\u043d\u044f)\",\n      \"payment\": \"50% \u043f\u0440\u0435\u0434\u043e\u043f\u043b\u0430\u0442\u0430, 50% \u043f\u043e \u0433\u043e\u0442\u043e\u0432\u043d\u043e\u0441\u0442\u0438 \u043f\u0435\u0440\u0435\u0434\u0430\u0442\u044c \u0432\u0430\u043c \u0441\u0430\u0439\u0442\",\n      \"price\": \"79 251 \u20bd\",\n      \"bonuses\": [],\n      \"budget\": \"\"\n    },\n    {\n      \"name\": \"\u041c\u0438\u043d\u0438\u043c\u0430\u043b\u044c\u043d\u044b\u0439\",\n      \"color\": \"#3b82f6\",\n      \"diamondsCount\": 1,\n      \"progressPercent\": 22,\n      \"sections\": [\n        {\n          \"title\": \"\u0422\u0440\u0451\u0445\u044d\u0442\u0430\u043f\u043d\u044b\u0435 \u043f\u0440\u0435\u0434\u043f\u0440\u043e\u0435\u043a\u0442\u043d\u044b\u0435 \u0438\u0441\u0441\u043b\u0435\u0434\u043e\u0432\u0430\u043d\u0438\u044f\",\n          \"items\": [\n            {\n              \"text\": \"\u0418\u0441\u0441\u043b\u0435\u0434\u043e\u0432\u0430\u043d\u0438\u0435 \u043f\u0440\u043e\u0434\u0443\u043a\u0442\u0430 \",\n              \"style\": \"normal\",\n              \"subitems\": [\n                \"\u0411\u0440\u0438\u0444\u0438\u043d\u0433 \u0441 \u0440\u0443\u043a\u043e\u0432\u043e\u0434\u0438\u0442\u0435\u043b\u0435\u043c \u043a\u043e\u043c\u043f\u0430\u043d\u0438\u0438, \u043c\u0430\u0440\u043a\u0435\u0442\u043e\u043b\u043e\u0433\u043e\u043c \u0438 \u0420\u041e\u041f\u043e\u043c (\u0434\u043b\u0438\u0442\u0435\u043b\u044c\u043d\u043e\u0441\u0442\u044c 2-5 \u0447\u0430\u0441\u043e\u0432)\",\n                \"\u0412\u044b\u0434\u0435\u043b\u0435\u043d\u0438\u0435 \u0442\u043e\u043f-20 \u043a\u043b\u044e\u0447\u0435\u0432\u044b\u0445 \u043f\u0440\u0435\u0438\u043c\u0443\u0449\u0435\u0441\u0442\u0432 \u043a\u043e\u043c\u043f\u0430\u043d\u0438\u0438 \u0432 \u0444\u043e\u0440\u043c\u0430\u0442\u0435 \u0444\u0430\u043a\u0442\u043e\u0432 \u0438 \u0432\u044b\u0433\u043e\u0434\"\n              ]\n            },\n            {\n              \"text\": \"\u0410\u043d\u0430\u043b\u0438\u0437 \u0446\u0435\u043b\u0435\u0432\u043e\u0439 \u0430\u0443\u0434\u0438\u0442\u043e\u0440\u0438\u0438 \",\n              \"style\": \"normal\",\n              \"subitems\": [\n                \"\u0410\u043d\u0430\u043b\u0438\u0437 \u0416\u0426\u0410 \u043f\u043e \u043c\u0435\u0442\u043e\u0434\u0443 AJTBD + \u041f\u0435\u0440\u0441\u043e\u043d\u0430\u0436\u0438\",\n                \"\u0412\u044b\u0434\u0435\u043b\u0435\u043d\u0438\u0435 \u0441\u0435\u0433\u043c\u0435\u043d\u0442\u043e\u0432 \u043f\u043b\u0430\u0442\u0435\u0436\u0435\u0441\u043e\u043f\u043e\u0441\u0431\u043d\u043e\u0439 \u0426\u0410. \u0412\u044b\u0447\u043b\u0435\u043d\u0435\u043d\u0438\u0435 \u0442\u0440\u0438\u0433\u0433\u0435\u0440\u043e\u0432. \u041f\u043e\u0442\u0440\u0435\u0431\u043d\u043e\u0441\u0442\u0435\u0439. \u041a\u0440\u0438\u0442\u0435\u0440\u0438\u0435\u0432 \u043f\u0440\u0438\u043d\u044f\u0442\u0438\u044f \u0440\u0435\u0448\u0435\u043d\u0438\u044f. \u0411\u043e\u043b\u0435\u0439. \u0412\u043e\u0437\u0440\u0430\u0436\u0435\u043d\u0438\u0439. \u0412 \u0434\u0430\u043b\u044c\u043d\u0435\u0439\u0448\u0435\u043c - \u043d\u0430 \u043e\u0441\u043d\u043e\u0432\u0435 \u044d\u0442\u043e\u0433\u043e \u0430\u043d\u0430\u043b\u0438\u0437\u0430 \u0441\u0442\u0440\u043e\u044f\u0442\u0441\u044f \u0432\u0441\u0435 \u043c\u0430\u0440\u043a\u0435\u0442\u0438\u043d\u0433\u043e\u0432\u044b\u0435 \u0430\u043a\u0442\u0438\u0432\u043d\u043e\u0441\u0442\u0438. \"\n              ]\n            },\n            {\n              \"text\": \"\u0414\u0432\u0443\u0445\u0443\u0440\u043e\u0432\u0432\u043d\u0435\u0432\u044b\u0439 \u0430\u043d\u0430\u043b\u0438\u0437 \u0440\u044b\u043d\u043a\u0430 \u0438 \u043a\u043e\u043d\u043a\u0443\u0440\u0435\u043d\u0442\u043e\u0432\",\n              \"style\": \"partial\",\n              \"subitems\": [\n                \"\u0418\u0441\u0441\u043b\u0435\u0434\u043e\u0432\u0430\u043d\u0438\u0435 \u0440\u044b\u043d\u043a\u0430 \u0438 \u0438\u043d\u0444\u043e\u043f\u043e\u043b\u044f (\u0430\u043d\u0430\u043b\u0438\u0437 \u043f\u043b\u043e\u0449\u0430\u0434\u043e\u043a, \u043a\u043e\u0442\u043e\u0440\u044b\u0435 \u0432\u043b\u0438\u044f\u044e\u0442 \u043d\u0430 \u043a\u0440\u0438\u0442\u0435\u0440\u0438\u0438 \u043f\u0440\u0438\u043d\u044f\u0442\u0438\u044f \u0440\u0435\u0448\u0435\u043d\u0438\u044f \u0426\u0410 \u0438\u043b\u0438 \u0444\u043e\u0440\u043c\u0438\u0440\u0443\u044e\u0442 \u0443 \u043d\u0438\u0445 \u0431\u0430\u0437\u0443 \u0437\u043d\u0430\u043d\u0438\u0439 \u043e \u043f\u0440\u043e\u0434\u0443\u043a\u0442\u0435)\",\n                \"\u0424\u043e\u0440\u043c\u0438\u0440\u043e\u0432\u0430\u043d\u0438\u0435 \u043e\u0442\u0447\u0435\u0442\u0430 \u043f\u043e \u043f\u043e\u043b\u0443\u0447\u0435\u043d\u043d\u043e\u0439 \u0438\u043d\u0444\u043e\u0440\u043c\u0430\u0446\u0438\u0438 \u0441 \u043f\u0440\u0435\u0434\u043e\u0441\u0442\u0430\u0432\u043b\u0435\u043d\u0438\u0435\u043c \u0440\u0435\u0437\u0443\u043b\u044c\u0442\u0430\u0442\u043e\u0432 \u0440\u0443\u043a\u043e\u0432\u043e\u0434\u0441\u0442\u0432\u0443 \u043a\u043e\u043c\u043f\u0430\u043d\u0438\u0438\",\n                \"\u0410\u043d\u0430\u043b\u0438\u0437 \u0441\u0430\u0439\u0442\u043e\u0432 \u0422\u041e\u041f-10 \u043a\u043e\u043d\u043a\u0443\u0440\u0435\u043d\u0442\u043e\u0432 \u0432 \u043d\u0438\u0448\u0435 (\u043f\u043e\u0441\u0430\u0434\u043e\u0447\u043d\u044b\u0435 \u0441\u0442\u0440\u0430\u043d\u0438\u0446\u044b, \u043c\u0430\u0440\u043a\u0435\u0442\u0438\u043d\u0433\u043e\u0432\u044b\u0435 \u0440\u0435\u0448\u0435\u043d\u0438\u044f, \u0446\u0435\u043d\u043e\u043e\u0431\u0440\u0430\u0437\u043e\u0432\u0430\u043d\u0438\u0435)\",\n                \"\u0420\u0435\u043a\u043e\u043c\u0435\u043d\u0434\u0430\u0446\u0438\u0438 \u043f\u043e \u043f\u043e\u0437\u0438\u0446\u0438\u043e\u043d\u0438\u0440\u043e\u0432\u0430\u043d\u0438\u044e, \u0423\u0422\u041f, \u0432\u044b\u0431\u043e\u0440\u0443 \u0441\u0435\u0433\u043c\u0435\u043d\u0442\u0430\",\n                \"\u0421\u043e\u0437\u0434\u0430\u043d\u0438\u0435 \u0426\u0435\u043f\u043e\u0447\u043a\u0438 \u043f\u0440\u0438\u043d\u044f\u0442\u0438\u044f \u0440\u0435\u0448\u0435\u043d\u0438\u044f (Decision Journey)\"\n              ]\n            },\n            {\n              \"text\": \"\u041a\u0430\u0441\u0442\u0434\u0435\u0432 / \u043e\u043f\u0440\u043e\u0441 \u043e\u0442\u0434\u0435\u043b\u043e\u043c \u043a\u043e\u043d\u0442\u0440\u043e\u043b\u044f \u043a\u0430\u0447\u0435\u0441\u0442\u0432\u0430 \u0434\u043e 5 \u0432\u0430\u0448\u0438\u0445 \u043a\u043b\u0438\u0435\u043d\u0442\u043e\u0432\",\n              \"style\": \"disabled\",\n              \"subitems\": []\n            }\n          ]\n        },\n        {\n          \"title\": \"\u0421\u043e\u0437\u0434\u0430\u043d\u0438\u0435 1 \u0441\u0442\u0440\u0430\u043d\u0438\u0446\u044b \u0441\u0430\u0439\u0442\u0430 \u043f\u043e\u0434 \u043d\u0430\u043f\u0440\u0430\u0432\u043b\u0435\u043d\u0438\u0435 - \u0411\u0424\u041b\",\n          \"items\": [\n            {\n              \"text\": \"\u0420\u0430\u0437\u0440\u0430\u0431\u043e\u0442\u043a\u0430 \u0443\u043d\u0438\u043a\u0430\u043b\u044c\u043d\u043e\u0439 \u043f\u0440\u043e\u0434\u0430\u044e\u0449\u0435\u0439 \u0441\u0442\u0440\u0443\u043a\u0442\u0443\u0440\u044b \u0441\u0430\u0439\u0442\u0430, \u043a\u043e\u0442\u043e\u0440\u0430\u044f \u0443\u0447\u0438\u0442\u044b\u0432\u0430\u0435\u0442 \u0432\u0441\u0435 \u043a\u0440\u0438\u0442\u0435\u0440\u0438\u0438, \u0432\u043e\u0437\u0440\u0430\u0436\u0435\u043d\u0438\u044f \u0438 \u043f\u043e\u0442\u0440\u0435\u0431\u043d\u043e\u0441\u0442\u0438 \u0432\u0441\u0435\u0445 \u0426\u0410\",\n              \"style\": \"normal\",\n              \"subitems\": []\n            },\n            {\n              \"text\": \"\u0421\u043e\u0437\u0434\u0430\u043d\u0438\u0435 \u0441\u043a\u0440\u044b\u0442\u044b\u0445 \u0438 \u0438\u043d\u0442\u0435\u0440\u0430\u043a\u0442\u0438\u0432\u043d\u044b\u0445 \u0444\u043e\u0440\u043c \u0437\u0430\u0445\u0432\u0430\u0442\u0430 \u043a\u043e\u043d\u0442\u0430\u043a\u0442\u043e\u0432 \u0434\u043b\u044f \u043c\u0430\u043a\u0441\u0438\u043c\u0438\u0437\u0430\u0446\u0438\u0438 \u043a\u043e\u043d\u0432\u0435\u0440\u0441\u0438\u0438 (\u0432 \u0442\u043e\u043c \u0447\u0438\u0441\u043b\u0435 \u043a\u0432\u0438\u0437-\u043e\u043f\u0440\u043e\u0441\u043d\u0438\u043a)\",\n              \"style\": \"normal\",\n              \"subitems\": [\n                \"\u0420\u0430\u0437\u0440\u0430\u0431\u043e\u0442\u043a\u0430 \u044d\u0444\u0444\u0435\u043a\u0442\u0438\u0432\u043d\u043e\u0433\u043e \\\"\u043f\u043e\u043f-\u0430\u043f\u0430 \u043d\u0430 \u0432\u044b\u0445\u043e\u0434\\\" (exit pop-up)\",\n                \"\u041a\u0432\u0438\u0437\"\n              ]\n            },\n            {\n              \"text\": \"\u0412\u0451\u0440\u0441\u0442\u043a\u0430 \u0441\u0430\u0439\u0442\u0430 \u043f\u043e\u0434 4 \u0440\u0430\u0437\u043c\u0435\u0440\u0430\",\n              \"style\": \"normal\",\n              \"subitems\": [\n                \"\u0420\u0430\u0437\u0440\u0430\u0431\u043e\u0442\u043a\u0430 \u043c\u043e\u0431\u0438\u043b\u044c\u043d\u043e\u0439 \u0432\u0435\u0440\u0441\u0438\u0438 \u0441\u0430\u0439\u0442\u0430\"\n              ]\n            },\n            {\n              \"text\": \"\u0410\u0434\u0430\u043f\u0442\u0430\u0446\u0438\u044f \u0438 \u0443\u0441\u043a\u043e\u0440\u0435\u043d\u0438\u0435 \u0441\u043a\u043e\u0440\u043e\u0441\u0442\u0438 \u0437\u0430\u0433\u0440\u0443\u0437\u043a\u0438 \u0441\u0430\u0439\u0442\u0430\",\n              \"style\": \"normal\",\n              \"subitems\": []\n            },\n            {\n              \"text\": \"\u0420\u0430\u0437\u0440\u0430\u0431\u043e\u0442\u043a\u0430 \u0443\u0442\u0435\u043f\u043b\u044f\u044e\u0449\u0435\u0439 \u0441\u0442\u0440\u0430\u043d\u0438\u0446\u044b \\\"\u0421\u043f\u0430\u0441\u0438\u0431\u043e \u0437\u0430 \u0437\u0430\u044f\u0432\u043a\u0443\\\"\",\n              \"style\": \"normal\",\n              \"subitems\": []\n            },\n            {\n              \"text\": \"\u0423\u043b\u0443\u0447\u0448\u0435\u043d\u0438\u0435 \u0441\u0430\u0439\u0442\u0430, \u0438\u0441\u0445\u043e\u0434\u044f \u0438\u0437 \u0434\u0430\u043d\u043d\u044b\u0445 \u0430\u043d\u0430\u043b\u0438\u0442\u0438\u043a\u0438\",\n              \"style\": \"normal\",\n              \"subitems\": []\n            },\n            {\n              \"text\": \"\u041d\u0435\u043e\u0433\u0440\u0430\u043d\u0438\u0447\u0435\u043d\u043d\u043e\u0435 \u0432\u043d\u0435\u0441\u0435\u043d\u0438\u0435 \u043f\u0440\u0430\u0432\u043e\u043a \u043f\u043e \u0443\u043b\u0443\u0447\u0448\u0435\u043d\u0438\u044e \u044d\u0444\u0444\u0435\u043a\u0442\u0438\u0432\u043d\u043e\u0441\u0442\u0438 \u0441\u0430\u0439\u0442\u0430 \",\n              \"style\": \"normal\",\n              \"subitems\": []\n            },\n            {\n              \"text\": \"\u041f\u043e\u0434\u0431\u043e\u0440 \u0448\u0440\u0438\u0444\u0442\u043e\u0432 \u0438 \u0446\u0432\u0435\u0442\u043e\u0432\u043e\u0439 \u0433\u0430\u043c\u043c\u044b \u0432 \u0444\u0438\u0440\u043c\u0435\u043d\u043d\u043e\u043c \u0441\u0442\u0438\u043b\u0435\",\n              \"style\": \"normal\",\n              \"subitems\": []\n            },\n            {\n              \"text\": \"\u0423\u0441\u0438\u043b\u0435\u043d\u0438\u0435 \u043f\u0440\u043e\u0434\u0430\u044e\u0449\u0438\u0445 \u043f\u043e\u0441\u044b\u043b\u043e\u0432 \u0441 \u043f\u043e\u043c\u043e\u0449\u044c\u044e \u0432\u0435\u0431-\u0434\u0438\u0437\u0430\u0439\u043d\u0430\",\n              \"style\": \"normal\",\n              \"subitems\": []\n            },\n            {\n              \"text\": \"\u0422\u0435\u0441\u0442\u0438\u0440\u043e\u0432\u0430\u043d\u0438\u0435 \u043a\u0430\u0436\u0434\u043e\u0439 \u0444\u043e\u0440\u043c\u044b \u0437\u0430\u0445\u0432\u0430\u0442\u0430 \u043d\u0430 \u043f\u0440\u0435\u0434\u043c\u0435\u0442 \u0434\u043e\u0445\u043e\u0434\u0438\u043c\u043e\u0441\u0442\u0438 \u0437\u0430\u044f\u0432\u043e\u043a\",\n              \"style\": \"normal\",\n              \"subitems\": []\n            },\n            {\n              \"text\": \"\u0418\u043d\u0442\u0435\u0440\u0430\u043a\u0442\u0438\u0432\u043d\u044b\u0435 \u044d\u043b\u0435\u043c\u0435\u043d\u0442\u044b \u0441 \u043f\u043e\u043c\u043e\u0449\u044c\u044e HTML \u043a\u043e\u0434\u0430\",\n              \"style\": \"disabled\",\n              \"subitems\": [\n                \"\u041d\u0430\u043f\u0440\u0438\u043c\u0435\u0440, \u043a\u0430\u043b\u044c\u043a\u0443\u043b\u044f\u0442\u043e\u0440, \u0442\u0430\u0431\u043b\u0438\u0446\u044b \u0441\u0440\u0430\u0432\u043d\u0435\u043d\u0438\u0439\"\n              ]\n            },\n            {\n              \"text\": \"\u041a\u043e\u043f\u0438\u0440\u0430\u0439\u0442\u0438\u043d\u0433 \u0442\u0435\u043a\u0441\u0442\u043e\u0432, \u0432\u044b\u0437\u044b\u0432\u0430\u044e\u0449\u0438\u0445 \u0434\u043e\u0432\u0435\u0440\u0438\u0435 (\u0441 \u0443\u0447\u0451\u0442\u043e\u043c \u0437\u0430\u043a\u043e\u043d\u0430)\",\n              \"style\": \"normal\",\n              \"subitems\": []\n            }\n          ]\n        }\n      ],\n      \"bonus\": {\n        \"enabled\": false,\n        \"title\": \"\u0411\u043e\u043d\u0443\u0441\",\n        \"items\": []\n      },\n      \"deliverables\": [\n        \"\u041e\u0442\u0447\u0451\u0442 \u0441 \u0438\u043d\u0441\u0430\u0439\u0442\u0430\u043c\u0438\",\n        \"\u041d\u0430\u0441\u0442\u0440\u043e\u0435\u043d\u043d\u044b\u0435 \u043a\u0430\u043c\u043f\u0430\u043d\u0438\u0438\"\n      ],\n      \"whatYouAvoid\": [\n        \"\u0421\u043b\u0438\u0432 \u0431\u044e\u0434\u0436\u0435\u0442\u0430\",\n        \"\u041d\u0435\u0446\u0435\u043b\u0435\u0432\u043e\u0439 \u0442\u0440\u0430\u0444\u0438\u043a\"\n      ],\n      \"terms\": \"9-12 \u0434\u043d\u0435\u0439 (\u0441 \u0443\u0447\u0451\u0442\u043e\u043c \u043f\u0440\u0430\u0432\u043e\u043a + 2-3 \u0434\u043d\u044f)\",\n      \"payment\": \"50% \u043f\u0440\u0435\u0434\u043e\u043f\u043b\u0430\u0442\u0430, 50% \u043f\u043e \u0433\u043e\u0442\u043e\u0432\u043d\u043e\u0441\u0442\u0438 \u043f\u0435\u0440\u0435\u0434\u0430\u0442\u044c \u0432\u0430\u043c \u0441\u0430\u0439\u0442\",\n      \"price\": \"48 863 \u20bd\",\n      \"bonuses\": [],\n      \"budget\": \"\"\n    }\n  ],\n  \"contextBlocks\": [\n    {\n      \"id\": \"goals\",\n      \"title\": \"\ud83c\udfaf \u0412\u0430\u0448\u0438 \u0446\u0435\u043b\u0438\",\n      \"html\": \"<ul><li class=\\\"whitespace-normal break-words pl-2\\\"><b>\u041d\u043e\u0432\u044b\u0439 \u0441\u0430\u0439\u0442 \u0441 \u0440\u0430\u0437\u0434\u0435\u043b\u0435\u043d\u0438\u0435\u043c \u043f\u043e \u043d\u0430\u043f\u0440\u0430\u0432\u043b\u0435\u043d\u0438\u044f\u043c</b>: \u0411\u0424\u041b, \u0441\u0435\u043c\u0435\u0439\u043d\u044b\u0435 \u0434\u0435\u043b\u0430, \u043d\u0430\u0441\u043b\u0435\u0434\u0441\u0442\u0432\u0435\u043d\u043d\u044b\u0435 \u0434\u0435\u043b\u0430</li><li class=\\\"whitespace-normal break-words pl-2\\\">\u0417\u0430\u043f\u0443\u0441\u043a <b>\u0430\u043a\u0442\u0438\u0432\u043d\u043e\u0439 \u043a\u043e\u043d\u0442\u0435\u043a\u0441\u0442\u043d\u043e\u0439 \u0440\u0435\u043a\u043b\u0430\u043c\u044b</b> (\u042f\u043d\u0434\u0435\u043a\u0441.\u0414\u0438\u0440\u0435\u043a\u0442 + \u042f\u043d\u0434\u0435\u043a\u0441.\u041a\u0430\u0440\u0442\u044b)</li><li class=\\\"whitespace-normal break-words pl-2\\\"><b>15\u201317 \u0434\u043e\u0433\u043e\u0432\u043e\u0440\u043e\u0432</b> \u0432 \u043c\u0435\u0441\u044f\u0446 (\u0441\u0435\u0439\u0447\u0430\u0441 ~2\u20133)</li><li class=\\\"whitespace-normal break-words pl-2\\\"><b>\u041e\u043d\u043b\u0430\u0439\u043d-\u043f\u0440\u043e\u0434\u0443\u043a\u0442</b>: \u043f\u0440\u043e\u0434\u0430\u0436\u0430 \u0448\u0430\u0431\u043b\u043e\u043d\u043e\u0432 \u0434\u043e\u043a\u0443\u043c\u0435\u043d\u0442\u043e\u0432 + \u043f\u043e\u0448\u0430\u0433\u043e\u0432\u044b\u0445 \u0438\u043d\u0441\u0442\u0440\u0443\u043a\u0446\u0438\u0439 \u043f\u043e \u0431\u0430\u043d\u043a\u0440\u043e\u0442\u0441\u0442\u0432\u0443 (\u0432\u043d\u0435\u0441\u0443\u0434\u0435\u0431\u043d\u043e\u043c\u0443 \u0438 \u0441\u0443\u0434\u0435\u0431\u043d\u043e\u043c\u0443) \u2014 \u043c\u0430\u0441\u0448\u0442\u0430\u0431\u0438\u0440\u0443\u0435\u043c\u0430\u044f \u0438\u0441\u0442\u043e\u0440\u0438\u044f \u043f\u043e \u0432\u0441\u0435\u0439 \u0420\u043e\u0441\u0441\u0438\u0438</li><li class=\\\"whitespace-normal break-words pl-2\\\"><b>\u041c\u0435\u0445\u0430\u043d\u0438\u043a\u0430 \u043a\u0432\u0438\u0437\u0430/\u0430\u043d\u043a\u0435\u0442\u044b</b> \\\"\u043f\u043e\u0434\u0445\u043e\u0434\u0438\u0448\u044c \u043b\u0438 \u0442\u044b \u043f\u043e\u0434 \u0431\u0430\u043d\u043a\u0440\u043e\u0442\u0441\u0442\u0432\u043e\\\" \u043d\u0430 \u0441\u0430\u0439\u0442\u0435</li><li class=\\\"whitespace-normal break-words pl-2\\\">\u041d\u0430\u0441\u0442\u0440\u043e\u0439\u043a\u0430 \u0441\u0430\u0439\u0442\u0430 <b>\u043f\u043e\u0434 \u043d\u0435\u0441\u043a\u043e\u043b\u044c\u043a\u043e \u0433\u043e\u0440\u043e\u0434\u043e\u0432/\u0440\u0435\u0433\u0438\u043e\u043d\u043e\u0432</b> (\u0433\u0435\u043e\u043c\u0443\u043b\u044c\u0442\u0438\u043f\u043b\u0438\u043a\u0430\u0446\u0438\u044f) \u2014 <i>\u0432 \u043f\u0435\u0440\u0441\u043f\u0435\u043a\u0442\u0438\u0432\u0435</i></li></ul>\\n\\n\\n\\n\\n\",\n      \"enabled\": true\n    },\n    {\n      \"id\": \"current\",\n      \"title\": \"\ud83d\udcca \u0422\u0435\u043a\u0443\u0449\u0430\u044f \u0441\u0438\u0442\u0443\u0430\u0446\u0438\u044f\",\n      \"html\": \"<ul><li class=\\\"whitespace-normal break-words pl-2\\\">~2\u20133 \u0434\u043e\u0433\u043e\u0432\u043e\u0440\u0430 \u0432 \u043c\u0435\u0441\u044f\u0446 (\u0432\u0435\u0441\u044c \u043e\u0431\u044a\u0451\u043c)</li><li class=\\\"whitespace-normal break-words pl-2\\\">\u0421\u0440\u0435\u0434\u043d\u0438\u0439 \u0447\u0435\u043a \u043f\u043e \u0411\u0424\u041b: <b>~120 \u0442\u044b\u0441. \u0440\u0443\u0431.</b> (\u0432 \u0440\u0430\u0441\u0441\u0440\u043e\u0447\u043a\u0443)</li><li class=\\\"whitespace-normal break-words pl-2\\\">\u0413\u043e\u0442\u043e\u0432\u044b \u0432\u043a\u043b\u0430\u0434\u044b\u0432\u0430\u0442\u044c \u0432 \u0440\u0435\u043a\u043b\u0430\u043c\u0443: <b>10\u201315% \u043e\u0442 \u0441\u0443\u043c\u043c\u044b \u0434\u043e\u0433\u043e\u0432\u043e\u0440\u0430</b> (~12\u201318 \u0442\u044b\u0441. \u043d\u0430 \u043a\u043b\u0438\u0435\u043d\u0442\u0430)</li><li class=\\\"whitespace-normal break-words pl-2\\\"><b>\u0421\u0442\u0430\u0442\u0438\u0441\u0442\u0438\u043a\u0438</b> \u043f\u043e \u0432\u043e\u0440\u043e\u043d\u043a\u0435 (\u043b\u0438\u0434\u044b \u2192 \u0437\u0430\u044f\u0432\u043a\u0438 \u2192 \u0434\u043e\u0433\u043e\u0432\u043e\u0440\u044b) <b>\u043d\u0435\u0442 \u0441\u043e\u0432\u0441\u0435\u043c</b></li><li class=\\\"whitespace-normal break-words pl-2\\\">\u041a\u043e\u043d\u0432\u0435\u0440\u0441\u0438\u044f \u0441\u0430\u0439\u0442\u0430: \u043d\u0435\u0438\u0437\u0432\u0435\u0441\u0442\u043d\u0430, <b>\u0437\u0430\u044f\u0432\u043e\u043a \u0441 \u0441\u0430\u0439\u0442\u0430 \u043f\u043e\u0447\u0442\u0438 \u043d\u0435\u0442</b></li><li><b>\\n\u041e\u0440\u0438\u0435\u043d\u0442\u0438\u0440\u043e\u0432\u043e\u0447\u043d\u0430\u044f \u0441\u0442\u043e\u0438\u043c\u043e\u0441\u0442\u044c \u043a\u043b\u0438\u0435\u043d\u0442\u0430</b> \u043f\u043e \u042f\u043d\u0434\u0435\u043a\u0441.\u041a\u0430\u0440\u0442\u0430\u043c \u0440\u0430\u043d\u0435\u0435: ~10 \u0442\u044b\u0441. \u0440\u0443\u0431.</li></ul>\\n\\n\\n\\n\\n\",\n      \"enabled\": true\n    },\n    {\n      \"id\": \"problems\",\n      \"title\": \"\u26a0\ufe0f \u0427\u0442\u043e \u043c\u043e\u0436\u0435\u0442 \u043f\u043e\u043c\u0435\u0448\u0430\u0442\u044c\",\n      \"html\": \"<ul><li>\u041d\u0435\u0442 \u043f\u043e\u0442\u043e\u043a\u0430 \u043a\u043b\u0438\u0435\u043d\u0442\u043e\u0432,<b> \u0432\u0441\u0451 \u0434\u0435\u0440\u0436\u0438\u0442\u0441\u044f \u043d\u0430 \u043b\u0438\u0447\u043d\u043e\u043c \u0431\u0440\u0435\u043d\u0434\u0435 \u043e\u0434\u043d\u043e\u0433\u043e \u0447\u0435\u043b\u043e\u0432\u0435\u043a\u0430</b>&nbsp;</li><li>\u041d\u0435\u0442 \u0430\u043d\u0430\u043b\u0438\u0442\u0438\u043a\u0438 \u0438 \u043f\u043e\u043d\u0438\u043c\u0430\u043d\u0438\u044f, \u0447\u0442\u043e \u0440\u0430\u0431\u043e\u0442\u0430\u0435\u0442,&nbsp;\u041d\u0435\u0442 CRM, \u043d\u0435\u0442 \u0441\u0442\u0430\u0442\u0438\u0441\u0442\u0438\u043a\u0438 \u043a\u043e\u043d\u0432\u0435\u0440\u0441\u0438\u0439, \u043d\u0435\u0442 \u043f\u043e\u043d\u0438\u043c\u0430\u043d\u0438\u044f \u0441\u0442\u043e\u0438\u043c\u043e\u0441\u0442\u0438 \u043a\u043b\u0438\u0435\u043d\u0442\u0430 = \u043f\u0440\u0438 \u0437\u0430\u043f\u0443\u0441\u043a\u0435 <b>\u0431\u044e\u0434\u0436\u0435\u0442 \u0441\u043d\u043e\u0432\u0430 \u043c\u043e\u0436\u0435\u0442 \u0441\u043b\u0438\u0442\u044c\u0441\u044f</b> \u043a\u0430\u043a \u0432 \u044f\u043d\u0432\u0430\u0440\u0435 \u0441 \u042f\u043d\u0434\u0435\u043a\u0441.\u041a\u0430\u0440\u0442\u0430\u043c\u0438</li><li>\u0421\u0430\u0439\u0442 \u043d\u0435 \u0440\u0430\u0431\u043e\u0442\u0430\u0435\u0442 \u043a\u0430\u043a \u0438\u043d\u0441\u0442\u0440\u0443\u043c\u0435\u043d\u0442 \u043f\u0440\u043e\u0434\u0430\u0436 = <b>\u043d\u0435 \u0431\u0443\u0434\u0435\u0442 \u0437\u0430\u043f\u0443\u0441\u043a\u0430 \u0414\u0438\u0440\u0435\u043a\u0442\u0430</b> = <b>\u043e\u0442\u043a\u043b\u0430\u0434\u044b\u0432\u0430\u0435\u0442\u0441\u044f \u0446\u0435\u043b\u044c \u0432 15-17 \u0434\u043e\u0433\u043e\u0432\u043e\u0440\u043e\u0432</b> = \u043d\u0435\u0442 \u043c\u0430\u0441\u0448\u0442\u0430\u0431\u0438\u0440\u043e\u0432\u0430\u043d\u0438\u044f \u043f\u043e \u0420\u043e\u0441\u0441\u0438\u0438</li><li>\u041d\u0435\u0442 \u043f\u043e\u043d\u0438\u043c\u0430\u043d\u0438\u044f \u0431\u0430\u0437\u043e\u0432\u044b\u0445 \u043c\u0430\u0440\u043a\u0435\u0442\u0438\u043d\u0433\u043e\u0432\u044b\u0445 \u043c\u0435\u0445\u0430\u043d\u0438\u043a = \u0435\u0441\u043b\u0438 \u0437\u0430\u043f\u0443\u0441\u0442\u0438\u0442\u044c\u0441\u044f \u0441\u0430\u043c\u043e\u0441\u0442\u043e\u044f\u0442\u0435\u043b\u044c\u043d\u043e <b>\u0435\u0441\u0442\u044c \u0431\u043e\u043b\u044c\u0448\u0430\u044f \u0432\u0435\u0440\u043e\u044f\u0442\u043d\u043e\u0441\u0442\u044c \u043f\u043e\u0442\u0440\u0430\u0442\u0438\u0442\u044c \u0431\u044e\u0434\u0436\u0435\u0442 \u0432 \u043d\u0438\u043a\u0443\u0434\u0430</b></li></ul>\",\n      \"enabled\": true\n    }\n  ],\n  \"agency\": {\n    \"name\": \"\",\n    \"contactLabel\": \"\",\n    \"contactUrl\": \"\"\n  }\n}");
+loadFromStorage();
 if (!data.contextBlocks) data.contextBlocks = [
   { id: "goals",    title: "🎯 Ваши цели",         html: "", enabled: true },
   { id: "current",  title: "📊 Текущая ситуация",   html: "", enabled: true },
@@ -2131,10 +3237,10 @@ showAll = true;
 renderPreview();
 var sol = document.getElementById('solution-section');
 if (sol) sol.classList.remove('hidden');
-var revealWrap = document.getElementById('reveal-solution-wrap');
-if (revealWrap) revealWrap.style.display = 'none';
-var exitBtn = document.getElementById('presentation-exit');
-if (exitBtn) exitBtn.style.display = 'none';
+var rw = document.getElementById('reveal-solution-wrap');
+if (rw) rw.style.display = 'none';
+var eb = document.getElementById('presentation-exit');
+if (eb) eb.style.display = 'none';
 
 // Re-render mobile tabs on resize
 window.addEventListener('resize', () => {
@@ -2146,5 +3252,6 @@ window.addEventListener('resize', () => {
   }
 });
 </script>
-</body>
-</html>
+
+
+</body></html>
