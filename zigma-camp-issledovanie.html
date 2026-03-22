@@ -1,0 +1,2042 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Зигма Арт — Маркетинговый отчёт</title>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Playfair+Display:ital,wght@0,700;0,900;1,700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #F8F7F0;
+  --bg2: #F0EFE6;
+  --bg3: #E8E6D9;
+  --accent: #e8c97e;
+  --accent2: #c9a84c;
+  --accent3: #f5e4b0;
+  --text: #1a1814;
+  --text2: #5a5040;
+  --text3: #9a8f7a;
+  --border: #d8d0bc;
+  --green: #5a9e6f;
+  --red: #c0533a;
+  --blue: #4a7fa8;
+  --purple: #7a5ea8;
+  --card-bg: #faf9f4;
+  --shadow: 0 2px 16px rgba(26,24,20,0.07);
+  --shadow2: 0 4px 32px rgba(26,24,20,0.10);
+  --radius: 12px;
+  --radius-sm: 8px;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-size: 15px;
+  line-height: 1.6;
+  min-height: 100vh;
+}
+
+/* ── HEADER ── */
+.header {
+  background: var(--text);
+  color: var(--bg);
+  padding: 28px 32px 24px;
+  position: relative;
+  overflow: hidden;
+}
+.header::before {
+  content: '';
+  position: absolute;
+  top: -40px; right: -40px;
+  width: 220px; height: 220px;
+  border-radius: 50%;
+  background: var(--accent);
+  opacity: .12;
+}
+.header-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+.header-badge {
+  background: var(--accent);
+  color: var(--text);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  padding: 4px 12px;
+  border-radius: 20px;
+  display: inline-block;
+  margin-bottom: 12px;
+}
+.header h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(24px, 5vw, 40px);
+  font-weight: 900;
+  line-height: 1.15;
+  letter-spacing: -.02em;
+  margin-bottom: 6px;
+}
+.header-sub {
+  color: rgba(248,247,240,.6);
+  font-size: 14px;
+  font-style: italic;
+}
+.header-stats {
+  display: flex;
+  gap: 24px;
+  flex-wrap: wrap;
+  margin-top: 20px;
+  padding-top: 20px;
+  border-top: 1px solid rgba(248,247,240,.15);
+}
+.h-stat { text-align: center; }
+.h-stat-val {
+  font-family: 'Playfair Display', serif;
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--accent);
+  display: block;
+  line-height: 1;
+}
+.h-stat-label {
+  font-size: 11px;
+  color: rgba(248,247,240,.55);
+  text-transform: uppercase;
+  letter-spacing: .06em;
+  margin-top: 4px;
+}
+
+/* ── TABS ── */
+.tabs-wrap {
+  background: var(--bg2);
+  border-bottom: 1px solid var(--border);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+.tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0;
+  padding: 0 12px;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.tabs::-webkit-scrollbar { display: none; }
+.tab {
+  padding: 0 18px;
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text2);
+  cursor: pointer;
+  border-bottom: 3px solid transparent;
+  white-space: nowrap;
+  transition: all .2s;
+  user-select: none;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+  background: none;
+  border-left: none;
+  border-right: none;
+  border-top: none;
+  outline: none;
+}
+.tab:hover { color: var(--text); background: rgba(232,201,126,.08); }
+.tab.active {
+  color: var(--text);
+  border-bottom-color: var(--accent);
+  font-weight: 600;
+}
+
+/* ── CONTENT ── */
+.content { padding: 24px 20px 60px; max-width: 1100px; margin: 0 auto; }
+.section { display: none; }
+.section.active { display: block; animation: fadeIn .3s ease; }
+@keyframes fadeIn { from { opacity:0; transform:translateY(6px); } to { opacity:1; transform:none; } }
+
+/* ── TYPOGRAPHY ── */
+.section-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(22px, 4vw, 32px);
+  font-weight: 700;
+  letter-spacing: -.02em;
+  margin-bottom: 4px;
+  line-height: 1.2;
+}
+.section-desc {
+  color: var(--text2);
+  font-size: 14px;
+  margin-bottom: 28px;
+  font-style: italic;
+}
+.block-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 14px;
+  letter-spacing: -.01em;
+}
+.label {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--text3);
+  margin-bottom: 6px;
+  display: block;
+}
+.divider { height: 1px; background: var(--border); margin: 28px 0; }
+
+/* ── CARD ── */
+.card {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 20px;
+  box-shadow: var(--shadow);
+}
+.card-accent {
+  border-left: 4px solid var(--accent);
+}
+
+/* ── GRIDS ── */
+.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+.grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+
+/* ── STAT CARD ── */
+.stat-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 18px;
+  text-align: center;
+  box-shadow: var(--shadow);
+}
+.stat-val {
+  font-family: 'Playfair Display', serif;
+  font-size: 32px;
+  font-weight: 700;
+  color: var(--text);
+  line-height: 1;
+  display: block;
+}
+.stat-label {
+  font-size: 12px;
+  color: var(--text3);
+  margin-top: 6px;
+  line-height: 1.4;
+}
+
+/* ── BADGE ── */
+.badge {
+  display: inline-block;
+  padding: 3px 10px;
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: 600;
+}
+.badge-green { background: #d4edda; color: #2d6a4f; }
+.badge-yellow { background: #fff3cd; color: #856404; }
+.badge-red { background: #f8d7da; color: #842029; }
+.badge-blue { background: #d0e8f7; color: #1a5276; }
+.badge-accent { background: var(--accent3); color: #5a4010; }
+
+/* ── SEGMENT CARD ── */
+.seg-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: var(--shadow);
+}
+.seg-header {
+  padding: 16px 18px 12px;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 12px;
+}
+.seg-score {
+  font-family: 'Playfair Display', serif;
+  font-size: 36px;
+  font-weight: 900;
+  color: var(--accent2);
+  line-height: 1;
+  white-space: nowrap;
+}
+.seg-score span { font-size: 16px; color: var(--text3); }
+.seg-name {
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1.3;
+  flex: 1;
+}
+.seg-body { padding: 16px 18px; }
+.seg-body p { font-size: 13px; color: var(--text2); line-height: 1.55; margin-bottom: 12px; }
+.seg-meta { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+
+/* ── SCORE BAR ── */
+.score-bar-wrap { margin-bottom: 14px; }
+.score-bar-label {
+  display: flex;
+  justify-content: space-between;
+  font-size: 13px;
+  color: var(--text2);
+  margin-bottom: 5px;
+}
+.score-bar-label strong { color: var(--text); font-weight: 600; }
+.score-bar-track {
+  height: 8px;
+  background: var(--bg3);
+  border-radius: 4px;
+  overflow: hidden;
+}
+.score-bar-fill {
+  height: 100%;
+  border-radius: 4px;
+  background: linear-gradient(90deg, var(--accent2), var(--accent));
+  transition: width .8s cubic-bezier(.34,1.56,.64,1);
+}
+
+/* ── BAR CHART ── */
+.bar-chart { display: flex; flex-direction: column; gap: 12px; }
+.bc-row { display: flex; align-items: center; gap: 12px; }
+.bc-label { font-size: 13px; color: var(--text2); min-width: 160px; flex-shrink: 0; text-align: right; }
+.bc-track { flex: 1; height: 28px; background: var(--bg3); border-radius: 4px; overflow: hidden; position: relative; }
+.bc-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--accent2), var(--accent));
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  padding-left: 10px;
+  font-size: 12px;
+  font-weight: 600;
+  color: #5a4010;
+  white-space: nowrap;
+  transition: width .9s cubic-bezier(.34,1.56,.64,1);
+}
+
+/* ── TABLE ── */
+.table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; border-radius: var(--radius); border: 1px solid var(--border); }
+table { width: 100%; border-collapse: collapse; font-size: 13px; }
+th {
+  background: var(--bg2);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  color: var(--text3);
+  padding: 10px 14px;
+  text-align: left;
+  border-bottom: 1px solid var(--border);
+  white-space: nowrap;
+}
+td {
+  padding: 10px 14px;
+  border-bottom: 1px solid var(--bg3);
+  vertical-align: top;
+  line-height: 1.5;
+}
+tr:last-child td { border-bottom: none; }
+tr:hover td { background: rgba(232,201,126,.06); }
+
+/* ── PERSONA CARD ── */
+.persona-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: var(--shadow);
+}
+.persona-header {
+  background: var(--text);
+  color: var(--bg);
+  padding: 20px;
+  position: relative;
+}
+.persona-avatar {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: var(--accent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Playfair Display', serif;
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 12px;
+}
+.persona-name { font-size: 20px; font-weight: 700; }
+.persona-role { font-size: 13px; color: rgba(248,247,240,.6); margin-top: 3px; font-style: italic; }
+.persona-body { padding: 18px; }
+.persona-quote {
+  background: var(--bg2);
+  border-left: 3px solid var(--accent);
+  padding: 12px 14px;
+  font-style: italic;
+  font-size: 13px;
+  color: var(--text2);
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  margin-bottom: 16px;
+  line-height: 1.6;
+}
+.detail-list { list-style: none; }
+.detail-list li {
+  display: flex;
+  gap: 8px;
+  padding: 7px 0;
+  border-bottom: 1px solid var(--bg3);
+  font-size: 13px;
+  line-height: 1.5;
+}
+.detail-list li:last-child { border-bottom: none; }
+.detail-list li::before {
+  content: '→';
+  color: var(--accent2);
+  flex-shrink: 0;
+  font-weight: 700;
+}
+
+/* ── FEAR LIST ── */
+.fear-item {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  padding: 9px 0;
+  border-bottom: 1px solid var(--bg3);
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--text2);
+}
+.fear-item:last-child { border-bottom: none; }
+.fear-item::before {
+  content: '⚠';
+  font-size: 12px;
+  color: var(--red);
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+/* ── CHANNEL CARD ── */
+.channel-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 16px;
+  box-shadow: var(--shadow);
+}
+.channel-name { font-weight: 600; font-size: 14px; margin-bottom: 6px; }
+.channel-kpi { font-size: 12px; color: var(--green); font-weight: 500; margin-top: 6px; }
+
+/* ── CJM ── */
+.cjm-stage {
+  display: flex;
+  gap: 16px;
+  padding: 18px 0;
+  border-bottom: 1px solid var(--border);
+  position: relative;
+}
+.cjm-stage:last-child { border-bottom: none; }
+.cjm-num {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: var(--accent);
+  color: var(--text);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 14px;
+  flex-shrink: 0;
+  font-family: 'Playfair Display', serif;
+}
+.cjm-content { flex: 1; }
+.cjm-title { font-weight: 600; font-size: 14px; margin-bottom: 4px; }
+.cjm-sub { font-size: 12px; color: var(--text3); margin-bottom: 8px; font-style: italic; }
+.cjm-desc { font-size: 13px; color: var(--text2); line-height: 1.55; margin-bottom: 8px; }
+.cjm-meta { display: flex; flex-wrap: wrap; gap: 6px; }
+
+/* ── EMOTION BAR ── */
+.emotion-bar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 6px 0;
+}
+.emotion-label { font-size: 12px; color: var(--text3); min-width: 70px; }
+.emotion-track {
+  flex: 1;
+  height: 6px;
+  background: var(--bg3);
+  border-radius: 3px;
+  overflow: hidden;
+}
+.emotion-fill {
+  height: 100%;
+  border-radius: 3px;
+  background: linear-gradient(90deg, #4a7fa8, var(--accent));
+}
+.emotion-val { font-size: 12px; font-weight: 600; color: var(--text2); min-width: 30px; }
+
+/* ── SVG RADAR ── */
+.radar-wrap { display: flex; justify-content: center; padding: 10px 0; }
+
+/* ── POSITIONING ── */
+.pos-variant {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 20px;
+  margin-bottom: 16px;
+  box-shadow: var(--shadow);
+}
+.pos-letter {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  background: var(--accent);
+  color: var(--text);
+  font-family: 'Playfair Display', serif;
+  font-weight: 700;
+  font-size: 20px;
+  border-radius: 8px;
+  margin-bottom: 12px;
+}
+.pos-headline {
+  font-family: 'Playfair Display', serif;
+  font-size: 20px;
+  font-weight: 700;
+  font-style: italic;
+  color: var(--text);
+  margin-bottom: 10px;
+  line-height: 1.3;
+}
+.pos-tag {
+  display: inline-block;
+  background: #e8f5e9;
+  color: #2d6a4f;
+  font-size: 11px;
+  font-weight: 600;
+  padding: 3px 10px;
+  border-radius: 20px;
+  margin-bottom: 10px;
+}
+
+/* ── QUICK WINS ── */
+.qw-item {
+  display: flex;
+  gap: 14px;
+  padding: 16px 0;
+  border-bottom: 1px solid var(--border);
+}
+.qw-item:last-child { border-bottom: none; }
+.qw-num {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--text);
+  color: var(--accent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  font-weight: 700;
+  flex-shrink: 0;
+  font-family: 'Playfair Display', serif;
+}
+.qw-content { flex: 1; }
+.qw-title { font-weight: 600; font-size: 14px; margin-bottom: 4px; }
+.qw-desc { font-size: 13px; color: var(--text2); line-height: 1.55; margin-bottom: 8px; }
+.qw-meta { display: flex; flex-wrap: wrap; gap: 8px; font-size: 12px; }
+.qw-time { color: var(--blue); font-weight: 500; }
+.qw-budget { color: var(--green); font-weight: 500; }
+
+/* ── PLAN ── */
+.plan-period {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  margin-bottom: 16px;
+  overflow: hidden;
+  box-shadow: var(--shadow);
+}
+.plan-period-header {
+  background: var(--text);
+  color: var(--bg);
+  padding: 12px 18px;
+  font-weight: 600;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.plan-period-header .badge {
+  background: var(--accent);
+  color: var(--text);
+}
+.plan-period-body { padding: 16px 18px; }
+
+/* ── PIE SVG ── */
+.pie-legend { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 14px; justify-content: center; }
+.pie-legend-item { display: flex; align-items: center; gap: 6px; font-size: 12px; }
+.pie-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+
+/* ── COMPETITOR ── */
+.comp-check { color: var(--green); font-size: 16px; }
+.comp-cross { color: var(--red); font-size: 16px; }
+.comp-partial { color: #e8a020; font-size: 14px; }
+
+/* ── RTB CARDS ── */
+.rtb-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 16px;
+  box-shadow: var(--shadow);
+}
+.rtb-num {
+  font-family: 'Playfair Display', serif;
+  font-size: 28px;
+  font-weight: 900;
+  color: var(--accent);
+  line-height: 1;
+  margin-bottom: 6px;
+}
+.rtb-type { font-size: 10px; text-transform: uppercase; letter-spacing: .08em; color: var(--text3); margin-bottom: 8px; }
+.rtb-claim { font-size: 13px; font-weight: 600; color: var(--text); margin-bottom: 6px; line-height: 1.4; }
+.rtb-proof { font-size: 12px; color: var(--text2); line-height: 1.5; }
+
+/* ── SWOT ── */
+.swot-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.swot-cell {
+  border-radius: var(--radius);
+  padding: 18px;
+}
+.swot-s { background: #edf7ee; border: 1px solid #b8dfc0; }
+.swot-w { background: #fef8ec; border: 1px solid #f5d87a; }
+.swot-o { background: #eef4fb; border: 1px solid #b0cce8; }
+.swot-t { background: #fdf0f0; border: 1px solid #e8b0b0; }
+.swot-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 16px;
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+.swot-s .swot-title { color: #2d6a4f; }
+.swot-w .swot-title { color: #856404; }
+.swot-o .swot-title { color: #1a5276; }
+.swot-t .swot-title { color: #842029; }
+.swot-list { list-style: none; }
+.swot-list li {
+  font-size: 13px;
+  line-height: 1.5;
+  padding: 5px 0;
+  border-bottom: 1px solid rgba(0,0,0,.06);
+  display: flex;
+  gap: 7px;
+}
+.swot-list li:last-child { border-bottom: none; }
+.swot-list li::before {
+  flex-shrink: 0;
+  font-size: 12px;
+  margin-top: 1px;
+}
+.swot-s .swot-list li::before { content: '✓'; color: #2d6a4f; }
+.swot-w .swot-list li::before { content: '!'; color: #856404; }
+.swot-o .swot-list li::before { content: '↑'; color: #1a5276; }
+.swot-t .swot-list li::before { content: '↓'; color: #842029; }
+
+/* ── ECONOMICS ── */
+.econ-highlight {
+  background: var(--text);
+  color: var(--bg);
+  border-radius: var(--radius);
+  padding: 20px;
+  margin-bottom: 20px;
+}
+.econ-highlight .stat-val { color: var(--accent); }
+.econ-highlight .stat-label { color: rgba(248,247,240,.6); }
+
+/* ── INFO BLOCK ── */
+.info-block {
+  background: var(--accent3);
+  border: 1px solid var(--accent);
+  border-radius: var(--radius-sm);
+  padding: 14px 16px;
+  font-size: 13px;
+  line-height: 1.6;
+  color: #5a4010;
+  margin-bottom: 16px;
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 600px) {
+  .header { padding: 20px 16px 18px; }
+  .content { padding: 16px 14px 50px; }
+  .tabs { padding: 0 4px; }
+  .tab { padding: 0 12px; font-size: 12px; }
+  .grid-2 { grid-template-columns: 1fr; }
+  .grid-3 { grid-template-columns: 1fr; }
+  .grid-4 { grid-template-columns: 1fr 1fr; }
+  .swot-grid { grid-template-columns: 1fr; }
+  .bc-label { min-width: 100px; font-size: 12px; }
+  .cjm-stage { flex-direction: row; }
+  .header-stats { gap: 16px; }
+  .h-stat-val { font-size: 22px; }
+  table { font-size: 12px; }
+  th, td { padding: 8px 10px; }
+}
+@media (max-width: 400px) {
+  .grid-4 { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-top">
+    <div>
+      <div class="header-badge">Маркетинговый отчёт</div>
+      <h1>Зигма Арт<br>Лагерь на море</h1>
+      <div class="header-sub">Анализ ЦА · Конкуренты · Позиционирование · CJM</div>
+    </div>
+  </div>
+  <div class="header-stats">
+    <div class="h-stat">
+      <span class="h-stat-val">120K</span>
+      <div class="h-stat-label">Средний чек, ₽</div>
+    </div>
+    <div class="h-stat">
+      <span class="h-stat-val">50</span>
+      <div class="h-stat-label">Детей на смену</div>
+    </div>
+    <div class="h-stat">
+      <span class="h-stat-val">7,2M</span>
+      <div class="h-stat-label">SOM, ₽/сезон</div>
+    </div>
+    <div class="h-stat">
+      <span class="h-stat-val">14</span>
+      <div class="h-stat-label">Дней смены</div>
+    </div>
+    <div class="h-stat">
+      <span class="h-stat-val">5</span>
+      <div class="h-stat-label">Сегментов ЦА</div>
+    </div>
+  </div>
+</div>
+
+<div class="tabs-wrap">
+  <div class="tabs" id="tabs">
+    <button class="tab active" data-tab="segments" ontouchstart="" onclick="">Сегменты ЦА</button>
+    <button class="tab" data-tab="personas" ontouchstart="">Персоны</button>
+    <button class="tab" data-tab="cjm" ontouchstart="">CJM</button>
+    <button class="tab" data-tab="competitors" ontouchstart="">Конкуренты</button>
+    <button class="tab" data-tab="positioning" ontouchstart="">Позиционирование</button>
+    <button class="tab" data-tab="channels" ontouchstart="">Каналы</button>
+    <button class="tab" data-tab="economics" ontouchstart="">Экономика</button>
+    <button class="tab" data-tab="quickwins" ontouchstart="">Быстрые победы</button>
+  </div>
+</div>
+
+<div class="content">
+
+<!-- ══════════════════════════════════════════
+     SECTION 1: СЕГМЕНТЫ
+══════════════════════════════════════════ -->
+<div class="section active" id="segments">
+  <div class="section-title">Сегменты целевой аудитории</div>
+  <div class="section-desc">5 сегментов · приоритизированы по баллам 0–100</div>
+
+  <div class="info-block">
+    <strong>Ключевая аудитория:</strong> Родители из Москвы, дети 10–16 лет. Решение о покупке: инициатор — мама, финальный контроль рисков — папа. Чек ₽120 000, цикл принятия решения 2–8 недель.
+  </div>
+
+  <!-- Overall scores bar chart -->
+  <div class="card" style="margin-bottom:24px;">
+    <div class="block-title">Скоринг сегментов (из 100)</div>
+    <div class="bar-chart" id="barChart">
+      <div class="bc-row"><div class="bc-label">Социальный рывок</div><div class="bc-track"><div class="bc-fill" style="width:84%">84 · Берём</div></div></div>
+      <div class="bc-row"><div class="bc-label">Новая среда</div><div class="bc-track"><div class="bc-fill" style="width:78%">78 · Берём</div></div></div>
+      <div class="bc-row"><div class="bc-label">Детокс и режим</div><div class="bc-track"><div class="bc-fill" style="width:74%">74 · Тестируем</div></div></div>
+      <div class="bc-row"><div class="bc-label">Сцена и портфолио</div><div class="bc-track"><div class="bc-fill" style="width:70%">70 · Тестируем</div></div></div>
+      <div class="bc-row"><div class="bc-label">Лето под присмотром</div><div class="bc-track"><div class="bc-fill" style="width:66%">66 · Тестируем</div></div></div>
+    </div>
+  </div>
+
+  <!-- Segment cards -->
+  <div class="grid-2" style="margin-bottom:24px;">
+
+    <!-- Seg 1 -->
+    <div class="seg-card">
+      <div class="seg-header">
+        <div>
+          <div class="seg-name">«Социальный рывок»</div>
+          <div style="font-size:13px;color:var(--text2);margin-top:3px;">Стеснительный подросток 12–15 лет</div>
+        </div>
+        <div style="text-align:right">
+          <div class="seg-score">84<span>/100</span></div>
+          <div class="badge badge-green" style="margin-top:4px;">Берём</div>
+        </div>
+      </div>
+      <div class="seg-body">
+        <p>Родители, у которых ребёнок умный и «нормальный», но в компаниях зажимается, избегает новых знакомств. Нужна безопасная среда, где подросток потренирует коммуникацию без унижений.</p>
+        <div class="score-bar-wrap"><div class="score-bar-label"><span>Ценность</span><strong>27/30</strong></div><div class="score-bar-track"><div class="score-bar-fill" style="width:90%"></div></div></div>
+        <div class="score-bar-wrap"><div class="score-bar-label"><span>Прибыльность</span><strong>22/25</strong></div><div class="score-bar-track"><div class="score-bar-fill" style="width:88%"></div></div></div>
+        <div class="score-bar-wrap"><div class="score-bar-label"><span>Масштабируемость</span><strong>17/25</strong></div><div class="score-bar-track"><div class="score-bar-fill" style="width:68%"></div></div></div>
+        <div class="score-bar-wrap"><div class="score-bar-label"><span>Скорость старта</span><strong>18/20</strong></div><div class="score-bar-track"><div class="score-bar-fill" style="width:90%"></div></div></div>
+        <div class="seg-meta">
+          <span class="badge badge-blue">SOM 3,6–7,2 млн</span>
+          <span class="badge badge-accent">Яндекс.Директ + VK</span>
+          <span class="badge badge-red">Стоп: недоверие к новому</span>
+        </div>
+        <div style="margin-top:14px;">
+          <div class="label">Big Job</div>
+          <p style="font-style:italic;font-size:13px;">Хочу, чтобы мой ребёнок научился спокойно общаться и проявляться среди сверстников, чтобы к следующему учебному году он не «прятался».</p>
+        </div>
+        <div style="margin-top:10px;">
+          <div class="label">Триггер</div>
+          <p style="font-size:13px;">Впереди переход в новый класс/школу или публичные выступления; ребёнок избегает новых компаний.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Seg 2 -->
+    <div class="seg-card">
+      <div class="seg-header">
+        <div>
+          <div class="seg-name">«Новая среда»</div>
+          <div style="font-size:13px;color:var(--text2);margin-top:3px;">Адаптация к смене школы/класса 11–14 лет</div>
+        </div>
+        <div style="text-align:right">
+          <div class="seg-score">78<span>/100</span></div>
+          <div class="badge badge-green" style="margin-top:4px;">Берём</div>
+        </div>
+      </div>
+      <div class="seg-body">
+        <p>Ребёнок в ближайшие месяцы меняет коллектив. Родители боятся, что подросток «не встроится», станет изолированным. Нужен безопасный «тренировочный полигон» адаптации.</p>
+        <div class="score-bar-wrap"><div class="score-bar-label"><span>Ценность</span><strong>25/30</strong></div><div class="score-bar-track"><div class="score-bar-fill" style="width:83%"></div></div></div>
+        <div class="score-bar-wrap"><div class="score-bar-label"><span>Прибыльность</span><strong>20/25</strong></div><div class="score-bar-track"><div class="score-bar-fill" style="width:80%"></div></div></div>
+        <div class="score-bar-wrap"><div class="score-bar-label"><span>Масштабируемость</span><strong>16/25</strong></div><div class="score-bar-track"><div class="score-bar-fill" style="width:64%"></div></div></div>
+        <div class="score-bar-wrap"><div class="score-bar-label"><span>Скорость старта</span><strong>17/20</strong></div><div class="score-bar-track"><div class="score-bar-fill" style="width:85%"></div></div></div>
+        <div class="seg-meta">
+          <span class="badge badge-blue">SOM 2,4–4,8 млн</span>
+          <span class="badge badge-accent">VK + Telegram</span>
+          <span class="badge badge-red">Стоп: страх одиночества</span>
+        </div>
+        <div style="margin-top:14px;">
+          <div class="label">Big Job</div>
+          <p style="font-style:italic;font-size:13px;">Хочу, чтобы ребёнок научился быстро адаптироваться в новом коллективе, чтобы смена школы прошла без изоляции и стресса.</p>
+        </div>
+        <div style="margin-top:10px;">
+          <div class="label">Триггер</div>
+          <p style="font-size:13px;">Подтверждён переход в новую школу/класс или конфликты в старом коллективе.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Seg 3 -->
+    <div class="seg-card">
+      <div class="seg-header">
+        <div>
+          <div class="seg-name">«Детокс и режим»</div>
+          <div style="font-size:13px;color:var(--text2);margin-top:3px;">Живой день без гаджетов 12–16 лет</div>
+        </div>
+        <div style="text-align:right">
+          <div class="seg-score">74<span>/100</span></div>
+          <div class="badge badge-yellow" style="margin-top:4px;">Тестируем</div>
+        </div>
+      </div>
+      <div class="seg-body">
+        <p>Подросток «перепрыгнул в онлайн»: сон сбит, телефон/игры/соцсети, с реальными людьми общается мало. Родители хотят вернуть режим и живое общение без войн дома.</p>
+        <div class="score-bar-wrap"><div class="score-bar-label"><span>Ценность</span><strong>23/30</strong></div><div class="score-bar-track"><div class="score-bar-fill" style="width:77%"></div></div></div>
+        <div class="score-bar-wrap"><div class="score-bar-label"><span>Прибыльность</span><strong>21/25</strong></div><div class="score-bar-track"><div class="score-bar-fill" style="width:84%"></div></div></div>
+        <div class="score-bar-wrap"><div class="score-bar-label"><span>Масштабируемость</span><strong>15/25</strong></div><div class="score-bar-track"><div class="score-bar-fill" style="width:60%"></div></div></div>
+        <div class="score-bar-wrap"><div class="score-bar-label"><span>Скорость старта</span><strong>15/20</strong></div><div class="score-bar-track"><div class="score-bar-fill" style="width:75%"></div></div></div>
+        <div class="seg-meta">
+          <span class="badge badge-blue">SOM 1,8–3,6 млн</span>
+          <span class="badge badge-accent">Telegram посевы</span>
+          <span class="badge badge-red">Стоп: бунт подростка</span>
+        </div>
+        <div style="margin-top:10px;">
+          <div class="label">⚠ Важно в коммуникации</div>
+          <p style="font-size:13px;color:var(--red);">Нельзя говорить «мы лечим зависимость». Формулировка: «насыщенный режим, живые проекты, ограничение телефона как часть организации».</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Seg 4 -->
+    <div class="seg-card">
+      <div class="seg-header">
+        <div>
+          <div class="seg-name">«Сцена и портфолио»</div>
+          <div style="font-size:13px;color:var(--text2);margin-top:3px;">Творческий ребёнок 10–16 лет</div>
+        </div>
+        <div style="text-align:right">
+          <div class="seg-score">70<span>/100</span></div>
+          <div class="badge badge-yellow" style="margin-top:4px;">Тестируем</div>
+        </div>
+      </div>
+      <div class="seg-body">
+        <p>Ребёнок любит сцену, мечтает выступать, хочет «как в кино». Нужен не просто отдых, а качественный творческий опыт: системные занятия, репетиции, финальный показ, видео для портфолио.</p>
+        <div class="score-bar-wrap"><div class="score-bar-label"><span>Ценность</span><strong>22/30</strong></div><div class="score-bar-track"><div class="score-bar-fill" style="width:73%"></div></div></div>
+        <div class="score-bar-wrap"><div class="score-bar-label"><span>Прибыльность</span><strong>20/25</strong></div><div class="score-bar-track"><div class="score-bar-fill" style="width:80%"></div></div></div>
+        <div class="score-bar-wrap"><div class="score-bar-label"><span>Масштабируемость</span><strong>14/25</strong></div><div class="score-bar-track"><div class="score-bar-fill" style="width:56%"></div></div></div>
+        <div class="score-bar-wrap"><div class="score-bar-label"><span>Скорость старта</span><strong>14/20</strong></div><div class="score-bar-track"><div class="score-bar-fill" style="width:70%"></div></div></div>
+        <div class="seg-meta">
+          <span class="badge badge-blue">SOM 1,2–3,0 млн</span>
+          <span class="badge badge-accent">YouTube + VK</span>
+        </div>
+        <div style="margin-top:10px;">
+          <div class="label">Что нужно сделать</div>
+          <p style="font-size:13px;">Подготовить 10–15 единиц контента «разбор упражнений/форматов/результатов» и проверить, растёт ли конверсия в встречу.</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Seg 5 full width -->
+  <div class="seg-card" style="margin-bottom:24px;">
+    <div class="seg-header">
+      <div>
+        <div class="seg-name">«Лето под присмотром»</div>
+        <div style="font-size:13px;color:var(--text2);margin-top:3px;">Надёжная организация для занятых родителей · дети 10–13 лет</div>
+      </div>
+      <div style="text-align:right">
+        <div class="seg-score">66<span>/100</span></div>
+        <div class="badge badge-yellow" style="margin-top:4px;">Тестируем</div>
+      </div>
+    </div>
+    <div class="seg-body">
+      <p>Ключевая задача — организовать «надёжные 14 дней»: ребёнок под присмотром 24/7, накормлен, в безопасности, занят делом. Развитие ребёнка — вторично. Решение прагматичное: 2–4 варианта, быстрое сравнение по безопасности/условиям/цене.</p>
+      <div class="grid-3">
+        <div>
+          <div class="score-bar-wrap"><div class="score-bar-label"><span>Ценность</span><strong>21/30</strong></div><div class="score-bar-track"><div class="score-bar-fill" style="width:70%"></div></div></div>
+          <div class="score-bar-wrap"><div class="score-bar-label"><span>Прибыльность</span><strong>16/25</strong></div><div class="score-bar-track"><div class="score-bar-fill" style="width:64%"></div></div></div>
+        </div>
+        <div>
+          <div class="score-bar-wrap"><div class="score-bar-label"><span>Масштабируемость</span><strong>13/25</strong></div><div class="score-bar-track"><div class="score-bar-fill" style="width:52%"></div></div></div>
+          <div class="score-bar-wrap"><div class="score-bar-label"><span>Скорость старта</span><strong>16/20</strong></div><div class="score-bar-track"><div class="score-bar-fill" style="width:80%"></div></div></div>
+        </div>
+        <div>
+          <div class="seg-meta" style="flex-direction:column;gap:6px;">
+            <span class="badge badge-blue">SOM 0,9–2,4 млн</span>
+            <span class="badge badge-accent">Рефералы базы + Яндекс Поиск</span>
+            <span class="badge badge-red">Стоп: цена vs массовые лагеря</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Общие критерии -->
+  <div class="card">
+    <div class="block-title">Общие критерии выбора лагеря (все сегменты)</div>
+    <div class="grid-2">
+      <div>
+        <div class="fear-item"><span>Безопасность и медицинская инфраструктура</span></div>
+        <div class="fear-item"><span>Регламент связи: ежедневно в 12:00, 30 минут</span></div>
+        <div class="fear-item"><span>Ежедневные фото/видео в чат родителей</span></div>
+        <div class="fear-item"><span>Камерность: до 50 детей, 1 взрослый на 3–4 детей</span></div>
+      </div>
+      <div>
+        <div class="fear-item"><span>Осязаемый результат (видео, самопрезентация)</span></div>
+        <div class="fear-item"><span>Прозрачная цена без скрытых доплат</span></div>
+        <div class="fear-item"><span>Договор с печатями и условия возврата</span></div>
+        <div class="fear-item"><span>Понятная программа по дням 1–14</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     SECTION 2: ПЕРСОНЫ
+══════════════════════════════════════════ -->
+<div class="section" id="personas">
+  <div class="section-title">Персоны покупателей</div>
+  <div class="section-desc">3 детальных портрета · ключевой сегмент «Социальный рывок»</div>
+
+  <div class="grid-3" style="margin-bottom:24px;">
+
+    <!-- Екатерина -->
+    <div class="persona-card">
+      <div class="persona-header">
+        <div class="persona-avatar">Е</div>
+        <div class="persona-name">Екатерина</div>
+        <div class="persona-role">Инициатор покупки · HR/офисная работа · Москва</div>
+      </div>
+      <div class="persona-body">
+        <div class="persona-quote">«Хочу, чтобы он за 14 дней стал смелее с людьми и перестал бояться говорить»</div>
+        <div class="label">Big Job</div>
+        <p style="font-size:13px;color:var(--text2);margin-bottom:14px;">Хочу, чтобы сын стал увереннее и свободнее в общении, чтобы в новой компании мог знакомиться и говорить, а не уходить в тень.</p>
+        <div class="label">Ситуация</div>
+        <p style="font-size:13px;color:var(--text2);margin-bottom:14px;">Сыну 13. Умный, но в новых компаниях молчит, потом переживает, что «сказал глупость». Впереди переход в другой класс.</p>
+        <div class="label">Процесс решения</div>
+        <ul class="detail-list">
+          <li>Формулирует задачу, собирает 5–7 вариантов</li>
+          <li>Запрашивает презентацию, задаёт 10–20 вопросов про безопасность</li>
+          <li>Оставляет 2 финальных, показывает папе, просит созвон</li>
+          <li>Идёт на встречу в студию → подписывает договор</li>
+        </ul>
+        <div class="label" style="margin-top:12px;">Главные страхи</div>
+        <div class="fear-item"><span>Новый лагерь — нет уверенности в организации</span></div>
+        <div class="fear-item"><span>120к + трансфер + карманные — хочу понимать, за что</span></div>
+        <div class="fear-item"><span>Море: кто в воде, кто следит?</span></div>
+        <div class="fear-item"><span>Если позвонит и попросит забрать — что вы делаете?</span></div>
+        <div class="label" style="margin-top:12px;">Триггеры срочности</div>
+        <div class="detail-list">
+          <ul>
+            <li>Подтвердился переход в новый класс</li>
+            <li>Ребёнок отказался идти на мероприятие из-за «чужих людей»</li>
+            <li>Учитель сказал, что ребёнок стал избегать взаимодействия</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Сергей -->
+    <div class="persona-card">
+      <div class="persona-header">
+        <div class="persona-avatar" style="background:#4a7fa8;color:#fff">С</div>
+        <div class="persona-name">Сергей</div>
+        <div class="persona-role">Контролёр рисков · Руководитель/аналитик · Москва</div>
+      </div>
+      <div class="persona-body">
+        <div class="persona-quote">«Дайте мне факты: безопасность, договор, что входит, что на выходе»</div>
+        <div class="label">Big Job</div>
+        <p style="font-size:13px;color:var(--text2);margin-bottom:14px;">Хочу принять безопасное и финансово оправданное решение, чтобы ребёнок отдохнул и вернулся с полезным навыком, а я не оказался виноват в рисках.</p>
+        <div class="label">Ситуация</div>
+        <p style="font-size:13px;color:var(--text2);margin-bottom:14px;">Подключается, когда мама уже выбрала 2 варианта. «Приземляет»: задаёт вопросы про охрану, медпункт, возвраты, считает полный бюджет.</p>
+        <div class="label">Процесс решения</div>
+        <ul class="detail-list">
+          <li>Сравнивает 1–2 финальных варианта по рискам и прозрачности</li>
+          <li>Если ответы слабые — стоп. Если по регламенту — быстро «ок»</li>
+        </ul>
+        <div class="label" style="margin-top:12px;">Главные страхи</div>
+        <div class="fear-item"><span>Где гарантии безопасного моря? Сколько взрослых в воде?</span></div>
+        <div class="fear-item"><span>Какие удержания при отмене и почему?</span></div>
+        <div class="fear-item"><span>Кто несёт ответственность за трансфер?</span></div>
+        <div class="fear-item"><span>Полный бюджет выше ожиданий (с трансфером)</span></div>
+        <div class="label" style="margin-top:12px;">Turn-offs</div>
+        <div class="fear-item"><span>Договор «приходите — на месте разберёмся»</span></div>
+        <div class="fear-item"><span>Нечёткие ответы по безопасности на воде</span></div>
+        <div class="fear-item"><span>Скрытые доплаты «это обычно отдельно»</span></div>
+      </div>
+    </div>
+
+    <!-- Ирина -->
+    <div class="persona-card">
+      <div class="persona-header">
+        <div class="persona-avatar" style="background:#7a5ea8;color:#fff">И</div>
+        <div class="persona-name">Ирина</div>
+        <div class="persona-role">Сегмент «Детокс» · Маркетолог/менеджер · Москва</div>
+      </div>
+      <div class="persona-body">
+        <div class="persona-quote">«Я не хочу войн. Мне нужно, чтобы среда сама переключила его на жизнь»</div>
+        <div class="label">Big Job</div>
+        <p style="font-size:13px;color:var(--text2);margin-bottom:14px;">Хочу, чтобы ребёнок отдохнул от телефона и вернулся с режимом и живыми контактами, чтобы дома стало меньше конфликтов.</p>
+        <div class="label">Ситуация</div>
+        <p style="font-size:13px;color:var(--text2);margin-bottom:14px;">Сыну 15, дома вечные споры о телефоне. Ищет формат «без наказаний»: чтобы подросток сам увлёкся делами и телефон ушёл на второй план.</p>
+        <div class="label">Особенность покупки</div>
+        <p style="font-size:13px;color:var(--text2);margin-bottom:14px;">Решение конфликтное: нужно согласие подростка. Ирина просит видео и объяснение правил телефона, чтобы показать ребёнку.</p>
+        <div class="label">Главные страхи</div>
+        <div class="fear-item"><span>«Он не выдержит ограничения телефона»</span></div>
+        <div class="fear-item"><span>«Если будет злиться — вы справитесь?»</span></div>
+        <div class="fear-item"><span>«Мне нужны факты, а не мораль»</span></div>
+        <div class="fear-item"><span>Позиционирование «мы лечим зависимость» — отталкивает</span></div>
+        <div class="label" style="margin-top:12px;">Критерии успеха</div>
+        <ul class="detail-list">
+          <li>Ребёнок выдержал 14 дней без постоянного телефона</li>
+          <li>Сон/режим улучшились после возвращения</li>
+          <li>Есть новые контакты и истории про людей</li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Shared criteria -->
+  <div class="card">
+    <div class="block-title">Критерии выбора поставщика (Екатерина)</div>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Критерий</th><th>Метрика</th><th>Как проверяет</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Безопасность территории и моря</strong></td><td>Охрана/периметр/пропуска/видеоохрана + спасатель/буйки + 2 взрослых в воде</td><td>Просит письменный список мер, проверяет лицензии</td></tr>
+          <tr><td><strong>Коммуникация с родителями</strong></td><td>Ежедневно 12:00, 30 минут + возможность связаться через вожатого</td><td>Просит показать формат чата и закрепы «как связаться»</td></tr>
+          <tr><td><strong>Внимание к ребёнку 24/7</strong></td><td>1 взрослый на 3–4 детей; на отряд 2 вожатых + педагог + админ</td><td>Просит штатное расписание по отрядам</td></tr>
+          <tr><td><strong>Осязаемый результат</strong></td><td>Самопрезентация 1 мин, короткометражка, фото/видео, финал</td><td>Просит перечень итоговых форматов и примеры работ</td></tr>
+          <tr><td><strong>Прозрачная цена</strong></td><td>120 000 ₽; трансфер 20 000 ₽ отдельно; карманные</td><td>Получает письменный список «включено/не включено»</td></tr>
+          <tr><td><strong>Юридическая ясность</strong></td><td>Договор очно с печатями + условия возврата по срокам</td><td>Просит договор заранее, выделяет условия возврата</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     SECTION 3: CJM
+══════════════════════════════════════════ -->
+<div class="section" id="cjm">
+  <div class="section-title">Customer Journey Map</div>
+  <div class="section-desc">10 этапов пути клиента · от первой мысли до повторной покупки</div>
+
+  <div class="cjm-stage">
+    <div class="cjm-num">0</div>
+    <div class="cjm-content">
+      <div class="cjm-title">Весна: фоновая тревога о социальной скованности</div>
+      <div class="cjm-sub">Длительность: 1–4 недели · Интенсивность: 4/10</div>
+      <div class="emotion-bar"><div class="emotion-label">Тревога</div><div class="emotion-track"><div class="emotion-fill" style="width:40%"></div></div><div class="emotion-val">4/10</div></div>
+      <div class="cjm-desc">Родитель замечает признаки социальной скованности у ребёнка. Начинает прикидывать лето. Понимает, что «просто вывезти к морю» не решит задачу общения.</div>
+      <div class="cjm-meta">
+        <span class="badge badge-accent">Запросы: «как помочь подростку стать увереннее»</span>
+        <span class="badge badge-blue">Маркетинг: видео «3 признака, что ребёнку тяжело в новой группе»</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="cjm-stage">
+    <div class="cjm-num">1</div>
+    <div class="cjm-content">
+      <div class="cjm-title">Триггер: конкретное событие превращает мысль в задачу</div>
+      <div class="cjm-sub">Длительность: 1–7 дней · Интенсивность: 7/10</div>
+      <div class="emotion-bar"><div class="emotion-label">Тревога</div><div class="emotion-track"><div class="emotion-fill" style="width:70%"></div></div><div class="emotion-val">7/10</div></div>
+      <div class="cjm-desc">Ребёнок отказывается идти на мероприятие, конфликт в классе, страх отвечать у доски, переход в новую школу. Родитель решает: нужна среда, где он потренируется общаться.</div>
+      <div class="cjm-meta">
+        <span class="badge badge-accent">Запросы: «лагерь на море подростки безопасность»</span>
+        <span class="badge badge-blue">KPI: Конверсия в заявку 6–12%</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="cjm-stage">
+    <div class="cjm-num">2</div>
+    <div class="cjm-content">
+      <div class="cjm-title">Активный поиск: сравниваю лагеря как проект</div>
+      <div class="cjm-sub">Длительность: 3–14 дней · Интенсивность: 6/10</div>
+      <div class="emotion-bar"><div class="emotion-label">Рационализм</div><div class="emotion-track"><div class="emotion-fill" style="width:60%"></div></div><div class="emotion-val">6/10</div></div>
+      <div class="cjm-desc">Открывает 5–12 вариантов. Собирает факты: территория, медпункт, охрана, связь, питание, сколько детей, соотношение взрослых. Запрашивает презентацию у менеджера.</div>
+      <div class="cjm-meta">
+        <span class="badge badge-accent">Запросы: «театральный лагерь подростки отзывы», «чек-лист лагерь»</span>
+        <span class="badge badge-blue">KPI: Доля запросивших презентацию 18% от трафика</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="cjm-stage">
+    <div class="cjm-num">3</div>
+    <div class="cjm-content">
+      <div class="cjm-title">Сравнение «в лоб»: звонки, таблица, проверка доверия</div>
+      <div class="cjm-sub">Длительность: 3–10 дней · Интенсивность: 7/10</div>
+      <div class="emotion-bar"><div class="emotion-label">Настороженность</div><div class="emotion-track"><div class="emotion-fill" style="width:70%"></div></div><div class="emotion-val">7/10</div></div>
+      <div class="cjm-desc">Делает «таблицу»: цена, место, медпункт, охрана, связь, программа, итоги, договор/возвраты. Важнейшее — ощущение доверия к людям. Ключевой барьер: «это ваш первый лагерь?»</div>
+      <div class="cjm-meta">
+        <span class="badge badge-accent">Запросы: «Зигма Арт отзывы», «как понять что лагерь безопасный»</span>
+        <span class="badge badge-blue">KPI: Конверсия «презентация → созвон» 25–40%</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="cjm-stage">
+    <div class="cjm-num">4</div>
+    <div class="cjm-content">
+      <div class="cjm-title">Финальный выбор: приезд в студию, подписание</div>
+      <div class="cjm-sub">Длительность: 1–5 дней · Интенсивность: 8/10</div>
+      <div class="emotion-bar"><div class="emotion-label">Ответственность</div><div class="emotion-track"><div class="emotion-fill" style="width:80%"></div></div><div class="emotion-val">8/10</div></div>
+      <div class="cjm-desc">Приезжает в студию, смотрит пространство, знакомится с командой. Важен «человеческий фактор». Сверяет всё включённое. Финансовый стоп: 120к + трансфер 20к + карманные.</div>
+      <div class="cjm-meta">
+        <span class="badge badge-blue">KPI: Доля дошедших до встречи 35% от квалифицированных</span>
+        <span class="badge badge-green">Инструмент: «Папка доверия» 1–2 стр.</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="cjm-stage">
+    <div class="cjm-num">5</div>
+    <div class="cjm-content">
+      <div class="cjm-title">Оплата: 50% или 100%, «выдохнула — но хочу контроль»</div>
+      <div class="cjm-sub">Длительность: 1 день + 1–7 дней орг.задач · Интенсивность: 7/10</div>
+      <div class="emotion-bar"><div class="emotion-label">Облегчение</div><div class="emotion-track"><div class="emotion-fill" style="width:70%"></div></div><div class="emotion-val">7/10</div></div>
+      <div class="cjm-desc">Оплачивают 50% предоплаты или 100%. После оплаты — чат родителей, напоминания: что с собой, карманные, трансфер.</div>
+      <div class="cjm-meta">
+        <span class="badge badge-blue">KPI: NPS после оплаты 8/10 · снижение отмен до отъезда</span>
+        <span class="badge badge-green">Инструмент: серия сообщений -30/-14/-7/-1 день</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="cjm-stage">
+    <div class="cjm-num">6</div>
+    <div class="cjm-content">
+      <div class="cjm-title">Онбординг: чат оживает, первые фото — «система успокоения»</div>
+      <div class="cjm-sub">Длительность: 1–3 дня после заезда · Интенсивность: 8/10</div>
+      <div class="emotion-bar"><div class="emotion-label">Тревога→спокойствие</div><div class="emotion-track"><div class="emotion-fill" style="width:80%"></div></div><div class="emotion-val">8/10</div></div>
+      <div class="cjm-desc">Важнейшее — реализация обещаний: ежедневная связь в 12:00 на 30 мин, фото/видео в чат, режим солнца соблюдается.</div>
+      <div class="cjm-meta">
+        <span class="badge badge-blue">KPI: 75% родителей ставят коммуникации 8–10/10</span>
+        <span class="badge badge-green">Инструмент: ежедневный дайджест «утро/день/вечер + 3 фото»</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="cjm-stage">
+    <div class="cjm-num">7</div>
+    <div class="cjm-content">
+      <div class="cjm-title">Первый результат: ребёнок «включается» — этюды, речь, танец</div>
+      <div class="cjm-sub">Длительность: 3–7 дней · Интенсивность: 6/10</div>
+      <div class="emotion-bar"><div class="emotion-label">Надежда</div><div class="emotion-track"><div class="emotion-fill" style="width:60%"></div></div><div class="emotion-val">6/10</div></div>
+      <div class="cjm-desc">Родитель слышит в голосе ребёнка больше энергии, появляются истории про отряд. Ждёт признаков: ребёнок перестал избегать, начал говорить, появился новый круг.</div>
+      <div class="cjm-meta">
+        <span class="badge badge-blue">KPI: снижение тревожных обращений в чат</span>
+        <span class="badge badge-green">Инструмент: «промежуточный отчёт» на 7-й день</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="cjm-stage">
+    <div class="cjm-num">8</div>
+    <div class="cjm-content">
+      <div class="cjm-title">Проверка на лояльность: режим, телефоны, безопасность</div>
+      <div class="cjm-sub">Длительность: 4–7 дней · Интенсивность: 7/10</div>
+      <div class="emotion-bar"><div class="emotion-label">Чувствительность</div><div class="emotion-track"><div class="emotion-fill" style="width:70%"></div></div><div class="emotion-val">7/10</div></div>
+      <div class="cjm-desc">Родители чувствительны к любым сбоям: нет фото — паника. Формируется доверие: насколько команда держит режим, ночные дежурства, безопасность на море.</div>
+      <div class="cjm-meta">
+        <span class="badge badge-blue">KPI: 0 критических инцидентов без уведомления · удержание 98%</span>
+        <span class="badge badge-green">Инструмент: регламент «тишины» и ответа в чате</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="cjm-stage">
+    <div class="cjm-num">9</div>
+    <div class="cjm-content">
+      <div class="cjm-title">Рекомендации: пересказывает историю «до/после» друзьям</div>
+      <div class="cjm-sub">Длительность: 1–3 недели после смены · Интенсивность: 6/10</div>
+      <div class="emotion-bar"><div class="emotion-label">Гордость</div><div class="emotion-track"><div class="emotion-fill" style="width:60%"></div></div><div class="emotion-val">6/10</div></div>
+      <div class="cjm-desc">Показывает близким видео-результаты. Рассказывает «что изменилось». Пишет отзыв. Получает запрос от знакомых «куда вы отправляли?»</div>
+      <div class="cjm-meta">
+        <span class="badge badge-blue">KPI: Рефералы 10–25% от всех продаж</span>
+        <span class="badge badge-green">Инструмент: реферальная программа + шаблон отзыва</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="cjm-stage">
+    <div class="cjm-num">10</div>
+    <div class="cjm-content">
+      <div class="cjm-title">Расширение: студия в Москве, повторная смена, трек развития</div>
+      <div class="cjm-sub">Длительность: 1–3 месяца после смены · Интенсивность: 5/10</div>
+      <div class="emotion-bar"><div class="emotion-label">Мотивация</div><div class="emotion-track"><div class="emotion-fill" style="width:50%"></div></div><div class="emotion-val">5/10</div></div>
+      <div class="cjm-desc">Родитель думает, как закрепить эффект. Пробное занятие в студии за 900 ₽. Персональный трек: речь/самопрезентация/движение по итогам смены.</div>
+      <div class="cjm-meta">
+        <span class="badge badge-blue">KPI: Апсейл в студию 15–35% семей</span>
+        <span class="badge badge-green">Инструмент: «постлагерный план» на 4–8 недель</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     SECTION 4: КОНКУРЕНТЫ
+══════════════════════════════════════════ -->
+<div class="section" id="competitors">
+  <div class="section-title">Конкурентный анализ</div>
+  <div class="section-desc">12 конкурентов · матрица по 5 ключевым критериям</div>
+
+  <div class="table-wrap" style="margin-bottom:24px;">
+    <table>
+      <thead>
+        <tr>
+          <th>Конкурент</th>
+          <th>Безопасность</th>
+          <th>Связь/отчётность</th>
+          <th>Камерность</th>
+          <th>Результат</th>
+          <th>Цена прозрачна</th>
+          <th>Цена/смена</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>«Русская речь»</strong></td>
+          <td><span class="comp-check">✓</span></td>
+          <td><span class="comp-partial">~</span> частично</td>
+          <td><span class="comp-check">✓</span></td>
+          <td><span class="comp-check">✓</span></td>
+          <td><span class="comp-partial">~</span></td>
+          <td>87–90 тыс. ₽</td>
+        </tr>
+        <tr>
+          <td><strong>LT Camp (отель Park Inn)</strong></td>
+          <td><span class="comp-check">✓</span></td>
+          <td><span class="comp-partial">~</span> частично</td>
+          <td><span class="comp-cross">✗</span></td>
+          <td><span class="comp-check">✓</span></td>
+          <td><span class="comp-cross">✗</span></td>
+          <td>85–90 тыс. ₽</td>
+        </tr>
+        <tr>
+          <td><strong>LT Camp Чёрное море</strong></td>
+          <td><span class="comp-check">✓</span></td>
+          <td><span class="comp-partial">~</span> частично</td>
+          <td><span class="comp-cross">✗</span></td>
+          <td><span class="comp-cross">✗</span></td>
+          <td><span class="comp-check">✓</span></td>
+          <td>90 тыс. ₽</td>
+        </tr>
+        <tr>
+          <td><strong>Кинолагерь «Ералаш»</strong></td>
+          <td><span class="comp-check">✓</span></td>
+          <td><span class="comp-partial">~</span> маркетинг</td>
+          <td><span class="comp-cross">✗</span></td>
+          <td><span class="comp-check">✓</span></td>
+          <td><span class="comp-check">✓</span></td>
+          <td>70–160 тыс. ₽</td>
+        </tr>
+        <tr style="background:rgba(232,201,126,.06);">
+          <td><strong>МДЦ «Артек»</strong></td>
+          <td><span class="comp-check">✓</span></td>
+          <td><span class="comp-cross">✗</span> не стандарт</td>
+          <td><span class="comp-cross">✗</span> не закрывает</td>
+          <td><span class="comp-check">✓</span></td>
+          <td><span class="comp-cross">✗</span></td>
+          <td>80–180 тыс. ₽</td>
+        </tr>
+        <tr>
+          <td><strong>ВДЦ «Орлёнок»</strong></td>
+          <td><span class="comp-check">✓</span></td>
+          <td><span class="comp-cross">✗</span></td>
+          <td><span class="comp-cross">✗</span></td>
+          <td><span class="comp-check">✓</span></td>
+          <td><span class="comp-cross">✗</span></td>
+          <td>60–160 тыс. ₽</td>
+        </tr>
+        <tr>
+          <td><strong>ВДЦ «Смена»</strong></td>
+          <td><span class="comp-check">✓</span></td>
+          <td><span class="comp-cross">✗</span></td>
+          <td><span class="comp-cross">✗</span></td>
+          <td><span class="comp-check">✓</span></td>
+          <td><span class="comp-cross">✗</span></td>
+          <td>60–160 тыс. ₽</td>
+        </tr>
+        <tr>
+          <td><strong>SportZania</strong></td>
+          <td><span class="comp-check">✓</span></td>
+          <td><span class="comp-check">✓</span></td>
+          <td><span class="comp-check">✓</span></td>
+          <td><span class="comp-cross">✗</span></td>
+          <td><span class="comp-check">✓</span></td>
+          <td>20–140 тыс. ₽</td>
+        </tr>
+        <tr>
+          <td><strong>«Сириус»</strong></td>
+          <td><span class="comp-check">✓</span></td>
+          <td><span class="comp-cross">✗</span></td>
+          <td><span class="comp-check">✓</span></td>
+          <td><span class="comp-check">✓</span></td>
+          <td><span class="comp-cross">✗</span></td>
+          <td>По отбору</td>
+        </tr>
+        <tr>
+          <td><strong>«Кванториум» летние</strong></td>
+          <td><span class="comp-check">✓</span></td>
+          <td><span class="comp-check">✓</span></td>
+          <td><span class="comp-check">✓</span></td>
+          <td><span class="comp-cross">✗</span></td>
+          <td><span class="comp-check">✓</span></td>
+          <td>10–60 тыс. ₽</td>
+        </tr>
+        <tr>
+          <td><strong>Alean Family Resort</strong></td>
+          <td><span class="comp-check">✓</span></td>
+          <td><span class="comp-cross">✗</span></td>
+          <td><span class="comp-cross">✗</span></td>
+          <td><span class="comp-cross">✗</span></td>
+          <td><span class="comp-check">✓</span></td>
+          <td>200–600 тыс. ₽/семья</td>
+        </tr>
+        <tr>
+          <td><strong>Спорт.сборы (футбол)</strong></td>
+          <td><span class="comp-check">✓</span></td>
+          <td><span class="comp-cross">✗</span></td>
+          <td><span class="comp-check">✓</span></td>
+          <td><span class="comp-cross">✗</span></td>
+          <td><span class="comp-partial">~</span></td>
+          <td>50–160 тыс. ₽</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- White spots -->
+  <div class="block-title">Белые пятна — наши возможности</div>
+  <div class="grid-3" style="margin-bottom:24px;">
+    <div class="card card-accent">
+      <div class="label">Регламент связи</div>
+      <p style="font-size:13px;color:var(--text2);margin-top:8px;line-height:1.6;">Большинство конкурентов не стандартизируют связь с родителями. У нас — фиксированное окно 12:00/30 мин + ежедневные фото/видео = «контур спокойствия» как продукт.</p>
+    </div>
+    <div class="card card-accent">
+      <div class="label">Камерность с цифрами</div>
+      <p style="font-size:13px;color:var(--text2);margin-top:8px;line-height:1.6;">Крупные конкуренты не декларируют 1 взрослый на 3–4 детей. Наш визуал: схема «кто отвечает утром/днём/ночью» — уникальная позиция «анти-массовость для интровертов».</p>
+    </div>
+    <div class="card card-accent">
+      <div class="label">Измеримый результат</div>
+      <p style="font-size:13px;color:var(--text2);margin-top:8px;line-height:1.6;">Никто из конкурентов не даёт диагностику «до» и пакет видео «после». Наш подход: самопрезентация 2 мин → 30 сек на старте, 1 мин на финале. Сравнимо, доказуемо.</p>
+    </div>
+  </div>
+
+  <!-- SWOT -->
+  <div class="block-title">SWOT-анализ</div>
+  <div class="swot-grid">
+    <div class="swot-cell swot-s">
+      <div class="swot-title">Сильные стороны</div>
+      <ul class="swot-list">
+        <li>Связка «море + авторская программа по методике Щукинского»</li>
+        <li>Осязаемые результаты на каждого: видео, короткометражка, финал</li>
+        <li>Камерность: до 50 детей, 1:3–4 взрослый</li>
+        <li>Сильный контур безопасности: охрана, медкомплекс, педиатр на пляже</li>
+        <li>Регламент связи: 12:00/30 мин + ежедневные фото/видео</li>
+        <li>Команда: 14 лет педстажа (3000+ учеников), 20+ лет топ-менеджмента</li>
+      </ul>
+    </div>
+    <div class="swot-cell swot-w">
+      <div class="swot-title">Слабые стороны</div>
+      <ul class="swot-list">
+        <li>Лагерь — новый продукт; вопрос «а вы уже делали?» — главный барьер</li>
+        <li>Цена 120к выше прямых конкурентов (85–90к)</li>
+        <li>Договор только очно в студии — снижает конверсию у дальних</li>
+        <li>Трансфер отдельно (+20к) — ощущение «доплаты сверху»</li>
+      </ul>
+    </div>
+    <div class="swot-cell swot-o">
+      <div class="swot-title">Возможности</div>
+      <ul class="swot-list">
+        <li>Занять белое пятно «регламент связи как продукт спокойствия»</li>
+        <li>«Осязаемый результат» как главный коммерческий аргумент</li>
+        <li>Яндекс.Директ по запросам «безопасность + уверенность/коммуникация»</li>
+        <li>Масштабировать рефералов через механику с дедлайном мест</li>
+        <li>«Папка доверия» — превратить возражение «первый лагерь» в аргумент</li>
+      </ul>
+    </div>
+    <div class="swot-cell swot-t">
+      <div class="swot-title">Угрозы</div>
+      <ul class="swot-list">
+        <li>Конкуренты с низким чеком перебивают без доказательства результата</li>
+        <li>Один сбой в связи резко обнуляет доверие в премиальном сегменте</li>
+        <li>Рынок перегрет одинаковыми обещаниями «команда/развитие/дружба»</li>
+        <li>Копирование упаковки «самопрезентация/видео» конкурентами</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     SECTION 5: ПОЗИЦИОНИРОВАНИЕ
+══════════════════════════════════════════ -->
+<div class="section" id="positioning">
+  <div class="section-title">Позиционирование</div>
+  <div class="section-desc">Варианты · RTB · Tone of Voice · Заголовки лендинга</div>
+
+  <div class="info-block">
+    <strong>Рекомендованный вариант: А (результат)</strong> — сразу упаковывает результат в артефакты и снижает главный барьер недоверия через конкретику программы и выдачи.
+  </div>
+
+  <!-- Варианты -->
+  <div class="pos-variant">
+    <div class="pos-letter">А</div>
+    <div style="margin-bottom:6px;"><span class="badge badge-green">✓ Рекомендован</span></div>
+    <div class="pos-headline">«14 дней у моря — ребёнок возвращается смелее и с результатами на видео»</div>
+    <p style="font-size:13px;color:var(--text2);line-height:1.6;margin-bottom:10px;">Самопрезентация 1 мин, короткометражка, фото/видео всех показов и финальный праздник «Мой шаг вперёд». Каждый день вы видите, что всё под контролем: связь в 12:00/30 мин и ежедневные фото/видео в чат.</p>
+    <div class="label">Лучше всего для</div>
+    <p style="font-size:13px;color:var(--text2);">Первый экран лендинга, поиск Яндекс.Директ (высокий интент), скрипт менеджера при первом звонке. Сегмент «Социальный рывок».</p>
+  </div>
+
+  <div class="pos-variant">
+    <div class="pos-letter">Б</div>
+    <div class="pos-headline">«Не кружок — системная театральная программа по методике Щукинской школы: актёрка + речь + движение»</div>
+    <p style="font-size:13px;color:var(--text2);line-height:1.6;margin-bottom:10px;">Программа от «простого к сложному»: дни 1–5 контакт, 6–10 команда, 11–13 финал, 14 праздник. Интроверт не «ломается», а постепенно включается.</p>
+    <div class="label">Лучше всего для</div>
+    <p style="font-size:13px;color:var(--text2);">Прогрев в Telegram/VK (посты «как устроено»), ответы на возражение «что именно вы там делаете?»</p>
+  </div>
+
+  <div class="pos-variant">
+    <div class="pos-letter">В</div>
+    <div class="pos-headline">«Камерный лагерь на море: 50 детей, контроль 24/7, театр вместо хаоса»</div>
+    <p style="font-size:13px;color:var(--text2);line-height:1.6;margin-bottom:10px;">До 50 детей, фактически 1 взрослый на 3–4, ограничение телефона и ежедневная связь/фото-видео в чат для родителей.</p>
+    <div class="label">Лучше всего для</div>
+    <p style="font-size:13px;color:var(--text2);">VK лид-формы и креативы (быстрое считывание «для кого»), ретаргет, презентация/папка доверия.</p>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- Варианты заголовков -->
+  <div class="block-title">Варианты заголовков лендинга (первый экран)</div>
+  <div class="grid-2" style="margin-bottom:24px;">
+    <div class="card" style="border-left:3px solid var(--green);">
+      <div class="label">Вариант 1 · Результат · ✓ Рекомендован</div>
+      <div style="font-family:'Playfair Display',serif;font-size:22px;font-weight:700;margin:10px 0 6px;">Лагерь на море, где подросток заговорит</div>
+      <p style="font-size:13px;color:var(--text2);">14 дней в Шепси: актёрка, речь, танец + финал «Мой шаг вперёд» и видео-результаты.</p>
+      <div style="margin-top:10px;"><span class="badge badge-accent">CTA: Получить презентацию</span></div>
+    </div>
+    <div class="card" style="border-left:3px solid var(--green);">
+      <div class="label">Вариант 2 · Страх · ✓ Рекомендован</div>
+      <div style="font-family:'Playfair Display',serif;font-size:22px;font-weight:700;margin:10px 0 6px;">Камерный лагерь на море: 1 взрослый на 3–4</div>
+      <p style="font-size:13px;color:var(--text2);">До 50 детей, закрытая территория, медпункт и связь с родителями каждый день в 12:00 (30 мин).</p>
+      <div style="margin-top:10px;"><span class="badge badge-accent">CTA: Проверить места в смене</span></div>
+    </div>
+    <div class="card">
+      <div class="label">Вариант 3 · Любопытство</div>
+      <div style="font-family:'Playfair Display',serif;font-size:22px;font-weight:700;margin:10px 0 6px;">14 дней без хаоса: море, режим и сцена</div>
+      <p style="font-size:13px;color:var(--text2);">2 выхода к морю в день + 3 часа занятий. Телефон — ограниченно. Ребёнок занят и в команде.</p>
+      <div style="margin-top:10px;"><span class="badge badge-accent">CTA: Узнать программу по дням</span></div>
+    </div>
+    <div class="card">
+      <div class="label">Вариант 4 · FOMO</div>
+      <div style="font-family:'Playfair Display',serif;font-size:22px;font-weight:700;margin:10px 0 6px;">Подросток привезёт не сувениры, а уверенность</div>
+      <p style="font-size:13px;color:var(--text2);">Самопрезентация 1 мин, короткометражка, финальные показы и ежедневный фото/видео-отчёт.</p>
+      <div style="margin-top:10px;"><span class="badge badge-accent">CTA: Посмотреть, что на выходе</span></div>
+    </div>
+  </div>
+
+  <!-- RTB -->
+  <div class="block-title">RTB — Reasons to Believe</div>
+  <div class="grid-3" style="margin-bottom:24px;">
+    <div class="rtb-card">
+      <div class="rtb-num">1</div>
+      <div class="rtb-type">Результат в цифрах</div>
+      <div class="rtb-claim">До 50 детей на смену — 1 взрослый на 3–4 детей</div>
+      <div class="rtb-proof">3 отряда по 16–17. Визуальная схема «кто отвечает когда» на лендинге.</div>
+    </div>
+    <div class="rtb-card">
+      <div class="rtb-num">2</div>
+      <div class="rtb-type">Методология</div>
+      <div class="rtb-claim">Системная программа: актёрка + речь + танец с итоговыми форматами</div>
+      <div class="rtb-proof">3 часа/день, 4–5 итоговых форматов по актёрскому, 3 по речи, 2 по танцу; финальный праздник.</div>
+    </div>
+    <div class="rtb-card">
+      <div class="rtb-num">3</div>
+      <div class="rtb-type">Гарантия</div>
+      <div class="rtb-claim">Прописанная безопасность моря и ежедневная связь</div>
+      <div class="rtb-proof">Закрытый периметр, медпункт/педиатр на пляже, спасатель, 2 взрослых в воде, 12:00/30 мин.</div>
+    </div>
+    <div class="rtb-card">
+      <div class="rtb-num">4</div>
+      <div class="rtb-type">Экспертиза</div>
+      <div class="rtb-claim">Максим Зигизмунд — 14 лет педагогики, 3000+ учеников</div>
+      <div class="rtb-proof">~20 выпускников в Щукинское/ГИТИС/ВГИК. Победитель «Лица района» Москвы 2024.</div>
+    </div>
+    <div class="rtb-card">
+      <div class="rtb-num">5</div>
+      <div class="rtb-type">Экспертиза</div>
+      <div class="rtb-claim">Любовь Ершова — операционный директор 24/7</div>
+      <div class="rtb-proof">20+ лет топ-менеджмент, федеральные проекты «Дед Мороз приходит в дом» (89 регионов, 10 000+ волонтёров).</div>
+    </div>
+    <div class="rtb-card">
+      <div class="rtb-num">6</div>
+      <div class="rtb-type">Экспертиза</div>
+      <div class="rtb-claim">Иван Петров — 30+ лет, проекты с 10 000+ человек</div>
+      <div class="rtb-proof">Google, Citibank, Siemens, Сочи Парк, Райффайзенбанк. Психолог-практик МГУ.</div>
+    </div>
+  </div>
+
+  <!-- Tone of Voice -->
+  <div class="card">
+    <div class="block-title">Tone of Voice</div>
+    <div class="grid-2">
+      <div>
+        <div class="label" style="color:var(--green);">Говорим так</div>
+        <ul class="detail-list">
+          <li>«Сделаем так, чтобы он не терялся в группе и мог сказать о себе вслух»</li>
+          <li>«Закрытый периметр, пропуска, медпункт, педиатр на пляже, спасатель»</li>
+          <li>«3 часа актёрка/речь/танец каждый день + 2 выхода к морю»</li>
+          <li>«Ежедневно в 12:00 — 30 минут звонка + фото/видео в чат»</li>
+          <li>«Вы увидите результат на видео: самопрезентация 1 мин, скороговорка»</li>
+        </ul>
+      </div>
+      <div>
+        <div class="label" style="color:var(--red);">Никогда не говорим</div>
+        <ul class="detail-list">
+          <li>«Уникальная атмосфера» (без фактов)</li>
+          <li>«Профессиональная команда» (без цифр)</li>
+          <li>«Незабываемые эмоции»</li>
+          <li>«Развитие личности» (без конкретных форматов)</li>
+          <li>«Полная безопасность» (без регламентов)</li>
+          <li>«Индивидуальный подход» (без цифр 1:3–4)</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     SECTION 6: КАНАЛЫ
+══════════════════════════════════════════ -->
+<div class="section" id="channels">
+  <div class="section-title">Матрица каналов</div>
+  <div class="section-desc">8 каналов · привязка к этапам CJM · KPI</div>
+
+  <div class="grid-2" style="margin-bottom:24px;">
+    <div class="channel-card">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
+        <div class="channel-name">🔍 Яндекс.Директ Поиск</div>
+        <span class="badge badge-green">Приоритет #1</span>
+      </div>
+      <div class="label">Формат · Этапы 1, 2, 3</div>
+      <p style="font-size:13px;color:var(--text2);margin-top:6px;line-height:1.55;">Поисковые объявления + быстрые ссылки «безопасность/режим/цена/что на выходе». 30–80 высокоинтентных запросов: «лагерь на море подростки безопасность», «лагерь коммуникации», «театральный лагерь».</p>
+      <div class="channel-kpi">KPI: CTR 1,5–4,5% · конверсия в заявку 6–12% · бюджет 30–150 тыс.</div>
+    </div>
+
+    <div class="channel-card">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
+        <div class="channel-name">📱 VK Реклама (лид-формы)</div>
+        <span class="badge badge-green">Приоритет #2</span>
+      </div>
+      <div class="label">Формат · Этапы 0, 1, 2, 3</div>
+      <p style="font-size:13px;color:var(--text2);margin-top:6px;line-height:1.55;">Лента/клипы/карусели с лид-формой «получить презентацию». Таргетинг: Москва, родители детей 10–16, интересы кружки/образование. 3–5 креативов: море + уверенность, режим + безопасность, что на выходе.</p>
+      <div class="channel-kpi">KPI: CPL в целевом коридоре · доля квал. лидов 55% · бюджет 40–200 тыс.</div>
+    </div>
+
+    <div class="channel-card">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
+        <div class="channel-name">✈️ Telegram (посевы + канал)</div>
+        <span class="badge badge-blue">Приоритет #3</span>
+      </div>
+      <div class="label">Формат · Этапы 1, 2, 3</div>
+      <p style="font-size:13px;color:var(--text2);margin-top:6px;line-height:1.55;">Посевы в тематических каналах «родители подростков/образование/психология Москва». Серия постов: «день по минутам», «регламент моря», «кто в команде», «FAQ про страхи».</p>
+      <div class="channel-kpi">KPI: Вовлечённость 3–8% · клики по CTA · бюджет посевов</div>
+    </div>
+
+    <div class="channel-card">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
+        <div class="channel-name">🎁 Реферальная программа (база студии)</div>
+        <span class="badge badge-green">Самый быстрый</span>
+      </div>
+      <div class="label">Формат · Этапы 0, 1, 2, 9</div>
+      <p style="font-size:13px;color:var(--text2);margin-top:6px;line-height:1.55;">Рассылка по базе, личные сообщения. Чёткий бонус за приведённую семью + готовые тексты «что сказать подруге» + дедлайн по местам (до 50 детей). Уже работает — масштабировать.</p>
+      <div class="channel-kpi">KPI: 10–25% всех продаж · бюджет 0–50 тыс. · срок: 1–2 недели</div>
+    </div>
+
+    <div class="channel-card">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
+        <div class="channel-name">🎬 YouTube / Видеохостинги</div>
+        <span class="badge badge-accent">Этапы 2, 3, 4</span>
+      </div>
+      <div class="label">Формат · Органика + размещения</div>
+      <p style="font-size:13px;color:var(--text2);margin-top:6px;line-height:1.55;">Длинный ролик 7–12 мин «как проходят 14 дней» + шорты 30–60 сек. Показать реальный режим: море 2 раза, занятия 3 часа, свечка, финалы, безопасность на воде.</p>
+      <div class="channel-kpi">KPI: досмотр 35%+ · переходы на лендинг</div>
+    </div>
+
+    <div class="channel-card">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
+        <div class="channel-name">👥 VK посевы в родительских сообществах</div>
+        <span class="badge badge-accent">Этапы 1, 2</span>
+      </div>
+      <div class="label">Формат · Интеграции/партнёрство</div>
+      <p style="font-size:13px;color:var(--text2);margin-top:6px;line-height:1.55;">Посты в сообществах «школы/подростки/переезд/психология». Сообщество родителей по районам Москвы. Месседж: «если ребёнку трудно в коммуникации — лагерь как мягкий тренажёр».</p>
+      <div class="channel-kpi">KPI: репосты · переходы · запросы «расскажите подробнее»</div>
+    </div>
+
+    <div class="channel-card">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
+        <div class="channel-name">🏢 Встреча в студии (офлайн)</div>
+        <span class="badge badge-accent">Этап 4</span>
+      </div>
+      <div class="label">Формат · Конверсия в оплату</div>
+      <p style="font-size:13px;color:var(--text2);margin-top:6px;line-height:1.55;">Стандартизированная встреча 30 мин: «папка доверия» 1–2 стр. + мини-презентация + чек-лист рисков. Команда → следующий шаг «оплата/чат родителей».</p>
+      <div class="channel-kpi">KPI: конверсия встреча→оплата 35–60%</div>
+    </div>
+
+    <div class="channel-card">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
+        <div class="channel-name">⚙️ MAX (контент/прогрев)</div>
+        <span class="badge badge-accent">Этапы 0, 2, 3</span>
+      </div>
+      <div class="label">Формат · Прогрев подписчиков</div>
+      <p style="font-size:13px;color:var(--text2);margin-top:6px;line-height:1.55;">Показываем процесс: упражнения, этюды, речевые форматы, подготовка финала. Аудитория: текущие и новые подписчики Москвы.</p>
+      <div class="channel-kpi">KPI: досмотр видео · переходы в личку · заявки</div>
+    </div>
+  </div>
+
+  <!-- Automation -->
+  <div class="block-title">Автоматизации воронки</div>
+  <div class="card">
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Триггер</th><th>Действие</th><th>Цель</th><th>KPI</th></tr></thead>
+        <tbody>
+          <tr><td>Заявка на лендинге/лид-форме</td><td>Авто-выдача PDF «Презентация» + 3 сообщения: условия/безопасность/что на выходе</td><td>Факты вместо ожидания менеджера</td><td>Конверсия в диалог 35%</td></tr>
+          <tr><td>Квиз «подбор смены» заполнен</td><td>Авто-сегментация по возрасту/цели/страхам → персональный сценарий + оффер «пробное 900»</td><td>Снизить барьер «подойдёт ли»</td><td>25% записались на созвон</td></tr>
+          <tr><td>CRM: «оплачено 50%»</td><td>Серия напоминаний -30/-14/-7/-1 день: документы, вещи, логистика, карманные</td><td>Меньше хаоса перед выездом</td><td>80% закрыли «документы+вещи» за 14 дней</td></tr>
+          <tr><td>Дни 1–14 смены</td><td>Ежедневный автодайджест в чат: «утро/день/вечер» + ссылка на «важное»</td><td>Снижение тревоги родителей</td><td>75% оценивают коммуникацию 8–10/10</td></tr>
+          <tr><td>Смена завершена</td><td>Запрос отзыва по шаблону + реферальный код + оффер «пробное 900»</td><td>Рефералы + апсейл</td><td>10% рефералов от базы · 40% дают отзыв</td></tr>
+          <tr><td>7–14 дней после возвращения</td><td>Персональное сообщение «маршрут развития на 8 недель» по цели</td><td>Закрепление результата + LTV</td><td>Апсейл 15–35% семей</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     SECTION 7: ЭКОНОМИКА
+══════════════════════════════════════════ -->
+<div class="section" id="economics">
+  <div class="section-title">Юнит-экономика и рынок</div>
+  <div class="section-desc">Оценочные данные · TAM / SAM / SOM · юнит-метрики</div>
+
+  <!-- Key metrics -->
+  <div class="econ-highlight" style="margin-bottom:20px;">
+    <div class="grid-4">
+      <div class="stat-card" style="background:transparent;border-color:rgba(248,247,240,.15);">
+        <span class="stat-val" style="color:var(--accent);">120К</span>
+        <div class="stat-label" style="color:rgba(248,247,240,.6);">Средний чек, ₽</div>
+      </div>
+      <div class="stat-card" style="background:transparent;border-color:rgba(248,247,240,.15);">
+        <span class="stat-val" style="color:var(--accent);">8–25К</span>
+        <div class="stat-label" style="color:rgba(248,247,240,.6);">CAC, ₽ (оценочно)</div>
+      </div>
+      <div class="stat-card" style="background:transparent;border-color:rgba(248,247,240,.15);">
+        <span class="stat-val" style="color:var(--accent);">260К</span>
+        <div class="stat-label" style="color:rgba(248,247,240,.6);">LTV 2 года, ₽ (макс)</div>
+      </div>
+      <div class="stat-card" style="background:transparent;border-color:rgba(248,247,240,.15);">
+        <span class="stat-val" style="color:var(--accent);">0–2М</span>
+        <div class="stat-label" style="color:rgba(248,247,240,.6);">Окупаемость, мес.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="grid-2" style="margin-bottom:24px;">
+    <div class="card">
+      <div class="block-title">Юнит-метрики</div>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Параметр</th><th>Значение</th></tr></thead>
+          <tbody>
+            <tr><td>Средний чек</td><td><strong>108–120 тыс. ₽</strong></td></tr>
+            <tr><td>Ранняя оплата 100%</td><td>108 тыс. ₽ (до середины апреля)</td></tr>
+            <tr><td>Частота покупок/год</td><td>0,5–1,5 (лагерь + студия)</td></tr>
+            <tr><td>LTV 2 года</td><td>120–260 тыс. ₽</td></tr>
+            <tr><td>CAC (оценка)</td><td>8 000–25 000 ₽</td></tr>
+            <tr><td>Окупаемость</td><td>0–2 месяца (оплата до старта)</td></tr>
+            <tr><td>Мин. бюджет на 10 клиентов</td><td>120–350 тыс. ₽</td></tr>
+            <tr><td>Точка безубыточности</td><td>4–9 клиентов/мес</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="card">
+      <div class="block-title">Метрики воронки</div>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Этап</th><th>KPI (цель)</th></tr></thead>
+          <tbody>
+            <tr><td>Охват → интерес</td><td>Вовлечённость 3–8%</td></tr>
+            <tr><td>Трафик → лид</td><td>Конверсия 6–15%</td></tr>
+            <tr><td>Лид → квалификация</td><td>50–75% квал. лидов</td></tr>
+            <tr><td>Квал. → встреча</td><td>25–45% дошедших</td></tr>
+            <tr><td>Встреча → оплата</td><td>35–60%</td></tr>
+            <tr><td>Оплата → онбординг</td><td>NPS 8/10, 75%</td></tr>
+            <tr><td>Удержание до финала</td><td>98%</td></tr>
+            <tr><td>Отзывы/кейсы</td><td>40–70% семей</td></tr>
+            <tr><td>Апсейл (студия)</td><td>15–35% семей</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- Market -->
+  <div class="block-title">Рыночный потенциал по сегментам</div>
+  <div class="table-wrap" style="margin-bottom:24px;">
+    <table>
+      <thead>
+        <tr>
+          <th>Сегмент</th>
+          <th>TAM</th>
+          <th>SAM (Москва)</th>
+          <th>SOM (сезон)</th>
+          <th>До первой сделки</th>
+          <th>Лучший канал</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Социальный рывок (84)</strong></td>
+          <td>60–180 млн ₽</td>
+          <td>12–35 млн ₽</td>
+          <td><strong>3,6–7,2 млн ₽</strong></td>
+          <td>7–21 дней</td>
+          <td>Яндекс + ретаргет VK</td>
+        </tr>
+        <tr>
+          <td><strong>Новая среда (78)</strong></td>
+          <td>36–108 млн ₽</td>
+          <td>9,6–24 млн ₽</td>
+          <td><strong>2,4–4,8 млн ₽</strong></td>
+          <td>10–28 дней</td>
+          <td>VK + Telegram посевы</td>
+        </tr>
+        <tr>
+          <td><strong>Детокс и режим (74)</strong></td>
+          <td>30–84 млн ₽</td>
+          <td>7,2–19,2 млн ₽</td>
+          <td><strong>1,8–3,6 млн ₽</strong></td>
+          <td>14–30 дней</td>
+          <td>Telegram + VK сообщества</td>
+        </tr>
+        <tr>
+          <td><strong>Сцена и портфолио (70)</strong></td>
+          <td>24–72 млн ₽</td>
+          <td>4,8–14,4 млн ₽</td>
+          <td><strong>1,2–3,0 млн ₽</strong></td>
+          <td>14–45 дней</td>
+          <td>YouTube + VK контент</td>
+        </tr>
+        <tr>
+          <td><strong>Лето под присмотром (66)</strong></td>
+          <td>18–60 млн ₽</td>
+          <td>3,6–12 млн ₽</td>
+          <td><strong>0,9–2,4 млн ₽</strong></td>
+          <td>7–14 дней</td>
+          <td>Рефералы + Яндекс Поиск</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Visual SOM -->
+  <div class="card">
+    <div class="block-title">SOM по сегментам (сезон, максимум)</div>
+    <div class="bar-chart">
+      <div class="bc-row"><div class="bc-label">Социальный рывок</div><div class="bc-track"><div class="bc-fill" style="width:100%">7,2 млн ₽</div></div></div>
+      <div class="bc-row"><div class="bc-label">Новая среда</div><div class="bc-track"><div class="bc-fill" style="width:67%">4,8 млн ₽</div></div></div>
+      <div class="bc-row"><div class="bc-label">Детокс и режим</div><div class="bc-track"><div class="bc-fill" style="width:50%">3,6 млн ₽</div></div></div>
+      <div class="bc-row"><div class="bc-label">Сцена и портфолио</div><div class="bc-track"><div class="bc-fill" style="width:42%">3,0 млн ₽</div></div></div>
+      <div class="bc-row"><div class="bc-label">Лето под присмотром</div><div class="bc-track"><div class="bc-fill" style="width:33%">2,4 млн ₽</div></div></div>
+    </div>
+    <div style="margin-top:16px;padding-top:14px;border-top:1px solid var(--border);display:flex;gap:20px;flex-wrap:wrap;">
+      <div><span class="label">Итого SOM (оптимум)</span><div style="font-family:'Playfair Display',serif;font-size:28px;font-weight:700;color:var(--accent2);">~21 млн ₽</div></div>
+      <div><span class="label">При 2 сменах × 50 детей = 100 продаж</span><div style="font-family:'Playfair Display',serif;font-size:28px;font-weight:700;color:var(--text);">12 млн ₽</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     SECTION 8: БЫСТРЫЕ ПОБЕДЫ
+══════════════════════════════════════════ -->
+<div class="section" id="quickwins">
+  <div class="section-title">Быстрые победы + план на 2 недели</div>
+  <div class="section-desc">6 приоритетных действий · план 14 дней с артефактами и метриками</div>
+
+  <div class="info-block">
+    <strong>Принцип:</strong> 20% действий → 80% результата. Сначала закрыть доверие и упаковку, потом трафик. Без лендинга реклама теряет конверсию.
+  </div>
+
+  <!-- Quick Wins -->
+  <div class="card" style="margin-bottom:24px;">
+    <div class="block-title">6 быстрых побед (приоритет по порядку)</div>
+
+    <div class="qw-item">
+      <div class="qw-num">1</div>
+      <div class="qw-content">
+        <div class="qw-title">Отдельный лендинг под лагерь</div>
+        <div class="qw-desc">1 экран + безопасность + программа по дням + что на выходе + цена/что включено/что отдельно + FAQ + заявка. Сейчас отдельной страницы нет — реклама ведёт на «главную» и теряет конверсию.</div>
+        <div class="qw-meta">
+          <span class="qw-time">⏱ 2–3 недели</span>
+          <span class="qw-budget">💰 80–250 тыс. ₽</span>
+          <span class="badge badge-accent">CJM 1, 2, 3, 4</span>
+          <span class="badge badge-blue">Ожидаемый эффект: рост конверсии трафика в заявку</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="qw-item">
+      <div class="qw-num">2</div>
+      <div class="qw-content">
+        <div class="qw-title">«Папка доверия» и скрипт менеджера</div>
+        <div class="qw-desc">Безопасность (охрана/периметр/пропуска/медпункт/спасатель), связь (12:00/30 мин), режим моря (утро/вечер), соотношение взрослых (1:3–4) — в 1–2 страницы. Снижение ключевых страхов → выше доля встреч и оплат.</div>
+        <div class="qw-meta">
+          <span class="qw-time">⏱ 1 неделя</span>
+          <span class="qw-budget">💰 0–60 тыс. ₽</span>
+          <span class="badge badge-accent">CJM 2, 3, 4</span>
+          <span class="badge badge-green">Самое быстрое внедрение</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="qw-item">
+      <div class="qw-num">3</div>
+      <div class="qw-content">
+        <div class="qw-title">Реферальная программа для базы студии</div>
+        <div class="qw-desc">Чёткий бонус за приведённую семью + готовые тексты «что сказать подруге» + дедлайн по местам (до 50 детей на смену). Самый быстрый канал первых продаж — рефералы уже работают.</div>
+        <div class="qw-meta">
+          <span class="qw-time">⏱ 1–2 недели</span>
+          <span class="qw-budget">💰 0–50 тыс. ₽</span>
+          <span class="badge badge-accent">CJM 0, 1, 2, 9</span>
+          <span class="badge badge-green">Самый быстрый канал продаж</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="qw-item">
+      <div class="qw-num">4</div>
+      <div class="qw-content">
+        <div class="qw-title">Запуск Яндекс.Директ Поиск</div>
+        <div class="qw-desc">30–80 высокоинтентных запросов (лагерь на море/театральный/подростки/безопасность) + отдельные объявления под «стеснительность/уверенность/речь». Первые холодные лиды с понятной потребностью.</div>
+        <div class="qw-meta">
+          <span class="qw-time">⏱ 2 недели на тест</span>
+          <span class="qw-budget">💰 30–150 тыс. ₽</span>
+          <span class="badge badge-accent">CJM 1, 2</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="qw-item">
+      <div class="qw-num">5</div>
+      <div class="qw-content">
+        <div class="qw-title">VK Реклама + лид-формы</div>
+        <div class="qw-desc">Креативы: «море + уверенность + коммуникация», «режим и безопасность», «что на выходе». Авто-выдача презентации после заявки. Рост заявок вне базы.</div>
+        <div class="qw-meta">
+          <span class="qw-time">⏱ 2 недели на тест</span>
+          <span class="qw-budget">💰 40–200 тыс. ₽</span>
+          <span class="badge badge-accent">CJM 0, 1, 2, 3</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="qw-item">
+      <div class="qw-num">6</div>
+      <div class="qw-content">
+        <div class="qw-title">Сценарий «пробное занятие за 900» как фильтр</div>
+        <div class="qw-desc">Отдельная посадочная/форма + слоты расписания + скрипт «как провести родителя к лагерю». Снижение барьера «моему ребёнку не зайдёт», рост конверсии в оплату.</div>
+        <div class="qw-meta">
+          <span class="qw-time">⏱ 2 недели</span>
+          <span class="qw-budget">💰 0–70 тыс. ₽</span>
+          <span class="badge badge-accent">CJM 3, 4</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 2-week plan -->
+  <div class="block-title">План на 2 недели</div>
+
+  <div class="plan-period">
+    <div class="plan-period-header">
+      <span class="badge">Дни 1–3</span>
+      Закрываем страхи на бумаге: FAQ и структура лендинга
+    </div>
+    <div class="plan-period-body">
+      <p style="font-size:13px;color:var(--text2);line-height:1.6;margin-bottom:12px;">Собрать карту страхов родителей (20–30 пунктов) и превратить в FAQ-скрипт; утвердить структуру лендинга лагеря (1 экран → безопасность → программа → результат → цена/включено → договор/возвраты).</p>
+      <div style="display:flex;flex-wrap:wrap;gap:10px;margin-bottom:12px;">
+        <div><div class="label">Артефакт</div><span class="badge badge-blue">Документ «FAQ-скрипт + папка доверия»</span></div>
+        <div><div class="label">Метрика</div><span class="badge badge-accent">25 вопросов + 12 блоков скрипта</span></div>
+      </div>
+      <div class="info-block" style="margin-bottom:0;">⚠ Риск: сделают «красиво», но без ответов на страхи → лиды будут, оплат мало.</div>
+    </div>
+  </div>
+
+  <div class="plan-period">
+    <div class="plan-period-header">
+      <span class="badge">Дни 4–7</span>
+      Запускаем посадочную страницу + авто-выдачу презентации
+    </div>
+    <div class="plan-period-body">
+      <p style="font-size:13px;color:var(--text2);line-height:1.6;margin-bottom:12px;">Собрать лендинг (Tilda/аналог) + настроить выдачу презентации после заявки + связать с CRM и метриками.</p>
+      <div style="display:flex;flex-wrap:wrap;gap:10px;margin-bottom:12px;">
+        <div><div class="label">Артефакт</div><span class="badge badge-blue">Лендинг + интеграции + авто-выдача PDF</span></div>
+        <div><div class="label">Метрика</div><span class="badge badge-green">Конверсия лендинга в лид 6% на тестовом трафике</span></div>
+      </div>
+      <div class="info-block" style="margin-bottom:0;">⚠ Риск: реклама без лендинга ведёт на «главную» и теряет конверсию.</div>
+    </div>
+  </div>
+
+  <div class="plan-period">
+    <div class="plan-period-header">
+      <span class="badge">Дни 8–10</span>
+      Тест рекламных каналов + квалификация лидов
+    </div>
+    <div class="plan-period-body">
+      <p style="font-size:13px;color:var(--text2);line-height:1.6;margin-bottom:12px;">Запустить тест Яндекс Поиск (высокий интент) и VK лид-формы (3–5 креативов) + ввести квалификацию лида по 5 вопросам (возраст/цель/даты/бюджет/готовность к встрече).</p>
+      <div style="display:flex;flex-wrap:wrap;gap:10px;margin-bottom:12px;">
+        <div><div class="label">Артефакт</div><span class="badge badge-blue">2 рекламные кампании + форма квалификации + дашборд</span></div>
+        <div><div class="label">Метрика</div><span class="badge badge-green">CPL в целевом коридоре · 55% квал. лидов</span></div>
+      </div>
+      <div class="info-block" style="margin-bottom:0;">⚠ Риск: широкий трафик → менеджер тонет в нецелевых запросах.</div>
+    </div>
+  </div>
+
+  <div class="plan-period">
+    <div class="plan-period-header">
+      <span class="badge">Дни 11–14</span>
+      Стандартизация встречи + онбординг после оплаты
+    </div>
+    <div class="plan-period-body">
+      <p style="font-size:13px;color:var(--text2);line-height:1.6;margin-bottom:12px;">Стандартизировать встречу в студии (30 мин по чек-листу), подготовить печатный пакет, настроить серию напоминаний после предоплаты и до выезда.</p>
+      <div style="display:flex;flex-wrap:wrap;gap:10px;margin-bottom:12px;">
+        <div><div class="label">Артефакт</div><span class="badge badge-blue">Регламент встречи + печатная папка + автосерия сообщений</span></div>
+        <div><div class="label">Метрика</div><span class="badge badge-green">Квал. лид → встреча 30% · встреча → оплата 35%</span></div>
+      </div>
+      <div class="info-block" style="margin-bottom:0;">⚠ Риск: срыв конверсии на этапе встречи/договора из-за организационных «дыр».</div>
+    </div>
+  </div>
+
+</div>
+
+</div><!-- /content -->
+
+<script>
+// Touch-safe tab switching
+(function() {
+  var tabs = document.querySelectorAll('.tab');
+  var sections = document.querySelectorAll('.section');
+  var touchMoved = false;
+
+  tabs.forEach(function(tab) {
+    tab.addEventListener('touchstart', function() { touchMoved = false; }, { passive: true });
+    tab.addEventListener('touchmove', function() { touchMoved = true; }, { passive: true });
+    tab.addEventListener('touchend', function(e) {
+      if (!touchMoved) {
+        e.preventDefault();
+        activate(tab.dataset.tab);
+      }
+    });
+    tab.addEventListener('click', function() {
+      activate(tab.dataset.tab);
+    });
+  });
+
+  function activate(id) {
+    tabs.forEach(function(t) { t.classList.remove('active'); });
+    sections.forEach(function(s) { s.classList.remove('active'); });
+    var activeTab = document.querySelector('[data-tab="' + id + '"]');
+    var activeSection = document.getElementById(id);
+    if (activeTab) activeTab.classList.add('active');
+    if (activeSection) activeSection.classList.add('active');
+    // Scroll tab into view
+    if (activeTab) activeTab.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+})();
+</script>
+</body>
+</html>
