@@ -1,0 +1,2086 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Просто нож — Маркетинговое исследование</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Playfair+Display:ital,wght@0,700;0,800;1,700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #F8F7F0;
+  --bg2: #F0EEE5;
+  --card: #ffffff;
+  --accent: #e8c97e;
+  --accent-dark: #c9a84c;
+  --accent-light: #f5e8bc;
+  --border: #dddad0;
+  --text: #1a1a1a;
+  --text-muted: #7a7570;
+  --text-light: #a09890;
+  --green: #4a7c59;
+  --green-light: #e8f3ec;
+  --red: #b8392b;
+  --red-light: #faeae8;
+  --blue: #2c6e9e;
+  --blue-light: #e8f1f8;
+  --shadow: 0 2px 12px rgba(0,0,0,0.07);
+  --shadow-hover: 0 6px 24px rgba(0,0,0,0.12);
+  --radius: 12px;
+  --radius-sm: 8px;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'IBM Plex Sans', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  font-size: 14px;
+  line-height: 1.6;
+  min-height: 100vh;
+}
+
+/* HEADER */
+.header {
+  background: var(--text);
+  color: #fff;
+  padding: 28px 24px 24px;
+  position: relative;
+  overflow: hidden;
+}
+.header::before {
+  content: '';
+  position: absolute;
+  top: -40px; right: -40px;
+  width: 200px; height: 200px;
+  background: var(--accent);
+  border-radius: 50%;
+  opacity: 0.08;
+}
+.header::after {
+  content: '';
+  position: absolute;
+  bottom: -60px; left: 30%;
+  width: 300px; height: 300px;
+  background: var(--accent);
+  border-radius: 50%;
+  opacity: 0.05;
+}
+.header-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+}
+.header-label {
+  font-size: 11px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 8px;
+  font-weight: 500;
+}
+.header h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: 32px;
+  font-weight: 800;
+  color: #fff;
+  line-height: 1.1;
+  margin-bottom: 6px;
+}
+.header-sub {
+  color: rgba(255,255,255,0.55);
+  font-size: 13px;
+  font-weight: 300;
+}
+.header-stats {
+  display: flex;
+  gap: 24px;
+  margin-top: 20px;
+  flex-wrap: wrap;
+}
+.header-stat {
+  display: flex;
+  flex-direction: column;
+}
+.header-stat-num {
+  font-family: 'Playfair Display', serif;
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--accent);
+  line-height: 1;
+}
+.header-stat-label {
+  font-size: 11px;
+  color: rgba(255,255,255,0.5);
+  margin-top: 2px;
+}
+
+/* TABS */
+.tabs-wrap {
+  background: var(--text);
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+.tabs {
+  display: flex;
+  flex-wrap: wrap;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 8px;
+}
+.tab-btn {
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  color: rgba(255,255,255,0.5);
+  background: none;
+  border: none;
+  padding: 14px 16px;
+  cursor: pointer;
+  position: relative;
+  min-height: 44px;
+  touch-action: manipulation;
+  transition: color 0.2s;
+  white-space: nowrap;
+}
+.tab-btn::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 16px; right: 16px;
+  height: 2px;
+  background: var(--accent);
+  transform: scaleX(0);
+  transition: transform 0.2s;
+  border-radius: 2px 2px 0 0;
+}
+.tab-btn.active { color: var(--accent); }
+.tab-btn.active::after { transform: scaleX(1); }
+.tab-btn:hover:not(.active) { color: rgba(255,255,255,0.8); }
+
+/* CONTENT */
+.content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 28px 16px 60px;
+}
+.tab-panel { display: none; }
+.tab-panel.active { display: block; }
+
+/* SECTION TITLE */
+.section-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 4px;
+}
+.section-sub {
+  color: var(--text-muted);
+  font-size: 13px;
+  margin-bottom: 20px;
+}
+
+/* GRIDS */
+.grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+.grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+.grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+
+/* CARDS */
+.card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 20px;
+  box-shadow: var(--shadow);
+}
+.card-accent {
+  border-left: 3px solid var(--accent);
+}
+.card-green { border-left: 3px solid var(--green); }
+.card-red { border-left: 3px solid var(--red); }
+
+/* BADGES */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 3px 10px;
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+  line-height: 1.6;
+}
+.badge-green { background: var(--green-light); color: var(--green); }
+.badge-yellow { background: var(--accent-light); color: #8a6a10; }
+.badge-red { background: var(--red-light); color: var(--red); }
+.badge-blue { background: var(--blue-light); color: var(--blue); }
+.badge-dark { background: var(--text); color: #fff; }
+
+/* SCORE BAR */
+.score-bar-wrap { margin: 8px 0; }
+.score-bar-label {
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+  color: var(--text-muted);
+  margin-bottom: 4px;
+}
+.score-bar-label strong { color: var(--text); font-weight: 600; }
+.score-bar-track {
+  height: 8px;
+  background: var(--bg2);
+  border-radius: 4px;
+  overflow: hidden;
+}
+.score-bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--accent-dark), var(--accent));
+  border-radius: 4px;
+  transition: width 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.score-bar-fill.green { background: linear-gradient(90deg, #3a6648, var(--green)); }
+.score-bar-fill.blue { background: linear-gradient(90deg, #1f5278, var(--blue)); }
+.score-bar-fill.red { background: linear-gradient(90deg, #922b20, var(--red)); }
+
+/* STAT BOX */
+.stat-box {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 16px 20px;
+  text-align: center;
+}
+.stat-box-num {
+  font-family: 'Playfair Display', serif;
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--text);
+  line-height: 1;
+}
+.stat-box-num span { color: var(--accent-dark); }
+.stat-box-label {
+  font-size: 12px;
+  color: var(--text-muted);
+  margin-top: 4px;
+}
+
+/* SEGMENT CARDS */
+.segment-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 20px;
+  margin-bottom: 16px;
+  box-shadow: var(--shadow);
+}
+.segment-card-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 12px;
+  flex-wrap: wrap;
+}
+.segment-name {
+  font-family: 'Playfair Display', serif;
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--text);
+  flex: 1;
+}
+.score-circle {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: var(--accent-light);
+  border: 2px solid var(--accent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  flex-shrink: 0;
+}
+.score-circle-num {
+  font-family: 'Playfair Display', serif;
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--accent-dark);
+  line-height: 1;
+}
+.score-circle-label { font-size: 9px; color: var(--text-muted); }
+
+.big-job-box {
+  background: var(--bg2);
+  border-radius: var(--radius-sm);
+  padding: 10px 14px;
+  font-size: 13px;
+  color: var(--text);
+  font-style: italic;
+  border-left: 3px solid var(--accent);
+  margin: 10px 0;
+}
+
+/* PERSONA CARDS */
+.persona-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: var(--shadow);
+}
+.persona-header {
+  background: var(--text);
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.persona-avatar {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: var(--accent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Playfair Display', serif;
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--text);
+  flex-shrink: 0;
+}
+.persona-header-info { flex: 1; }
+.persona-name {
+  font-family: 'Playfair Display', serif;
+  font-size: 20px;
+  font-weight: 700;
+  color: #fff;
+}
+.persona-city { font-size: 12px; color: rgba(255,255,255,0.5); }
+.persona-body { padding: 20px; }
+.persona-quote {
+  background: var(--accent-light);
+  border-radius: var(--radius-sm);
+  padding: 12px 16px;
+  font-style: italic;
+  font-size: 13px;
+  color: #5a4a20;
+  margin-bottom: 16px;
+  border-left: 3px solid var(--accent);
+}
+
+/* TABLES */
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 12px;
+}
+.data-table th {
+  background: var(--bg2);
+  padding: 10px 12px;
+  text-align: left;
+  font-weight: 600;
+  color: var(--text-muted);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  border-bottom: 1px solid var(--border);
+}
+.data-table td {
+  padding: 10px 12px;
+  border-bottom: 1px solid var(--border);
+  vertical-align: top;
+}
+.data-table tr:last-child td { border-bottom: none; }
+.data-table tr:hover td { background: var(--bg2); }
+.table-wrap { overflow-x: auto; border-radius: var(--radius); border: 1px solid var(--border); }
+
+/* CRITERIA DOTS */
+.criteria-dot {
+  display: inline-block;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  text-align: center;
+  line-height: 18px;
+  font-size: 11px;
+  font-weight: 600;
+}
+.dot-plus { background: var(--green-light); color: var(--green); }
+.dot-plus2 { background: var(--green); color: #fff; }
+.dot-mixed { background: var(--accent-light); color: #8a6a10; }
+.dot-minus { background: var(--red-light); color: var(--red); }
+
+/* CJM STAGES */
+.cjm-stage {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 20px;
+  margin-bottom: 16px;
+  position: relative;
+  overflow: hidden;
+}
+.cjm-stage::before {
+  content: attr(data-num);
+  position: absolute;
+  top: 16px; right: 20px;
+  font-family: 'Playfair Display', serif;
+  font-size: 48px;
+  font-weight: 800;
+  color: var(--border);
+  line-height: 1;
+}
+.cjm-stage-label {
+  font-size: 10px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--accent-dark);
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+.cjm-stage-name {
+  font-family: 'Playfair Display', serif;
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 12px;
+  padding-right: 50px;
+}
+.cjm-emotion-bar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+.cjm-emotion-label { font-size: 11px; color: var(--text-muted); min-width: 70px; }
+.cjm-emotion-dots { display: flex; gap: 3px; }
+.emotion-dot {
+  width: 12px; height: 12px;
+  border-radius: 50%;
+  background: var(--border);
+}
+.emotion-dot.active { background: var(--accent); }
+.cjm-cols { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 12px; }
+.cjm-col-title {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 6px;
+}
+.cjm-col-text { font-size: 12px; color: var(--text); line-height: 1.5; }
+
+/* CHANNELS */
+.channel-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 16px;
+}
+.channel-icon {
+  width: 36px; height: 36px;
+  border-radius: 8px;
+  background: var(--accent-light);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+.channel-name {
+  font-weight: 600;
+  font-size: 13px;
+  margin-bottom: 4px;
+}
+.channel-stages { font-size: 11px; color: var(--text-muted); margin-bottom: 6px; }
+.channel-msg { font-size: 12px; color: var(--text); line-height: 1.4; }
+
+/* AUTOMATION CARDS */
+.auto-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 16px;
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+}
+.auto-trigger {
+  flex-shrink: 0;
+  background: var(--accent-light);
+  border-radius: 8px;
+  padding: 8px;
+  font-size: 20px;
+}
+.auto-content { flex: 1; }
+.auto-trigger-text {
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--accent-dark);
+  margin-bottom: 4px;
+}
+.auto-action { font-size: 12px; color: var(--text); margin-bottom: 4px; font-weight: 500; }
+.auto-kpi { font-size: 11px; color: var(--text-muted); }
+
+/* QUICK WIN CARDS */
+.qw-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 18px;
+  display: flex;
+  gap: 12px;
+}
+.qw-num {
+  flex-shrink: 0;
+  width: 32px; height: 32px;
+  border-radius: 50%;
+  background: var(--accent);
+  color: var(--text);
+  font-weight: 700;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Playfair Display', serif;
+}
+.qw-content { flex: 1; }
+.qw-title { font-weight: 600; font-size: 13px; margin-bottom: 4px; }
+.qw-meta { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 6px; }
+.qw-effect { font-size: 12px; color: var(--green); }
+.qw-body { font-size: 12px; color: var(--text-muted); line-height: 1.4; }
+
+/* PLAN ROW */
+.plan-row {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 18px;
+  margin-bottom: 10px;
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+}
+.plan-period {
+  flex-shrink: 0;
+  background: var(--text);
+  color: var(--accent);
+  border-radius: var(--radius-sm);
+  padding: 6px 12px;
+  font-size: 11px;
+  font-weight: 600;
+  text-align: center;
+  min-width: 70px;
+}
+.plan-body { flex: 1; }
+.plan-title { font-weight: 600; font-size: 13px; margin-bottom: 4px; }
+.plan-artifact { font-size: 12px; color: var(--blue); margin-bottom: 3px; }
+.plan-metric { font-size: 12px; color: var(--green); margin-bottom: 3px; }
+.plan-risk { font-size: 12px; color: var(--red); }
+
+/* RTB TABLE */
+.rtb-row { border-bottom: 1px solid var(--border); }
+.rtb-row:last-child { border-bottom: none; }
+.rtb-row td { padding: 12px; vertical-align: top; font-size: 12px; }
+.rtb-type {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 10px;
+  font-size: 10px;
+  font-weight: 600;
+}
+.rtb-result { background: var(--green-light); color: var(--green); }
+.rtb-method { background: var(--blue-light); color: var(--blue); }
+.rtb-guarantee { background: var(--accent-light); color: #8a6a10; }
+.rtb-case { background: var(--red-light); color: var(--red); }
+
+/* TOV */
+.tov-row {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 14px;
+  margin-bottom: 10px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  align-items: center;
+}
+.tov-bad { text-decoration: line-through; color: var(--text-muted); font-size: 12px; }
+.tov-good { font-size: 12px; font-weight: 600; color: var(--text); }
+.tov-arrow { color: var(--accent-dark); font-weight: 700; font-size: 14px; }
+
+/* FUNNEL */
+.funnel-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--border);
+}
+.funnel-row:last-child { border-bottom: none; }
+.funnel-stage-label {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--accent-dark);
+  min-width: 50px;
+}
+.funnel-desc { flex: 1; font-size: 12px; color: var(--text); }
+.funnel-kpi { font-size: 11px; color: var(--text-muted); text-align: right; min-width: 120px; }
+
+/* SWOT */
+.swot-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0;
+  border-radius: var(--radius);
+  overflow: hidden;
+  border: 1px solid var(--border);
+}
+.swot-cell {
+  padding: 18px;
+  border-right: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+.swot-cell:nth-child(2n) { border-right: none; }
+.swot-cell:nth-child(3), .swot-cell:nth-child(4) { border-bottom: none; }
+.swot-cell-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 14px;
+  font-weight: 700;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.swot-item { font-size: 12px; color: var(--text); margin-bottom: 6px; display: flex; gap: 6px; }
+.swot-item::before { content: '—'; color: var(--text-muted); flex-shrink: 0; }
+
+/* OPPORTUNITY BOX */
+.opp-box {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 18px;
+  margin-bottom: 12px;
+}
+.opp-title {
+  font-weight: 600;
+  font-size: 13px;
+  color: var(--text);
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.opp-our {
+  background: var(--accent-light);
+  border-radius: var(--radius-sm);
+  padding: 8px 12px;
+  font-size: 12px;
+  color: #5a4a20;
+  margin-top: 8px;
+  border-left: 3px solid var(--accent);
+}
+
+/* FIRST SCREEN CARD */
+.first-screen-card {
+  background: var(--text);
+  border-radius: var(--radius);
+  padding: 24px;
+  color: #fff;
+  margin-bottom: 12px;
+}
+.first-screen-label { font-size: 10px; color: rgba(255,255,255,0.4); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; }
+.first-screen-h1 { font-family: 'Playfair Display', serif; font-size: 20px; font-weight: 800; color: #fff; margin-bottom: 6px; }
+.first-screen-sub { font-size: 13px; color: rgba(255,255,255,0.6); margin-bottom: 12px; }
+.first-screen-cta {
+  display: inline-block;
+  background: var(--accent);
+  color: var(--text);
+  padding: 8px 20px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+/* LIST ITEMS */
+.li-check {
+  font-size: 12px;
+  color: var(--text);
+  padding: 4px 0;
+  display: flex;
+  gap: 8px;
+  align-items: flex-start;
+}
+.li-check::before {
+  content: '✓';
+  color: var(--green);
+  font-weight: 700;
+  flex-shrink: 0;
+}
+.li-cross { }
+.li-cross::before { content: '✕'; color: var(--red); }
+.li-warn::before { content: '!'; color: var(--accent-dark); }
+
+/* SEPARATOR */
+.sep { border: none; border-top: 1px solid var(--border); margin: 20px 0; }
+
+/* CHANNEL BADGE */
+.ch-badge {
+  display: inline-block;
+  font-size: 10px;
+  padding: 2px 8px;
+  background: var(--bg2);
+  border-radius: 10px;
+  color: var(--text-muted);
+  margin: 2px;
+}
+
+/* MOBILE */
+@media (max-width: 900px) {
+  .grid-3 { grid-template-columns: repeat(2, 1fr); }
+  .grid-4 { grid-template-columns: repeat(2, 1fr); }
+  .cjm-cols { grid-template-columns: 1fr; }
+}
+@media (max-width: 600px) {
+  .header h1 { font-size: 24px; }
+  .header-stats { gap: 16px; }
+  .grid-3, .grid-2, .grid-4 { grid-template-columns: 1fr; }
+  .tab-btn { flex: 0 0 calc(50% - 8px); font-size: 11px; padding: 12px 8px; text-align: center; }
+  .swot-grid { grid-template-columns: 1fr; }
+  .swot-cell { border-right: none; }
+  .swot-cell:nth-child(3) { border-bottom: 1px solid var(--border); }
+  .swot-cell:nth-child(4) { border-bottom: none; }
+  .tov-row { grid-template-columns: 1fr; }
+  .plan-row { flex-direction: column; }
+  .segment-card-header { flex-direction: column; }
+  .score-circle { align-self: flex-start; }
+  .content { padding: 16px 12px 40px; }
+  .cjm-stage::before { font-size: 36px; }
+}
+
+/* CHART STYLES */
+.donut-wrap { display: flex; align-items: center; gap: 20px; flex-wrap: wrap; }
+.donut-legend { flex: 1; min-width: 160px; }
+.donut-legend-item { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; font-size: 12px; }
+.legend-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+
+.bar-chart { margin: 12px 0; }
+.bar-row { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
+.bar-label { font-size: 11px; color: var(--text-muted); min-width: 100px; text-align: right; }
+.bar-track { flex: 1; height: 20px; background: var(--bg2); border-radius: 4px; overflow: hidden; position: relative; }
+.bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--accent-dark), var(--accent));
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  padding-left: 6px;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text);
+  white-space: nowrap;
+}
+
+/* KEYFRAMES */
+@keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+.tab-panel.active { animation: fadeIn 0.25s ease; }
+
+/* HIGHLIGHTED BOX */
+.highlight-box {
+  background: linear-gradient(135deg, #1a1a1a 0%, #2d2a25 100%);
+  border-radius: var(--radius);
+  padding: 20px;
+  color: #fff;
+  margin-bottom: 20px;
+}
+.highlight-box .hl-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--accent);
+  margin-bottom: 6px;
+}
+.highlight-box .hl-text { font-size: 13px; color: rgba(255,255,255,0.7); line-height: 1.5; }
+
+/* POSITIONING VARIANT CARD */
+.pos-variant {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 20px;
+  margin-bottom: 12px;
+  position: relative;
+}
+.pos-variant.recommended {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 2px var(--accent-light);
+}
+.pos-rec-badge {
+  position: absolute;
+  top: -10px; right: 16px;
+  background: var(--accent);
+  color: var(--text);
+  font-size: 10px;
+  font-weight: 700;
+  padding: 2px 10px;
+  border-radius: 10px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+.pos-variant-label { font-size: 11px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px; }
+.pos-tagline {
+  font-family: 'Playfair Display', serif;
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 8px;
+}
+.pos-text { font-size: 12px; color: var(--text-muted); line-height: 1.5; margin-bottom: 10px; }
+.pos-use { font-size: 12px; color: var(--blue); font-style: italic; }
+
+/* COMPETITOR CARD MINI */
+.comp-mini {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 16px;
+  margin-bottom: 10px;
+}
+.comp-mini-header { display: flex; justify-content: space-between; align-items: flex-start; gap: 8px; margin-bottom: 8px; }
+.comp-mini-name { font-weight: 600; font-size: 13px; }
+.comp-mini-price { font-size: 11px; color: var(--text-muted); text-align: right; }
+.comp-mini-criteria { display: flex; gap: 4px; flex-wrap: wrap; margin-bottom: 8px; }
+.comp-mini-criterion {
+  display: inline-flex;
+  gap: 3px;
+  align-items: center;
+  font-size: 10px;
+  padding: 2px 6px;
+  border-radius: 8px;
+}
+.crit-ok { background: var(--green-light); color: var(--green); }
+.crit-partial { background: var(--accent-light); color: #8a6a10; }
+.crit-bad { background: var(--red-light); color: var(--red); }
+.comp-complaint { font-size: 11px; color: var(--text-muted); font-style: italic; }
+</style>
+</head>
+<body>
+<div id="app">
+
+<!-- HEADER -->
+<header class="header">
+  <div class="header-inner">
+    <div class="header-label">Маркетинговое исследование</div>
+    <h1>«Просто нож»</h1>
+    <div class="header-sub">Анализ рынка · Сегменты · CJM · Позиционирование · Конкуренты</div>
+    <div class="header-stats">
+      <div class="header-stat">
+        <div class="header-stat-num">6 лет</div>
+        <div class="header-stat-label">на рынке</div>
+      </div>
+      <div class="header-stat">
+        <div class="header-stat-num">100 000+</div>
+        <div class="header-stat-label">проданных ножей</div>
+      </div>
+      <div class="header-stat">
+        <div class="header-stat-num">10 000+</div>
+        <div class="header-stat-label">отзывов</div>
+      </div>
+      <div class="header-stat">
+        <div class="header-stat-num">от 3 000 ₽</div>
+        <div class="header-stat-label">цена входа X12МФ</div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- TABS -->
+<div class="tabs-wrap">
+  <nav class="tabs" id="tabs">
+    <button class="tab-btn active" data-tab="market">📊 Рынок</button>
+    <button class="tab-btn" data-tab="segments">👥 Сегменты</button>
+    <button class="tab-btn" data-tab="personas">🧑 Персоны</button>
+    <button class="tab-btn" data-tab="competitors">⚔️ Конкуренты</button>
+    <button class="tab-btn" data-tab="positioning">🎯 Позиционирование</button>
+    <button class="tab-btn" data-tab="cjm">🗺 CJM</button>
+    <button class="tab-btn" data-tab="channels">📡 Каналы</button>
+    <button class="tab-btn" data-tab="plan">🚀 План</button>
+  </nav>
+</div>
+
+<main class="content">
+
+<!-- ==================== TAB: MARKET ==================== -->
+<div class="tab-panel active" id="tab-market">
+  <div class="section-title">Обзор рынка</div>
+  <div class="section-sub">Ключевые метрики, потенциал и приоритизация сегментов</div>
+
+  <div class="highlight-box" style="margin-bottom:20px;">
+    <div class="hl-title">Ключевая позиция</div>
+    <div class="hl-text">Рабочий кованый нож Х12МФ от 3 000 ₽ с 10-этапным ОТК, официальной оплатой с чеком и понятными гарантийными случаями. Спрос средний–высокий, нишевое УТП «честный рабочий» при высоком риске перегрева рынка маркетинговыми обещаниями без доказательств.</div>
+  </div>
+
+  <div class="grid-4" style="margin-bottom:24px;">
+    <div class="stat-box">
+      <div class="stat-box-num"><span>Средний–</span><br>высокий</div>
+      <div class="stat-box-label">Спрос на рынке</div>
+    </div>
+    <div class="stat-box">
+      <div class="stat-box-num"><span>1–7</span> дней</div>
+      <div class="stat-box-label">Скорость решения о покупке</div>
+    </div>
+    <div class="stat-box">
+      <div class="stat-box-num"><span>3 000–</span>11 000 ₽</div>
+      <div class="stat-box-label">Цены X12МФ на рынке</div>
+    </div>
+    <div class="stat-box">
+      <div class="stat-box-num"><span>4–7</span> дней</div>
+      <div class="stat-box-label">Срок изготовления</div>
+    </div>
+  </div>
+
+  <div class="grid-2" style="margin-bottom:24px;">
+    <div class="card">
+      <div style="font-weight:600;font-size:14px;margin-bottom:12px;">📈 Приоритизация сегментов</div>
+      <div class="bar-chart" id="seg-bars"></div>
+    </div>
+    <div class="card">
+      <div style="font-weight:600;font-size:14px;margin-bottom:12px;">💰 SOM — Достижимый рынок (год 1)</div>
+      <div class="bar-chart" id="som-bars"></div>
+      <div style="font-size:11px;color:var(--text-muted);margin-top:10px;">* Оценочные данные. SOM при текущей модели заявка→оплата</div>
+    </div>
+  </div>
+
+  <div class="section-title" style="margin-bottom:4px;">Таблица приоритизации сегментов</div>
+  <div class="section-sub">Итоговое решение по каждому сегменту</div>
+  <div class="table-wrap" style="margin-bottom:24px;">
+    <table class="data-table">
+      <thead><tr>
+        <th>Сегмент</th>
+        <th>Балл</th>
+        <th>Решение</th>
+        <th>SOM (год 1)</th>
+        <th>Лучший канал</th>
+        <th>Стоп-фактор</th>
+      </tr></thead>
+      <tbody>
+        <tr>
+          <td><strong>Рабочий универсал перед сезоном</strong></td>
+          <td><span class="badge badge-green">86 / 100</span></td>
+          <td><span class="badge badge-green">Берём</span></td>
+          <td>3.6–9.0 млн ₽</td>
+          <td>Яндекс.Директ Поиск + РСЯ</td>
+          <td>Недоверие к цене Х12МФ от 3 000 ₽</td>
+        </tr>
+        <tr>
+          <td><strong>Нержавейка под воду / рыбалка</strong></td>
+          <td><span class="badge badge-green">79 / 100</span></td>
+          <td><span class="badge badge-green">Берём</span></td>
+          <td>2.4–6.3 млн ₽</td>
+          <td>Яндекс.Директ (95Х18) + Telegram</td>
+          <td>Нужно объяснить выбор 95Х18 vs Х12МФ</td>
+        </tr>
+        <tr>
+          <td><strong>Один нож дом–дача–машина (EDC)</strong></td>
+          <td><span class="badge badge-yellow">74 / 100</span></td>
+          <td><span class="badge badge-yellow">Тестируем</span></td>
+          <td>1.8–5.4 млн ₽</td>
+          <td>РСЯ + VK Реклама</td>
+          <td>Конкуренция с маркетплейсами по цене</td>
+        </tr>
+        <tr>
+          <td><strong>Подарок мужчине, который будут использовать</strong></td>
+          <td><span class="badge badge-yellow">68 / 100</span></td>
+          <td><span class="badge badge-yellow">Тестируем</span></td>
+          <td>1.2–3.0 млн ₽</td>
+          <td>VK Реклама (поводы) + SEO</td>
+          <td>Риск не успеть к дате, не угадать</td>
+        </tr>
+        <tr>
+          <td><strong>Ножеман-скептик (термичка/доказательства)</strong></td>
+          <td><span class="badge badge-red">61 / 100</span></td>
+          <td><span class="badge badge-yellow">Тестируем</span></td>
+          <td>0.9–2.4 млн ₽</td>
+          <td>SEO + Видео-обзоры</td>
+          <td>Высокий порог доказательств, долгий цикл</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="grid-2">
+    <div class="card">
+      <div style="font-weight:600;font-size:14px;margin-bottom:12px;">📦 Юнит-экономика</div>
+      <div class="score-bar-wrap">
+        <div class="score-bar-label"><span>Средний чек</span><strong>3 000–3 500 ₽</strong></div>
+      </div>
+      <div class="score-bar-wrap">
+        <div class="score-bar-label"><span>LTV 2 года</span><strong>7 000–14 000 ₽</strong></div>
+      </div>
+      <div class="score-bar-wrap">
+        <div class="score-bar-label"><span>CAC (поиск)</span><strong>700–1 800 ₽</strong></div>
+      </div>
+      <div class="score-bar-wrap">
+        <div class="score-bar-label"><span>CAC (ретаргет)</span><strong>500–1 200 ₽</strong></div>
+      </div>
+      <div class="score-bar-wrap">
+        <div class="score-bar-label"><span>CAC (сарафан)</span><strong>0–300 ₽</strong></div>
+      </div>
+      <div class="score-bar-wrap">
+        <div class="score-bar-label"><span>Окупаемость</span><strong>0–1 месяц</strong></div>
+      </div>
+      <div class="score-bar-wrap">
+        <div class="score-bar-label"><span>Точка безубыточности</span><strong>10–30 клиентов/мес</strong></div>
+      </div>
+    </div>
+    <div class="card">
+      <div style="font-weight:600;font-size:14px;margin-bottom:12px;">⚠️ Контекст рынка</div>
+      <div class="li-check">Привычка платить есть — предоплата 100% снимается ЮKassa с чеком и возвратом 15 дней</div>
+      <div class="li-check">Заменители: маркетплейс 800 ₽, старый нож, мультитул, кустарь, «куплю потом»</div>
+      <div class="li-check">Риск перегрева: все пишут «кованый/ручная работа/бритва» без доказательств</div>
+      <div class="li-check">Цены на рынке Х12МФ: 5 000–11 000 ₽ → цена 3 000 ₽ вызывает подозрение</div>
+      <div class="li-check">Нужен «пакет доверия»: ОТК + гарантия + официальная оплата + документы</div>
+      <div class="li-check">Ключевая неопределённость: конверсия аудитории без охоты/рыбалки (EDC) при конкуренции с маркетплейсами</div>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== TAB: SEGMENTS ==================== -->
+<div class="tab-panel" id="tab-segments">
+  <div class="section-title">Сегменты аудитории</div>
+  <div class="section-sub">Детальный разбор 5 ключевых сегментов с критериями выбора и барьерами</div>
+  <div id="segments-container"></div>
+</div>
+
+<!-- ==================== TAB: PERSONAS ==================== -->
+<div class="tab-panel" id="tab-personas">
+  <div class="section-title">Ключевые персоны</div>
+  <div class="section-sub">Детальные профили покупателей из приоритетных сегментов</div>
+  <div id="personas-container" class="grid-3"></div>
+</div>
+
+<!-- ==================== TAB: COMPETITORS ==================== -->
+<div class="tab-panel" id="tab-competitors">
+  <div class="section-title">Конкурентный анализ</div>
+  <div class="section-sub">11 конкурентов, матрица критериев, белые пятна, SWOT</div>
+
+  <div style="margin-bottom:20px;">
+    <div style="font-weight:600;font-size:14px;margin-bottom:12px;">🗂 Матрица критериев (сокращённая)</div>
+    <div class="table-wrap">
+      <table class="data-table">
+        <thead><tr>
+          <th>Конкурент</th>
+          <th>Цена</th>
+          <th>Сталь</th>
+          <th>Гарантия</th>
+          <th>Сроки</th>
+          <th>Оплата/возврат</th>
+          <th>Хват</th>
+        </tr></thead>
+        <tbody id="comp-matrix-body"></tbody>
+      </table>
+    </div>
+    <div style="font-size:11px;color:var(--text-muted);margin-top:6px;">++ отлично · + есть · ± частично · — отсутствует</div>
+  </div>
+
+  <div style="font-weight:600;font-size:14px;margin-bottom:12px;">📋 Карточки конкурентов</div>
+  <div id="competitors-container"></div>
+
+  <div style="font-weight:600;font-size:14px;margin:20px 0 12px;">🎯 Белые пятна — Наши возможности</div>
+  <div id="opportunities-container"></div>
+
+  <div style="font-weight:600;font-size:14px;margin:20px 0 12px;">⚖️ SWOT-анализ</div>
+  <div class="swot-grid">
+    <div class="swot-cell" style="background:#f0faf4;">
+      <div class="swot-cell-title" style="color:var(--green);">💪 Сильные стороны</div>
+      <div class="swot-item">Х12МФ от 3 000 ₽ при высоком уровне исполнения — ценовой разрыв с рынком 5 000–6 000 ₽</div>
+      <div class="swot-item">10 этапов контроля качества (ОТК) по операциям</div>
+      <div class="swot-item">Официальная оплата ЮKassa с чеком + возврат 15 дней</div>
+      <div class="swot-item">Гарантия 2–3 года с перечнем гарантийных кейсов</div>
+      <div class="swot-item">УТП «Нож для работы, не для полки. Если нож жалко — он бесполезен»</div>
+      <div class="swot-item">100 000+ проданных ножей, 10 000+ отзывов, 6 лет на рынке</div>
+      <div class="swot-item">Комплект: нож + ножны + паспорт + сертификат с печатью + памятка ухода</div>
+    </div>
+    <div class="swot-cell" style="background:#fdf8ef;">
+      <div class="swot-cell-title" style="color:#8a6a10;">⚠️ Слабые стороны</div>
+      <div class="swot-item">100% предоплата — часть конкурентов предлагают оплату при получении</div>
+      <div class="swot-item">Нет лид-магнитов «на входе» (гравировка/скидки/бесплатный аксессуар)</div>
+      <div class="swot-item">Нельзя узко называть нож «шкуросъёмным/разделочным» — ограничение рекламы</div>
+      <div class="swot-item">«За 3 000 кованый Х12МФ — не верю» — постоянно нужно доказывать</div>
+    </div>
+    <div class="swot-cell" style="background:#f0f5fa;">
+      <div class="swot-cell-title" style="color:var(--blue);">🚀 Возможности</div>
+      <div class="swot-item">Занять «белое пятно доверия»: ЮKassa+чек, возврат, гарантия на первом экране</div>
+      <div class="swot-item">QR-протокол ОТК на каждый нож — доказательность стали и термички</div>
+      <div class="swot-item">Простой выбор для новичков: 3 версии по сценарию (Х12МФ/95Х18/с упором)</div>
+      <div class="swot-item">Перехват трафика у маркетплейсов аргументом «не лотерея»</div>
+    </div>
+    <div class="swot-cell" style="background:#fdf0ef;">
+      <div class="swot-cell-title" style="color:var(--red);">🔴 Угрозы</div>
+      <div class="swot-item">Маркетплейсы с ценой 800 ₽ как якорь сравнения</div>
+      <div class="swot-item">Кустари-одиночки могут демпинговать и копировать офферы</div>
+      <div class="swot-item">Копировщики (пример «Рабочий нож») забивают выдачу похожими сообщениями</div>
+      <div class="swot-item">Акцент на «серийность» = «штамповка» и убивает УТП «ручная работа»</div>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== TAB: POSITIONING ==================== -->
+<div class="tab-panel" id="tab-positioning">
+  <div class="section-title">Позиционирование</div>
+  <div class="section-sub">Варианты, ценностное предложение, RTB, TOV, первый экран</div>
+
+  <div style="font-weight:600;font-size:14px;margin-bottom:12px;">🎯 Варианты позиционирования</div>
+  <div class="pos-variant recommended">
+    <div class="pos-rec-badge">★ Рекомендован</div>
+    <div class="pos-variant-label">Вариант А — Результат</div>
+    <div class="pos-tagline">Рабочий кованый нож: пользуйтесь, не жалейте — с ОТК и гарантией</div>
+    <div class="pos-text">Для тех, кому перед сезоном нужен рабочий универсальный нож, «Просто нож» — это кованый нож ручной работы для реального использования (охота/лес/быт), который можно не жалеть и спокойно нагружать, потому что он выпускается с 10 этапами ОТК, приходит с паспортом и сертификатом, а также с гарантией 2–3 года и возвратом 15 дней.</div>
+    <div class="pos-use">✅ Лучше всего для: Яндекс.Директ (поиск), первый экран, ретаргетинг — быстро объясняет «зачем»</div>
+  </div>
+  <div class="pos-variant">
+    <div class="pos-variant-label">Вариант Б — Метод</div>
+    <div class="pos-tagline">Не лотерея: 10 этапов ОТК на каждом ноже</div>
+    <div class="pos-text">Для тех, кто боится «лотереи» с коваными ножами, «Просто нож» — это кованый нож со стабильным результатом, который повторяемо получается одинаковым, потому что каждый нож проходит 10 этапов контроля качества (от проверки заготовки до финальной проверки перед отправкой) и термообработка проверяется на соответствие заявленной стали и твёрдости.</div>
+    <div class="pos-use">✅ Лучше всего для: Лендинг (блок «как делаем»), SEO-статьи и видео — снять недоверие к цене</div>
+  </div>
+  <div class="pos-variant">
+    <div class="pos-variant-label">Вариант В — Специализация</div>
+    <div class="pos-tagline">Три версии под задачу: Х12МФ, 95Х18 или с упором</div>
+    <div class="pos-text">Для тех, кто не хочет разбираться в «ножевой теории», «Просто нож» — это понятный выбор из трёх рабочих версий (Х12МФ классика, 95Х18 нержавейка под воду, версия с упором), который закрывает ваш сценарий без ошибок, потому что на сайте и в консультации выбор строится от задачи и условий (вода/перчатки/страх скольжения).</div>
+    <div class="pos-use">✅ Лучше всего для: Трафик «новичков» (РСЯ/VK), карточки в каталоге, квизы «подбор за 30 секунд»</div>
+  </div>
+
+  <hr class="sep">
+  <div style="font-weight:600;font-size:14px;margin-bottom:12px;">🏆 RTB — Reasons to Believe</div>
+  <div class="table-wrap" style="margin-bottom:24px;">
+    <table class="data-table">
+      <thead><tr><th>#</th><th>Тип</th><th>Утверждение</th><th>Доказательство</th><th>Где использовать</th></tr></thead>
+      <tbody>
+        <tr><td>1</td><td><span class="rtb-type rtb-result">результат</span></td><td>100 000+ проданных ножей за 6 лет</td><td>«6 лет на рынке», «100 000+ проданных ножей»</td><td>Первый экран, блок доверия, скрипт менеджера</td></tr>
+        <tr><td>2</td><td><span class="rtb-type rtb-result">результат</span></td><td>10 000+ отзывов по всем площадкам</td><td>Скриншоты, ссылки на площадки</td><td>Блок «Отзывы», ретаргетинг, Telegram/VK</td></tr>
+        <tr><td>3</td><td><span class="rtb-type rtb-method">методология</span></td><td>10 этапов контроля качества (ОТК) до отправки</td><td>Перечень этапов: заготовка→термичка→сборка→правка→финальная проверка</td><td>Блок «Как мы делаем», видео процесс, FAQ</td></tr>
+        <tr><td>4</td><td><span class="rtb-type rtb-guarantee">гарантия</span></td><td>Гарантия 2–3 года + возврат 15 дней</td><td>Публичная политика на сайте, кейсы решения споров</td><td>Первый экран (значки), скрипт менеджера</td></tr>
+        <tr><td>5</td><td><span class="rtb-type rtb-method">экспертиза</span></td><td>Мастера с 15+ лет опыта, главный мастер 20+ лет</td><td>Биографии мастеров, фото из цеха</td><td>Блок «Команда», PR-публикации</td></tr>
+        <tr><td>6</td><td><span class="rtb-type rtb-method">методология</span></td><td>Термообработка — ключевой этап: контроль стали и твёрдости</td><td>Описание этапа в ОТК, фото твердомера</td><td>SEO-статьи, карточка товара, ответы в чатах</td></tr>
+        <tr><td>7</td><td><span class="rtb-type rtb-guarantee">гарантия</span></td><td>Оплата через ЮKassa с чеком — не «перевод на карту»</td><td>Скрин чека, логотип ЮKassa</td><td>Первый экран, ответы на возражение по предоплате</td></tr>
+        <tr><td>8</td><td><span class="rtb-type rtb-case">кейс</span></td><td>~90% блогеров охота/рыбалка/туризм пользовались</td><td>Коля Таёжный, Половый Салон, Вечно Одинокий, Ром Агра</td><td>Раздел «Обзоры», посевы Telegram, видео-нарезки</td></tr>
+        <tr><td>9</td><td><span class="rtb-type rtb-result">результат</span></td><td>Х12МФ у нас от 3 000 ₽; на рынке 4 500–10 000+ ₽</td><td>Сравнение с открытыми ценами конкурентов</td><td>Блок «Почему от 3 000», объявления в поиске</td></tr>
+        <tr><td>10</td><td><span class="rtb-type rtb-guarantee">гарантия</span></td><td>100% предоплата → доверие нужно доказывать документами</td><td>Часть конкурентов — «оплата при получении»; у нас — чек + возврат</td><td>Упаковка доверия, FAQ, скрипт менеджера</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <hr class="sep">
+  <div style="font-weight:600;font-size:14px;margin-bottom:12px;">🗣 Tone of Voice — Язык бренда</div>
+  <div class="card" style="margin-bottom:16px;">
+    <div style="display:flex;gap:16px;flex-wrap:wrap;margin-bottom:12px;">
+      <span class="badge badge-dark">Прямой</span>
+      <span class="badge badge-dark">Рабочий</span>
+      <span class="badge badge-dark">Спокойный</span>
+      <span class="badge badge-dark">Без пафоса</span>
+    </div>
+    <div style="font-style:italic;font-size:13px;color:var(--text-muted);margin-bottom:12px;">«Если нож жалко — он бесполезен»</div>
+    <div style="font-size:12px;color:var(--red);font-weight:600;margin-bottom:6px;">НЕЛЬЗЯ говорить:</div>
+    <div style="display:flex;gap:6px;flex-wrap:wrap;">
+      <span class="badge badge-red">высокое качество</span>
+      <span class="badge badge-red">профессиональный подход</span>
+      <span class="badge badge-red">индивидуальный подход</span>
+      <span class="badge badge-red">лучшие ножи на рынке</span>
+      <span class="badge badge-red">премиальные материалы по доступной цене</span>
+      <span class="badge badge-red">серийное производство</span>
+      <span class="badge badge-red">конвейер</span>
+    </div>
+  </div>
+  <div id="tov-rows"></div>
+
+  <hr class="sep">
+  <div style="font-weight:600;font-size:14px;margin-bottom:12px;">🖥 Варианты первого экрана</div>
+  <div class="grid-2" id="first-screens"></div>
+</div>
+
+<!-- ==================== TAB: CJM ==================== -->
+<div class="tab-panel" id="tab-cjm">
+  <div class="section-title">Карта пути клиента</div>
+  <div class="section-sub">10 этапов — от «живёт с каким-то ножом» до «возвращается за вторым»</div>
+  <div style="font-size:12px;color:var(--text-muted);margin-bottom:20px;">Архетип: <strong>Запланированная одиночная покупка.</strong> Путь 0→5 обычно 3–14 дней; в «сезон» может сжиматься до 1–3 дней.</div>
+  <div id="cjm-container"></div>
+</div>
+
+<!-- ==================== TAB: CHANNELS ==================== -->
+<div class="tab-panel" id="tab-channels">
+  <div class="section-title">Каналы и автоматизации</div>
+  <div class="section-sub">Матрица каналов, 6 автоматизаций, метрики воронки</div>
+
+  <div style="font-weight:600;font-size:14px;margin-bottom:12px;">📡 Матрица каналов</div>
+  <div class="grid-3" id="channels-container" style="margin-bottom:24px;"></div>
+
+  <div style="font-weight:600;font-size:14px;margin-bottom:12px;">⚡ Автоматизации</div>
+  <div class="grid-2" id="automations-container" style="margin-bottom:24px;"></div>
+
+  <div style="font-weight:600;font-size:14px;margin-bottom:12px;">📊 Метрики воронки (0→10)</div>
+  <div class="card">
+    <div id="funnel-container"></div>
+  </div>
+</div>
+
+<!-- ==================== TAB: PLAN ==================== -->
+<div class="tab-panel" id="tab-plan">
+  <div class="section-title">Быстрые победы и план на 2 недели</div>
+  <div class="section-sub">6 quick wins + пошаговый план запуска</div>
+
+  <div style="font-weight:600;font-size:14px;margin-bottom:12px;">⚡ Быстрые победы (Quick Wins)</div>
+  <div id="qw-container" style="margin-bottom:24px;"></div>
+
+  <div style="font-weight:600;font-size:14px;margin-bottom:12px;">📅 План на 2 недели</div>
+  <div id="plan-container" style="margin-bottom:24px;"></div>
+
+  <div style="font-weight:600;font-size:14px;margin-bottom:12px;">📊 Месседж-матрица по сегментам</div>
+  <div class="table-wrap" style="margin-bottom:24px;">
+    <table class="data-table">
+      <thead><tr><th>Сегмент</th><th>Главный месседж</th><th>Ключевой страх</th><th>Пруф</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><strong>Рабочий универсал</strong></td>
+          <td>Кованый нож Х12МФ от 3 000 ₽: пользуйтесь, не жалейте</td>
+          <td>Недоверие к низкой цене и «лотерея» по качеству</td>
+          <td>10 этапов ОТК + 100 000+ ножей + гарантия/возврат/чек</td>
+        </tr>
+        <tr>
+          <td><strong>Нержавейка под воду</strong></td>
+          <td>Версия 95Х18: для воды/рыбалки — чтобы не переживать за ржавчину</td>
+          <td>Не хочу пятен/ржавчины и сложного ухода</td>
+          <td>Факт версии 95Х18 + документы + гарантия/возврат</td>
+        </tr>
+        <tr>
+          <td><strong>Дача/авто/EDC</strong></td>
+          <td>Один понятный рабочий нож, который не разваливается</td>
+          <td>Куплю — а он тупится/разболтается/развалится</td>
+          <td>10 этапов ОТК + гарантия 2–3 года + возврат 15 дней</td>
+        </tr>
+        <tr>
+          <td><strong>Подарок</strong></td>
+          <td>Полезный подарок с документами и понятным возвратом</td>
+          <td>Вдруг не успеет к дате или не понравится</td>
+          <td>Сроки 4–7 дней + возврат 15 дней + красивый комплект</td>
+        </tr>
+        <tr>
+          <td><strong>Ножеман-скептик</strong></td>
+          <td>Честный инструмент без «маркетинговой шелухи»</td>
+          <td>Нет доказательств термички и стабильности</td>
+          <td>QR-протокол ОТК + видео процесса + открытые кейсы</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div style="font-weight:600;font-size:14px;margin-bottom:12px;">💼 TAM / SAM / SOM по сегментам</div>
+  <div class="table-wrap">
+    <table class="data-table">
+      <thead><tr><th>Сегмент</th><th>TAM</th><th>SAM</th><th>SOM (год 1)</th><th>До первой сделки</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Охота/лес</strong></td><td>0.75–4.2 млрд ₽</td><td>120–420 млн ₽</td><td><span class="badge badge-green">3.6–9.0 млн ₽</span></td><td>1–7 дней</td></tr>
+        <tr><td><strong>Рыбалка/вода</strong></td><td>0.5–3.6 млрд ₽</td><td>90–360 млн ₽</td><td><span class="badge badge-green">2.4–6.3 млн ₽</span></td><td>2–10 дней</td></tr>
+        <tr><td><strong>Дача/авто/EDC</strong></td><td>0.8–15 млрд ₽</td><td>150–720 млн ₽</td><td><span class="badge badge-yellow">1.8–5.4 млн ₽</span></td><td>2–14 дней</td></tr>
+        <tr><td><strong>Подарок</strong></td><td>0.3–4.5 млрд ₽</td><td>60–350 млн ₽</td><td><span class="badge badge-yellow">1.2–3.0 млн ₽</span></td><td>3–14 дней</td></tr>
+        <tr><td><strong>Ножеман-скептик</strong></td><td>0.15–10.5 млрд ₽</td><td>30–320 млн ₽</td><td><span class="badge badge-red">0.9–2.4 млн ₽</span></td><td>7–30 дней</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+</main>
+</div>
+
+<script>
+// ==================== TAB SWITCHING ====================
+const tabs = document.querySelectorAll('.tab-btn');
+const panels = document.querySelectorAll('.tab-panel');
+let touchStartX = 0;
+let touchStartY = 0;
+
+tabs.forEach(btn => {
+  btn.addEventListener('click', () => switchTab(btn.dataset.tab));
+  btn.addEventListener('touchstart', (e) => {
+    touchStartX = e.touches[0].clientX;
+    touchStartY = e.touches[0].clientY;
+  }, { passive: true });
+  btn.addEventListener('touchend', (e) => {
+    const dx = Math.abs(e.changedTouches[0].clientX - touchStartX);
+    const dy = Math.abs(e.changedTouches[0].clientY - touchStartY);
+    if (dx < 10 && dy < 10) {
+      e.preventDefault();
+      switchTab(btn.dataset.tab);
+    }
+  });
+});
+
+function switchTab(tabId) {
+  tabs.forEach(t => t.classList.remove('active'));
+  panels.forEach(p => p.classList.remove('active'));
+  document.querySelector(`[data-tab="${tabId}"]`).classList.add('active');
+  document.getElementById(`tab-${tabId}`).classList.add('active');
+  window.scrollTo({ top: 0 });
+}
+
+// ==================== DATA ====================
+const SEGMENTS = [
+  {
+    name: '«Перед сезоном нужен рабочий универсал»',
+    score: 86, decision: 'Берём', decisionColor: 'green',
+    scoring: { value: 27, profit: 24, scale: 17, speed: 18 },
+    som: '3.6–9.0 млн ₽/год',
+    audience: 'Мужчины 25–55, охотники/туристы, 3–15 выездов в год',
+    bigJob: 'Хочу иметь рабочий нож, который не подведёт на выезде и которым можно спокойно пользоваться, чтобы не тратить время на заточку и не переживать за безопасность хвата.',
+    coreJobs: [
+      'Нож держит рез минимум 2–5 выездов без полноценной заточки',
+      'Безопасный хват в мокрой руке/перчатках — 0 случаев соскальзывания',
+      'Официальная оплата с чеком + паспорт/сертификат «не ХО»'
+    ],
+    criteria: ['Соответствие стали (Х12МФ)', 'Гарантия 24–36 месяцев', 'Сроки до региона', 'Оплата с чеком + возврат 15 дней', 'Безопасность хвата'],
+    stopFactor: 'Недоверие к цене «Х12МФ от 3 000» без доказательств',
+    topBarriers: ['«За 3к кованый Х12МФ — не верю, где подвох?»','«100% предоплата — а если не понравится?»','«Нужно к выезду — боюсь не успеть»','«Х12МФ не начнёт ржаветь точками?»'],
+    channels: ['Яндекс.Директ Поиск', 'РСЯ/ретаргет', 'VK (охота/туризм)', 'Сарафан/рефералы'],
+    quote: '«Нужен нормальный рабочий нож для леса, чтобы резал и не бесил»'
+  },
+  {
+    name: '«Нержавейка под воду: нож, который не пугает ржавчиной»',
+    score: 79, decision: 'Берём', decisionColor: 'green',
+    scoring: { value: 25, profit: 23, scale: 16, speed: 15 },
+    som: '2.4–6.3 млн ₽/год',
+    audience: 'Мужчины 23–60, рыбаки (лодка/берег), частый контакт с водой',
+    bigJob: 'Хочу иметь нож для рыбалки и воды, который не начинает покрываться пятнами и не требует постоянного ухода, чтобы спокойно пользоваться.',
+    coreJobs: [
+      'Нет видимой коррозии после 3–5 рыбалок при обычной сушке',
+      'Комфортный рез при чистке рыбы, контроль в мокрой руке',
+      'Законность: паспорт изделия + сертификат в комплекте'
+    ],
+    criteria: ['Нержавеющая сталь 95Х18', 'Гарантия 24–36 месяцев', 'Доставка без сюрпризов', 'Возврат 15 дней', 'Версия с упором/эргономика'],
+    stopFactor: 'Непонимание разницы 95Х18 и Х12МФ → риск неправильного выбора',
+    topBarriers: ['«Нержавейка — это не пластилин? Не хочу точить каждый раз»','«В мокрой руке опасно — нужен упор»','«Не хочу, чтобы нож пах ржавчиной после рыбы»','«Доставка до посёлка — будет ли вообще?»'],
+    channels: ['Яндекс.Директ (95Х18/рыбалка)', 'Telegram (рыбалка)', 'VK сообщества', 'SEO «сталь для рыбалки»'],
+    quote: '«Дайте нож в лодку, чтобы не ржавел и был удобный»'
+  },
+  {
+    name: '«Один нож на дом–дачу–машину: чтобы не бесил»',
+    score: 74, decision: 'Тестируем', decisionColor: 'yellow',
+    scoring: { value: 22, profit: 20, scale: 18, speed: 14 },
+    som: '1.8–5.4 млн ₽/год',
+    audience: 'Мужчины 20–50, город/дача/авто, универсальные бытовые задачи',
+    bigJob: 'Хочу один понятный нож, который нормально режет и не разваливается, чтобы не покупать каждый год новый и не раздражаться от тупого лезвия.',
+    coreJobs: [
+      'Режет без «жевания» после 1–2 месяцев бытового использования',
+      'Нет люфтов/расшатывания в первые 6 месяцев',
+      'Внешний вид аккуратный, есть документы и официальная оплата'
+    ],
+    criteria: ['Цена 3 000–4 000 ₽', 'Гарантия 24–36 месяцев', 'Сроки изготовления 4–7 дней', 'Комплект: ножны + паспорт', 'Отзывы 10 000+'],
+    stopFactor: 'Сильная ценовая конкуренция с маркетплейсами и «какой-нибудь нож и так есть»',
+    topBarriers: ['«Зачем мне за 3к, если есть за 800?»','«Мне не нужен охотничий, мне нужен обычный»','«Дерево — не будет ли трескаться?»','«100% предоплата — неприятно»'],
+    channels: ['РСЯ + VK (дача/туризм/мангал)', 'Яндекс.Директ (широкий)', 'SEO универсальный нож', 'Ремаркетинг'],
+    quote: '«Я не хочу нож за 800, который через месяц на выброс. Лучше один нормальный и забыть»'
+  },
+  {
+    name: '«Подарок мужчине, который реально будут использовать»',
+    score: 68, decision: 'Тестируем', decisionColor: 'yellow',
+    scoring: { value: 20, profit: 18, scale: 14, speed: 16 },
+    som: '1.2–3.0 млн ₽/год',
+    audience: 'Женщины и мужчины 25–55, выбирают подарок под конкретный повод (23 февраля, ДР, юбилей)',
+    bigJob: 'Хочу подарить вещь, которая выглядит достойно и при этом реально используется, чтобы человек был доволен и не убрал её «в шкаф».',
+    coreJobs: [
+      'Понять «подойдёт ли» за 2 минуты по карточке/сценарию',
+      'Доставка успевает к дате — 4–7 дней изготовление + доставка',
+      'Возврат 15 дней на случай ошибки + документы «не ХО»'
+    ],
+    criteria: ['Срок до даты', 'Возврат 15 дней', 'Комплект выглядит достойно', 'Официальная оплата', 'Отзывы 10 000+'],
+    stopFactor: 'Риск не угадать по сценарию и внешнему виду + жёсткие сроки к дате',
+    topBarriers: ['«Вдруг выглядит дёшево и подарок не зайдёт»','«Я не понимаю в сталях — боюсь купить не то»','«Сроки: если не успеет к дате — всё пропало»','«100% предоплата — страшно»'],
+    channels: ['VK (подарочные поводы)', 'SEO «подарок охотнику нож»', 'Яндекс.Директ Поиск', 'Ретаргет'],
+    quote: '«Я хочу, чтобы муж радовался и пользовался, а не убрал "беречь"»'
+  },
+  {
+    name: '«Ножеман-скептик: нужно доказательство термички и стабильности»',
+    score: 61, decision: 'Тестируем', decisionColor: 'red',
+    scoring: { value: 18, profit: 21, scale: 12, speed: 10 },
+    som: '0.9–2.4 млн ₽/год',
+    audience: 'Мужчины 25–55, участники ножевых сообществ/форумов, высокая критичность',
+    bigJob: 'Хочу купить нож, который соответствует заявленным характеристикам и сделан стабильно, чтобы не участвовать в лотерее и не разочароваться.',
+    coreJobs: [
+      'Описание термообработки + контроль твёрдости как факт проверки',
+      'Стабильность: нет массовых жалоб на кромку/рукоять',
+      'Гарантия и возврат как у нормального производителя'
+    ],
+    criteria: ['Контроль термообработки (HRC)', 'Документы не-ХО', 'Честный возврат 15 дней', 'Реальная гарантия 2–3 года', 'Объяснение низкой цены без «серийности»'],
+    stopFactor: 'Требует доказательств уровня «процесс/измерения/стабильность», иначе — негатив',
+    topBarriers: ['«За 3к это не может быть стабильно, где экономия?»','«Если это серийное — значит штамповка»','«Покажите контроль твёрдости, иначе это разговоры»','«Не хочу общаться с менеджером по шаблону»'],
+    channels: ['SEO (термичка/ОТК)', 'YouTube-обзоры', 'Форумы/комментарии', 'Ретаргет'],
+    quote: '«Покажите процесс и контроль — и я поверю. Слова про кованый без доказательств мне не нужны»'
+  }
+];
+
+const PERSONAS = [
+  {
+    name: 'Андрей', city: 'Кемерово', initial: 'А',
+    segment: 'Рабочий универсал перед сезоном',
+    situation: 'Работает в городе, 1–2 раза в месяц в сезон выезжает в лес. На прошлом выезде нож «сдулся»: тупил верёвку, рука поехала. До следующего выезда 10 дней.',
+    bigJob: 'Купить рабочий нож под охоту/лес — держит рез, безопасный хват, официальная покупка с документами.',
+    quote: '«На прошлом выезде мой нож сдулся на второй день. Хочу взять такой, чтобы кинул в рюкзак — и он работает»',
+    triggers: ['Скорый выезд через 7–14 дней', 'Негативный опыт: быстрый износ кромки', 'Рекомендация товарища «возьми рабочий, не жалко»'],
+    barriers: ['«За 3 000 кованый Х12МФ — не верю»', '«Предоплата 100% без живого подтверждения»', '«Страх не успеть к выезду»', '«Х12МФ не начнёт ржаветь точками?»'],
+    decision: '1) Понял — старый нож не устраивает. 2) Вбил 3–5 запросов. 3) Выбрал 2–3 варианта. 4) Написал менеджеру: сроки, документы, гарантия. 5) Если ответы конкретные — оплатил по ссылке ЮKassa.',
+    successMetrics: ['Доставка ≤ 14–21 дней суммарно', 'Рез держится ≥ 2–5 выездов', '0 случаев соскальзывания', 'Документы: паспорт + сертификат + памятка']
+  },
+  {
+    name: 'Сергей', city: 'Астрахань', initial: 'С',
+    segment: 'Нержавейка под воду / рыбалка',
+    situation: 'Рыбалка почти каждые выходные в сезон. Нож живёт в лодке, постоянно влажно. Не хочет «дорогой бренд», хочет практично.',
+    bigJob: 'Нержавеющий нож 95Х18 для воды и рыбалки — не переживать за коррозию, удобный в мокрой руке.',
+    quote: '«Я не хочу каждый раз сушить и мазать. Нужен нож, который спокойно переносит воду»',
+    triggers: ['Пятна/коррозия на текущем ноже', 'Начало сезона рыбалки', 'Совет знакомых рыбаков'],
+    barriers: ['«Нержавейка будет быстро тупиться?»', '«В мокрой руке нужен упор»', '«Доставка далеко — не хочу сюрпризов»', '«100% предоплата»'],
+    decision: 'Сравнивает 3–6 вариантов, смотрит отзывы, спрашивает про уход/коррозию. Если ответ простой и по делу — оплачивает.',
+    successMetrics: ['Нет коррозии: 0–1 пятно за сезон', 'Удобство хвата ≥ 8/10', 'Доставка ≤ 14 дней после отправки']
+  },
+  {
+    name: 'Ирина', city: 'Екатеринбург', initial: 'И',
+    segment: 'Подарок мужчине',
+    situation: 'Выбирает подарок мужу, который ездит на природу. Не разбирается в сталях, боится ошибиться, хочет гарантию/возврат.',
+    bigJob: 'Купить подарок, который выглядит достойно, реально используется и успеет к дате с возможностью вернуть.',
+    quote: '«Я хочу, чтобы муж радовался и пользовался, а не убрал "беречь"»',
+    triggers: ['Скорый день рождения или праздник', 'Хочет мужской и полезный подарок', 'Бюджет до 5 000 ₽'],
+    barriers: ['«Вдруг не успеет к дате»', '«Вдруг не понравится — можно вернуть?»', '«Почему так дёшево?»', '«Не понимаю в сталях»'],
+    decision: 'Быстро сравнивает 5–10 вариантов, выбирает по отзывам и понятности, задаёт 1–2 вопроса про сроки и возврат.',
+    successMetrics: ['Доставка к дате: 100%', 'Внешний вид аккуратный, без дефектов', 'Возможность возврата без конфликтов']
+  }
+];
+
+const COMPETITORS = [
+  { name: 'Кузнечная мастерская Андрея Бирюкова', site: 'inetkuznec.ru', price: '4 800–70 000+ ₽', type: 'прямой',
+    criteria: { steel: 'plus', guarantee: 'mixed', timing: 'mixed', payment: 'mixed', grip: 'mixed' },
+    pros: ['Широкий ассортимент сталей (включая порошковые)', 'Регулярные скидки 10–20%', 'Реальные цены и наличие в карточках'],
+    cons: ['Средний ценник выше 3 000 ₽ (от 4 800 ₽)', 'Гарантия без конкретного срока на первом экране', 'Нет SLA по срокам изготовления'],
+    complaint: '«Цена хорошая, но мне нужен рабочий нож до 6 тысяч — у вас начинается дороже»'
+  },
+  { name: 'ООО «Ворсменский нож»', site: 'knife-vorsma.ru', price: '≈9 284 ₽ (пример)', type: 'прямой',
+    criteria: { steel: 'plus2', guarantee: 'plus', timing: 'mixed', payment: 'plus', grip: 'plus' },
+    pros: ['Много параметров + опции (заточка, гравировка)', '«Возможна доставка без предоплаты»', 'Сертификаты в публичном доступе'],
+    cons: ['Цена выше 3 000 ₽ (пример 9 283 ₽)', 'Товары часто «под заказ» без срока', '«Пожизненная гарантия*» — звёздочка вызывает вопросы'],
+    complaint: '«Написано под заказ, а сколько ждать — непонятно. Мне надо до выезда»'
+  },
+  { name: 'Ножи Павлово (nozhi.online)', site: 'nozhi.online', price: '5 500–5 550 ₽', type: 'прямой',
+    criteria: { steel: 'plus', guarantee: 'mixed', timing: 'plus', payment: 'plus', grip: 'mixed' },
+    pros: ['Конкретные параметры и HRC на карточках', 'Оплата при получении после осмотра', 'Гравировка +400 ₽ для подарка'],
+    cons: ['Цена от 5 500 ₽ (выше массового сегмента)', 'Гарантия не на карточке', '«От 3 дней» — только про доставку, не сборку'],
+    complaint: '«Про оплату написано, а про возврат и гарантийные случаи надо самому искать»'
+  },
+  { name: 'Кузница Коваль (koval-knife.shop)', site: 'koval-knife.shop', price: '4 000–130 000 ₽', type: 'прямой',
+    criteria: { steel: 'mixed', guarantee: 'mixed', timing: 'mixed', payment: 'minus', grip: 'mixed' },
+    pros: ['Широкий ассортимент сталей и ценовых уровней', 'Сильная «легенда производства»', 'Раздел отзывов на сайте'],
+    cons: ['Входная цена выше 3 000 ₽ (акция от 4 000 ₽)', 'Нет «оплата с чеком/возврат» на первом экране', 'Нет SLA по срокам'],
+    complaint: '«Красиво, но мне нужен простой рабочий нож под 3 тысячи и чтобы было понятно про возврат сразу»'
+  },
+  { name: '«Вострый нож» (Ворсма)', site: 'вострый нож .рф', price: '4 500–6 000 ₽', type: 'прямой',
+    criteria: { steel: 'plus', guarantee: 'mixed', timing: 'mixed', payment: 'minus', grip: 'mixed' },
+    pros: ['Цена близко к рабочему сегменту', 'Большой выбор геометрий с упором', 'Обработка «в течение 1 рабочего дня»'],
+    cons: ['Нет явного «ЮKassa/чек» и «возврат N дней»', 'HRC и термичка не на витрине', 'Гарантия — скрытый аргумент'],
+    complaint: '«Вроде Ворсма, но где гарантия/возврат на видном месте?»'
+  },
+  { name: 'Ножиков (nozhikov.ru)', site: 'nozhikov.ru', price: '3 990–11 990 ₽', type: 'косвенный',
+    criteria: { steel: 'mixed', guarantee: 'mixed', timing: 'plus', payment: 'plus', grip: 'mixed' },
+    pros: ['Большой выбор, «В наличии» для быстрых покупок', 'Подарочные сертификаты', 'Офлайн-точка в Москве'],
+    cons: ['Не производитель — ответственность за сталь размыта', '«Гарантия качества» без срока/случаев', 'Сложные фильтры для новичка'],
+    complaint: '«Слишком много вариантов, не понимаю что мне выбрать под рыбалку»'
+  },
+  { name: 'НожАндрей (nozhandrey.ru)', site: 'nozhandrey.ru', price: '≈5 000 ₽', type: 'прямой',
+    criteria: { steel: 'plus', guarantee: 'minus', timing: 'mixed', payment: 'minus', grip: 'mixed' },
+    pros: ['Чётко указаны сталь и HRC 60–62', 'Понятная стоимость доставки', 'Ножны из натуральной кожи'],
+    cons: ['«НАЛОЖЕННЫМ ПЛАТЕЖОМ НЕ ОТПРАВЛЯЕМ» — барьер', 'Нет гарантии/возврата на карточке', '100% предоплата «на карту»'],
+    complaint: '«Я не хочу переводить на карту 100% незнакомому магазину, дайте оплату с чеком»'
+  },
+  { name: 'Маркетплейсы (Ozon/WB)', site: 'ozon.ru / wb.ru', price: '800–2 500 ₽', type: 'альтернатива',
+    criteria: { steel: 'minus', guarantee: 'mixed', timing: 'plus2', payment: 'plus', grip: 'mixed' },
+    pros: ['Самая низкая цена ≈800 ₽', 'Быстрая доставка 1–3 дня', 'Много отзывов и фото покупателей'],
+    cons: ['Невозможно стабильно доказать сталь/термичку', '«Лотерея партии»: пришло похоже, но другое', 'Возврат по стали — тупик'],
+    complaint: '«На фото одно, вживую другое, а сталь вообще непонятно какая»'
+  }
+];
+
+const OPPORTUNITIES = [
+  {
+    criterion: 'Официальная оплата с чеком + возможность возврата',
+    icon: '💳',
+    uncovered: ['Кузница Коваль', '«Вострый нож»', 'НожАндрей', 'Кузнечная мастерская Ирбис', 'URAL-ARTISAN'],
+    partial: ['Ворсменский нож', 'Ножи Павлово', 'Маркетплейсы'],
+    opportunity: 'Сделать на первом экране карточки «пакет доверия»: «ЮKassa → чек», «возврат 15 дней», «гарантия 2–3 года», отдельная страница «как оформить возврат за 3 шага» с фото документов.'
+  },
+  {
+    criterion: 'Сроки изготовления/отправки без сюрпризов',
+    icon: '⏱',
+    uncovered: ['Кузница Коваль', 'НожАндрей', 'Мастерская дамаска', 'URAL-ARTISAN'],
+    partial: ['Ножи Павлово', 'Ворсменский нож', 'Маркетплейсы'],
+    opportunity: 'Ввести «календарь отгрузки»: «Отправка 4–7 рабочих дней» + трекер стадий заказа (принят/в работе/ОТК/передан в СДЭК) + таблица «сколько едет до: Москва 3 дня, ДВ до 2 недель».'
+  },
+  {
+    criterion: 'Доказательство соответствия стали (Х12МФ или 95Х18)',
+    icon: '🔬',
+    uncovered: ['Маркетплейсы (Ozon/WB)'],
+    partial: ['Мастерская дамаска', 'НожАндрей', 'Кузнечная мастерская Бирюкова', 'Ножи Павлово'],
+    opportunity: 'Публичный «протокол ОТК по ножу» с QR в паспорте: дата термообработки, марка стали, измеренная твёрдость, подпись термиста, фото замера твердомером + «10 этапов контроля» как чек-лист на сайте.'
+  },
+  {
+    criterion: 'Безопасность хвата (мокрая рука/перчатка)',
+    icon: '✋',
+    uncovered: ['Shukur.ru', 'Мастерская дамаска'],
+    partial: ['Ножи Павлово', 'Ворсменский нож', 'URAL-ARTISAN'],
+    opportunity: 'Простой выбор в каталоге: 3 кнопки «Нержавейка под воду (95Х18)», «С упором — боитесь скольжения», «Классика Х12МФ — держит рез дольше» + короткое видео «мокрая рука/перчатка» на каждом варианте.'
+  },
+  {
+    criterion: 'Гарантия и понятные гарантийные случаи',
+    icon: '🛡',
+    uncovered: ['Shukur.ru', 'НожАндрей', 'Мастерская дамаска', 'URAL-ARTISAN'],
+    partial: ['Кузнечная мастерская Бирюкова', 'Ножи Павлово', 'Ворсменский нож (звёздочка)'],
+    opportunity: 'Вынести на карточку «Гарантия 2–3 года» + список случаев «трещина в рукояти, скол, деформация, сомнение в качестве стали» + описание процедуры проверки спорных кейсов.'
+  }
+];
+
+const CJM_STAGES = [
+  {
+    num: '0', label: 'Осознание проблемы',
+    name: '«Живёт с каким-то ножом» и матерится, когда он тупится',
+    duration: 'Месяцы–годы до триггера', intensity: 3,
+    actions: 'Носит старый складник/дешёвый нож с маркетплейса. На природе замечает: нож быстро теряет остроту, «жует» канат, ржавеет точками.',
+    barriers: 'Нет ясной причины купить сейчас. Низкое доверие к обещаниям «кованой стали». Опасение «попасть на ХО».',
+    opportunity: 'Контент «чем отличается Х12МФ и 95Х18 в реальной жизни» + блок «не ХО + документы в комплекте» + калькулятор выбора.',
+    kpi: 'Досмотры видео до 75%, CTR из контента в каталог ≥ 6%'
+  },
+  {
+    num: '1', label: 'Триггер',
+    name: 'Перед сезоном: друг режет верёвку — и становится неловко за свой «пластилин»',
+    duration: '1–3 дня до активного поиска', intensity: 6,
+    actions: 'Видит у знакомого «рабочий нож» в деле. Или сам сталкивается: палец соскользнул на клинок, нож тупится на первом же дне.',
+    barriers: 'Сомнение «за 3 000 нормальный кованый не бывает». Страх предоплаты. Не понимает: Х12МФ или 95Х18?',
+    opportunity: 'Кнопка «Помочь выбрать за 2 минуты» с 3 вопросами. На первом экране: 6 лет, 100 000+ ножей, 10 000+ отзывов. Чёткий блок «Отправка 4–7 рабочих дней».',
+    kpi: 'Конверсия из визита в просмотр 2+ карточек ≥ 25%'
+  },
+  {
+    num: '2', label: 'Исследование',
+    name: '«Открывает 10 вкладок: Х12МФ/95Х18, кованый/не кованый, Ворсма/маркетплейс»',
+    duration: '1–7 дней', intensity: 7,
+    actions: 'Ищет ответы: какая сталь лучше под его сценарий. Читает отзывы, смотрит видео-обзоры. Сравнивает цены: видит на рынке 5 000–11 000 ₽, предложение «от 3 000» вызывает интерес и подозрение.',
+    barriers: 'Много «шума» по HRC/термичке/геометрии. Недоверие к низкой цене. Опасение «не то, что на фото».',
+    opportunity: 'Страница «Почему у нас Х12МФ от 3 000» через ОТК/гарантию/чек. Таблица «Выбор стали по условиям». Секция «Что в коробке».',
+    kpi: 'Время на странице «выбор стали» ≥ 1:40, переход в заявку ≥ 4%'
+  },
+  {
+    num: '3', label: 'Сравнение',
+    name: '«Маркетплейс за 800» vs «мастер за 9 000» vs «Просто нож от 3 000»',
+    duration: '1–4 дня', intensity: 7,
+    actions: 'Собирает короткий список. Пугает «лотерея» маркетплейса и «непредсказуемые сроки» кустаря. Хочет доказательств: ОТК, гарантия, возврат 15 дней, оплата ЮKassa.',
+    barriers: 'Триггер недоверия «слишком много обещают». Страх «не мой нож по руке». Сомнение по срокам.',
+    opportunity: '«3 сигнала доверия за 10 секунд»: ЮKassa + гарантия 2–3 года + возврат 15 дней. Фотогалерея «как выглядит дерево реально». Мини-видео «проверка твёрдости».',
+    kpi: 'Конверсия из карточки в заявку ≥ 6%'
+  },
+  {
+    num: '4', label: 'Диалог',
+    name: '«Спрашивает в лоб: Х12МФ точно? документы есть? сколько по времени до Хабаровска?»',
+    duration: '10 минут – 2 дня', intensity: 8,
+    actions: 'Идёт в диалог. Хочет короткие ответы: цена, доставка, срок 4–7 дней, комплект (ножны/паспорт/сертификат/памятка), гарантия/возврат. Если менеджер отвечает шаблонно — уходит.',
+    barriers: 'Медленный ответ/нет конкретики по срокам. Неясно чем 95Х18 лучше в воде. Предоплата 100%.',
+    opportunity: 'Скрипт ответа в 5 буллетах: сталь/версия, сроки, доставка, гарантия/возврат, документы. Карта сроков по регионам. Фото реального комплекта.',
+    kpi: 'Доля диалогов до оплаты ≥ 35%'
+  },
+  {
+    num: '5', label: 'Оплата',
+    name: '«Оплачивает 100% и переживает: только бы отправили»',
+    duration: '5–15 мин до оплаты + 0–24 ч на подтверждение', intensity: 8,
+    actions: 'Получает ссылку ЮKassa, оплачивает. Ждёт чек, сохраняет его. Прокручивает риски: «а если рукоять треснет», «а если сталь не та».',
+    barriers: 'Постоплатная тишина. Неясно как будет упаковано. Нет ожиданий по внешнему виду дерева.',
+    opportunity: 'Авто-сообщение «Заказ принят»: дата готовности + когда будет трек. Ссылка на памятку по уходу. Видео «как упаковываем».',
+    kpi: 'Клиенты с подтверждением ≤ 5 мин: ≥ 90%'
+  },
+  {
+    num: '6', label: 'Получение',
+    name: '«Вскрывает при всех в пункте выдачи и нюхает кожу ножен»',
+    duration: '1–3 дня', intensity: 9,
+    actions: 'Забирает через СДЭК/Почту. Часто вскрывает прямо в ПВЗ. Смотрит: посадка клинка, состояние рукояти, комплект. Делает первые тесты: рез бумаги, помидора.',
+    barriers: 'Ожидание «идеально как на фото» vs природные отличия дерева. Мелочи могут восприниматься как брак.',
+    opportunity: 'Мини-карта «Проверка при получении: 5 пунктов». QR на видео «как править на коже». Запрос фото «в руке» через 7 дней.',
+    kpi: 'Обращения по уходу без возврата ≥ 80%'
+  },
+  {
+    num: '7', label: 'Первый выезд',
+    name: '«Строгает щепу, режет верёвку и впервые не думает о заточке»',
+    duration: '1 выезд (1–7 дней)', intensity: 7,
+    actions: 'Берёт нож на охоту/рыбалку/поход. Использует по назначению. Если 95Х18 — проверяет поведение после мокрой рыбалки. Если Х12МФ — замечает, что правка нужна реже.',
+    barriers: 'Неправильные ожидания (рубка костей/металл → скол). Забывает вытереть насухо Х12МФ. Страх повредить рукоять при сырости.',
+    opportunity: 'Коммуникация «что ножу нельзя» без морали: 3 запрета. Предложение аксессуаров (кожа/паста для правки). Сбор UGC: фото/отзыв за бонус.',
+    kpi: 'Клиенты, открывшие инструкцию по уходу ≥ 45%'
+  },
+  {
+    num: '8', label: 'Привычка',
+    name: '«Через месяц понимает: я перестал носить точилку»',
+    duration: '3–8 недель', intensity: 5,
+    actions: 'Регулярно использует нож. Делится впечатлением с окружением. Может появиться первый «триггер ухода»: подсела острота. Проверяет гарантийный сценарий.',
+    barriers: 'Дефект + долгое решение = доверие рушится. Нет повода для повторной покупки.',
+    opportunity: 'Сценарий «вторая покупка»: второй нож под воду или подарок. Запрос отзыва через 21–30 дней.',
+    kpi: 'Повторные покупки/аксессуары за 60 дней ≥ 6–12%'
+  },
+  {
+    num: '9', label: 'Сарафан',
+    name: '«На костре кто-то просит дай на минуту — и дальше идёт цепочка»',
+    duration: '1 день – 3 месяца', intensity: 6,
+    actions: 'Достаёт нож в компании. Рассказывает: «рабочий, не жалко, за свои деньги огонь». Кидает ссылку или название «Просто нож».',
+    barriers: 'Нет удобного способа «передать» покупку (ссылка/промокод). Нет «доказательств» для скептика в окружении.',
+    opportunity: 'Реферальная программа: бонус на доставку другу и владельцу. Готовый «пакет доказательств» в 1 странице. Визитка/QR на каталог в коробке.',
+    kpi: 'Доля заказов по рефералам ≥ 5–10% за 3 месяца'
+  },
+  {
+    num: '10', label: 'Возврат',
+    name: '«Возвращается за вторым: нержавейку в лодку, Х12МФ — в рюкзак»',
+    duration: '2 недели – 12 месяцев', intensity: 5,
+    actions: 'Понимает: один нож не закрывает все сценарии. Покупает второй: 95Х18 под воду или версию с упором для зимних перчаток. Либо делает подарочный заказ.',
+    barriers: 'Нет явного каталога «второй нож по сценарию». Если предыдущая доставка была долгой — откладывает.',
+    opportunity: 'Сценарный каталог: «рыбалка», «охота/лес», «EDC/машина», «подарок». Предложение «вторая покупка со скидкой на доставку». Сбор отзывов «после сезона».',
+    kpi: 'Повторные покупки за 12 месяцев ≥ 12–25%'
+  }
+];
+
+const CHANNELS = [
+  { icon: '🔍', name: 'Яндекс.Директ Поиск', stages: '1, 2, 3, 4', msg: 'Кованый рабочий нож Х12МФ от 3 000 ₽ + документы/гарантия/ЮKassa-чек', format: 'Поисковые объявления + посадочная «выбор за 30 секунд»', cta: 'Подобрать версию' },
+  { icon: '📢', name: 'РСЯ (рекламная сеть)', stages: '0, 1, 2, 3', msg: 'Не лотерея: 10 этапов ОТК. Выберите Х12МФ / 95Х18 / с упором', format: 'Баннеры/видео «3 сценария» + ретаргет', cta: 'Выбрать сценарий' },
+  { icon: '💙', name: 'VK Реклама', stages: '1, 2, 3', msg: 'Нож для работы, не для полки: «если нож жалко — он бесполезен»', format: 'Карусель 3 версий + посты «как ухаживать» + отзывы', cta: 'Получить подбор' },
+  { icon: '✈️', name: 'Telegram (посевы)', stages: '0, 1, 2', msg: 'Рабочий кованый нож от 3 000 ₽ + ОТК/гарантия/возврат — без пафоса', format: 'Нативный пост «какую версию брать под воду/лес» + ссылка', cta: 'Открыть подбор' },
+  { icon: '▶️', name: 'YouTube / Видеоплатформы', stages: '0, 2, 3', msg: 'Тесты и практика: нож не для красоты — для задач', format: 'Короткие видео: рез/правка/что в коробке/ОТК', cta: 'Посмотреть комплектацию' },
+  { icon: '📝', name: 'SEO (статьи)', stages: '0, 2', msg: 'Понять и выбрать без теории: Х12МФ vs 95Х18, уход, рукоять', format: 'Статьи «Х12МФ плюсы/минусы», «нож для рыбалки: какая сталь»', cta: 'Перейти к выбору' },
+  { icon: '💬', name: 'Мессенджеры (чат/WhatsApp)', stages: '4, 5, 6, 8', msg: '5 буллетов: версия/сталь, цена, сроки 4–7 дней, доставка, гарантия/документы', format: 'Шаблон сообщения менеджера + автоответы + ссылка ЮKassa', cta: 'Уточнить доставку' },
+  { icon: '🤝', name: 'Реферальная программа', stages: '7, 8, 9, 10', msg: 'Проверенный рабочий нож. Бонус на доставку вам и другу', format: 'Вкладыш в коробку + QR + промокод', cta: 'Поделиться ссылкой' }
+];
+
+const AUTOMATIONS = [
+  { icon: '✅', trigger: 'Статус «оплата прошла» в ЮKassa/CRM', action: 'Авто-подтверждение: состав заказа, сроки 4–7 дней, каналы связи, когда трек', kpi: 'Клиенты с подтверждением ≤ 5 мин: ≥ 90%' },
+  { icon: '⏰', trigger: 'Заявка без ответа менеджера 120 минут', action: 'Авто-сообщение с 3 быстрыми ответами: сталь/версия, доставка, документы', kpi: 'Снижение брошенных заявок на 10–20%' },
+  { icon: '📦', trigger: 'Статус «доставлено» от СДЭК/Почты', action: 'Через 1 день — QR/ссылка: как ухаживать за Х12МФ/95Х18, что нельзя, как править', kpi: 'Открываемость инструкции по уходу ≥ 45%' },
+  { icon: '⭐', trigger: '21–30 дней после доставки', action: 'Запрос короткого отзыва по 3 вопросам: рез, удобство хвата, острота', kpi: 'Доля отзывов в течение 30–45 дней ≥ 8–15%' },
+  { icon: '🔄', trigger: '45–60 дней после первой покупки', action: 'Предложить вторую версию: «под воду — 95Х18», «безопасный хват — с упором»', kpi: 'Повторные покупки за 60 дней ≥ 6–12%' },
+  { icon: '🎁', trigger: 'Положительный отзыв / повторное использование', action: 'Выдать персональный QR/промокод: бонус к доставке другу и владельцу', kpi: 'Доля заказов по рефералам ≥ 5–10% за 3 месяца' }
+];
+
+const FUNNEL_STAGES = [
+  { stage: '0→1', desc: 'Сформировать потребность и интерес к «рабочему ножу»', kpi: 'Охват и вовлечённость: досмотры видео/прочтения статей, клики в квиз' },
+  { stage: '1→2', desc: 'Перевести в активный поиск на вашем ресурсе', kpi: 'CTR из триггерного контента/объявления в сайт' },
+  { stage: '2→3', desc: 'Удержать в изучении и объяснить разницу сталей', kpi: 'Доля сессий с просмотром 2+ страниц; скролл 75%' },
+  { stage: '3→4', desc: 'Запустить диалог и снять ключевые сомнения', kpi: 'Доля пользователей, начавших контакт (чат/заявка/звонок)' },
+  { stage: '4→5', desc: 'Перевести из вопросов в решение', kpi: 'Конверсия диалог → оплата; CRM: статусы + среднее время ответа' },
+  { stage: '5→6', desc: 'Закрепить доверие после предоплаты', kpi: 'Доля оплат без отмен/возвратов до отправки' },
+  { stage: '6→7', desc: 'Снизить негатив от ожиданий и внешнего вида', kpi: 'Доля клиентов без претензий при получении (72 часа)' },
+  { stage: '7→8', desc: 'Помочь правильно использовать и ухаживать', kpi: 'Открытия инструкций + статистика гарантийных обращений' },
+  { stage: '8→9', desc: 'Получить подтверждение качества и основу для сарафана', kpi: 'NPS/CSAT и доля положительных отзывов' },
+  { stage: '9→10', desc: 'Расширить на вторую сталь/версию/подарок', kpi: 'Доля повторных покупок за 12 месяцев' }
+];
+
+const QUICK_WINS = [
+  { n: 1, title: 'Собрать «пакет доверия» на сайте', days: '7–10 дней', budget: '0–30 000 ₽', effect: '+15–30% конверсия карточка→заявка', desc: 'ЮKassa+чек, гарантия 2–3 года, возврат 15 дней, фото документов, «что в коробке», сроки 4–7 дней', cjm: '2, 3, 4, 5' },
+  { n: 2, title: 'Яндекс.Директ Поиск по горячим запросам', days: '10–14 дней', budget: '20 000–80 000 ₽', effect: 'Первые целевые заявки через 2–5 дней', desc: '«нож х12мф купить», «кованый нож», «нож с упором», «нож не ХО сертификат» с посадкой на выбор стали + минус-слова', cjm: '1, 2, 3, 4' },
+  { n: 3, title: 'Скрипт менеджера «5 буллетов» + шаблоны', days: '3–5 дней', budget: '0–15 000 ₽', effect: '+10–20% конверсия диалог→оплата', desc: 'Сталь/версия, сроки, доставка, гарантия/возврат, документы. Фиксирует скорость и тон без шаблонности', cjm: '4, 5' },
+  { n: 4, title: 'Вкладыш в коробку с QR', days: '2–3 недели', budget: '10 000–40 000 ₽', effect: 'Снижение обращений по уходу + запуск сарафана', desc: '«Как проверить при получении», «уход за Х12МФ/95Х18», «что нельзя делать», «приведи друга — бонус на доставку»', cjm: '6, 7, 9' },
+  { n: 5, title: 'РСЯ/ретаргет на посетителей карточек', days: '2–4 недели', budget: '30 000–120 000 ₽', effect: 'Снижение стоимости заявки на 10–25%', desc: 'Догонять тех, кто смотрел выбор стали/карточки: 3 креатива «рабочий нож 3 000», «10 этапов ОТК», «рыбалка/вода»', cjm: '2, 3, 4' },
+  { n: 6, title: 'Запрос отзывов + сбор UGC через 21–30 дней', days: '2–4 недели', budget: '0–25 000 ₽', effect: 'Рост доказательной базы без скидок на продукт', desc: 'Фото ножа в деле с бонусом на доставку следующего заказа. Запрос через 21–30 дней — когда эмоция устоялась', cjm: '8, 9' }
+];
+
+const PLAN_ROWS = [
+  { period: 'Дни 1–3', title: 'Собрать фактуру в «доверительный блок»', artifact: 'Прототип блока доверия + карта страниц/CTA', metric: 'Готова страница/блок + настроены цели в Метрике', risk: 'Зависнуть в «переписывании сайта» без влияния на заявки' },
+  { period: 'Дни 4–7', title: 'Запустить Яндекс.Директ Поиск по горячим связкам', artifact: 'Кампании в Директе + UTM + отчёт первых 3 дней', metric: 'Целевой CPA заявки: 300–900 ₽; первые заявки', risk: 'Слить бюджет на слишком широкие запросы «купить нож»' },
+  { period: 'Дни 8–10', title: 'Внедрить скрипт менеджера и авто-пакет материалов', artifact: 'Шаблоны сообщений + таблица статусов', metric: 'Среднее время первого ответа ≤ 15 мин; +10% конверсия диалог→оплата', risk: 'Конверсия проседает из-за шаблонности общения' },
+  { period: 'Дни 11–14', title: 'Настроить ретаргет + 3 креатива под триггеры', artifact: 'Ретаргет-кампании + отчёт по аудиториям', metric: 'Revisit rate и конверсия ретарга в диалог ≥ 2–4%', risk: 'Не собрать данные для оптимизации и «стрелять вслепую»' }
+];
+
+const TOV_ROWS = [
+  { bad: 'Нож премиум-класса для истинных ценителей', good: 'Нож для работы: охота, лес, рыбалка, дом' },
+  { bad: 'Строгий контроль качества на всех этапах', good: '10 этапов ОТК: от проверки заготовки до финальной проверки перед отправкой' },
+  { bad: 'Безопасная покупка и надежный сервис', good: 'ЮKassa → чек, гарантия 2–3 года, возврат 15 дней' },
+  { bad: 'Идеально подойдет каждому', good: 'Выберите по задаче: Х12МФ (лес/охота), 95Х18 (вода), с упором (боитесь скольжения)' },
+  { bad: 'Долговечность на десятилетия', good: 'Нож, который не жалко использовать каждый день' }
+];
+
+const FIRST_SCREENS = [
+  { label: 'Вариант 1 (результат) — Рекомендован', h1: 'Кованый «рабочий» нож Х12МФ от 3 000 ₽', sub: '10 этапов ОТК, гарантия 2–3 года, возврат 15 дней. Оплата ЮKassa → чек', cta: 'Подобрать версию', rec: true },
+  { label: 'Вариант 2 (любопытство)', h1: 'Нож, который не жалко использовать каждый день', sub: 'Х12МФ / 95Х18 / с упором — выберите под ваш сценарий за 30 секунд', cta: 'Выбрать сценарий', rec: false },
+  { label: 'Вариант 3 (страх)', h1: 'Не лотерея: 10 этапов ОТК на каждом ноже', sub: '100 000+ проданных ножей за 6 лет. Гарантия 2–3 года и возврат 15 дней', cta: 'Посмотреть, как проверяем', rec: false },
+  { label: 'Вариант 4 (нержавейка)', h1: 'Нержавейка 95Х18 для рыбалки и воды', sub: 'Чтобы не думать о пятнах и уходе. Ножны, паспорт и сертификат в комплекте', cta: 'Показать нержавейку', rec: false }
+];
+
+// ==================== RENDERERS ====================
+
+// Market: segment bars
+function renderSegBars() {
+  const el = document.getElementById('seg-bars');
+  if (!el) return;
+  const segs = [
+    { label: 'Рабочий универсал', score: 86, color: 'var(--green)' },
+    { label: 'Нержавейка/вода', score: 79, color: 'var(--green)' },
+    { label: 'Дача/EDC', score: 74, color: 'var(--accent-dark)' },
+    { label: 'Подарок', score: 68, color: 'var(--accent-dark)' },
+    { label: 'Ножеман', score: 61, color: 'var(--red)' }
+  ];
+  el.innerHTML = segs.map(s => `
+    <div class="bar-row">
+      <div class="bar-label" style="font-size:11px;">${s.label}</div>
+      <div class="bar-track">
+        <div class="bar-fill" style="width:${s.score}%;background:${s.color};">${s.score}</div>
+      </div>
+    </div>
+  `).join('');
+}
+
+function renderSomBars() {
+  const el = document.getElementById('som-bars');
+  if (!el) return;
+  const data = [
+    { label: 'Охота/лес', val: '3.6–9.0 млн', w: 90 },
+    { label: 'Рыбалка/вода', val: '2.4–6.3 млн', w: 70 },
+    { label: 'Дача/EDC', val: '1.8–5.4 млн', w: 60 },
+    { label: 'Подарок', val: '1.2–3.0 млн', w: 38 },
+    { label: 'Ножеман', val: '0.9–2.4 млн', w: 26 }
+  ];
+  el.innerHTML = data.map(d => `
+    <div class="bar-row">
+      <div class="bar-label">${d.label}</div>
+      <div class="bar-track">
+        <div class="bar-fill" style="width:${d.w}%;">${d.val} ₽</div>
+      </div>
+    </div>
+  `).join('');
+}
+
+// Segments
+function renderSegments() {
+  const el = document.getElementById('segments-container');
+  if (!el) return;
+  el.innerHTML = SEGMENTS.map(s => {
+    const decColor = s.decisionColor === 'green' ? 'badge-green' : s.decisionColor === 'yellow' ? 'badge-yellow' : 'badge-red';
+    return `
+    <div class="segment-card">
+      <div class="segment-card-header">
+        <div>
+          <div class="segment-name">${s.name}</div>
+          <div style="margin-top:6px;">
+            <span class="badge ${decColor}" style="margin-right:6px;">${s.decision}</span>
+            <span class="badge badge-blue">SOM: ${s.som}</span>
+          </div>
+          <div style="font-size:12px;color:var(--text-muted);margin-top:6px;">${s.audience}</div>
+        </div>
+        <div class="score-circle">
+          <div class="score-circle-num">${s.score}</div>
+          <div class="score-circle-label">/ 100</div>
+        </div>
+      </div>
+      <div class="big-job-box">${s.bigJob}</div>
+      <div class="grid-2" style="margin:10px 0;">
+        <div>
+          <div style="font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:0.5px;color:var(--text-muted);margin-bottom:6px;">Скоринг</div>
+          ${[['Ценность', s.scoring.value, 30],['Прибыльность', s.scoring.profit, 30],['Масштаб', s.scoring.scale, 20],['Скорость', s.scoring.speed, 20]].map(([l,v,max]) => `
+          <div class="score-bar-wrap">
+            <div class="score-bar-label"><span>${l}</span><strong>${v}/${max}</strong></div>
+            <div class="score-bar-track"><div class="score-bar-fill" style="width:${Math.round(v/max*100)}%"></div></div>
+          </div>`).join('')}
+        </div>
+        <div>
+          <div style="font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:0.5px;color:var(--text-muted);margin-bottom:6px;">Ключевые работы</div>
+          ${s.coreJobs.map(j => `<div class="li-check">${j}</div>`).join('')}
+        </div>
+      </div>
+      <div class="grid-2" style="margin-top:10px;">
+        <div>
+          <div style="font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:0.5px;color:var(--text-muted);margin-bottom:6px;">Главные барьеры</div>
+          ${s.topBarriers.map(b => `<div class="li-check" style="color:var(--red);" class="li-cross">&#10007; <span style="color:var(--text)">${b}</span></div>`).join('')}
+        </div>
+        <div>
+          <div style="font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:0.5px;color:var(--text-muted);margin-bottom:6px;">Каналы</div>
+          ${s.channels.map(c => `<span class="ch-badge">${c}</span>`).join('')}
+          <div style="margin-top:10px;"><div class="badge badge-red">⚠ Стоп-фактор</div><div style="font-size:12px;color:var(--red);margin-top:4px;">${s.stopFactor}</div></div>
+        </div>
+      </div>
+      <div class="big-job-box" style="font-style:normal;background:var(--accent-light);border-color:var(--accent);color:#5a4a20;margin-top:10px;">${s.quote}</div>
+    </div>
+    `;
+  }).join('');
+}
+
+// Personas
+function renderPersonas() {
+  const el = document.getElementById('personas-container');
+  if (!el) return;
+  el.innerHTML = PERSONAS.map(p => `
+    <div class="persona-card">
+      <div class="persona-header">
+        <div class="persona-avatar">${p.initial}</div>
+        <div class="persona-header-info">
+          <div class="persona-name">${p.name}</div>
+          <div class="persona-city">📍 ${p.city} &nbsp;|&nbsp; ${p.segment}</div>
+        </div>
+      </div>
+      <div class="persona-body">
+        <div class="persona-quote">${p.quote}</div>
+        <div style="font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:0.5px;color:var(--text-muted);margin-bottom:6px;">Ситуация</div>
+        <div style="font-size:12px;margin-bottom:12px;">${p.situation}</div>
+        <div style="font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:0.5px;color:var(--text-muted);margin-bottom:4px;">Big Job</div>
+        <div class="big-job-box" style="margin-bottom:12px;">${p.bigJob}</div>
+        <div style="font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:0.5px;color:var(--text-muted);margin-bottom:6px;">Триггеры</div>
+        ${p.triggers.map(t => `<div class="li-check">${t}</div>`).join('')}
+        <div style="margin-top:10px;font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:0.5px;color:var(--text-muted);margin-bottom:6px;">Барьеры</div>
+        ${p.barriers.map(b => `<div class="li-check" style=""><span style="color:var(--red);margin-right:4px;">✕</span>${b}</div>`).join('')}
+        <div style="margin-top:10px;font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:0.5px;color:var(--text-muted);margin-bottom:6px;">Процесс решения</div>
+        <div style="font-size:12px;color:var(--text);">${p.decision}</div>
+        <div style="margin-top:10px;font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:0.5px;color:var(--text-muted);margin-bottom:6px;">Критерии успеха</div>
+        ${p.successMetrics.map(m => `<div class="li-check">${m}</div>`).join('')}
+      </div>
+    </div>
+  `).join('');
+}
+
+// Competitors matrix
+function renderCompMatrix() {
+  const el = document.getElementById('comp-matrix-body');
+  if (!el) return;
+  const dotMap = { 'plus2': '++', 'plus': '+', 'mixed': '±', 'minus': '—' };
+  const classMap = { 'plus2': 'dot-plus2', 'plus': 'dot-plus', 'mixed': 'dot-mixed', 'minus': 'dot-minus' };
+  el.innerHTML = COMPETITORS.map(c => `
+    <tr>
+      <td><strong>${c.name}</strong><br><span style="font-size:11px;color:var(--text-muted);">${c.site}</span></td>
+      <td style="white-space:nowrap;">${c.price}</td>
+      <td><span class="criteria-dot ${classMap[c.criteria.steel]}">${dotMap[c.criteria.steel]}</span></td>
+      <td><span class="criteria-dot ${classMap[c.criteria.guarantee]}">${dotMap[c.criteria.guarantee]}</span></td>
+      <td><span class="criteria-dot ${classMap[c.criteria.timing]}">${dotMap[c.criteria.timing]}</span></td>
+      <td><span class="criteria-dot ${classMap[c.criteria.payment]}">${dotMap[c.criteria.payment]}</span></td>
+      <td><span class="criteria-dot ${classMap[c.criteria.grip]}">${dotMap[c.criteria.grip]}</span></td>
+    </tr>
+  `).join('');
+}
+
+// Competitors cards
+function renderCompetitors() {
+  const el = document.getElementById('competitors-container');
+  if (!el) return;
+  const criteriaNames = { steel: 'Сталь', guarantee: 'Гарантия', timing: 'Сроки', payment: 'Оплата', grip: 'Хват' };
+  const classMap = { 'plus2': 'crit-ok', 'plus': 'crit-ok', 'mixed': 'crit-partial', 'minus': 'crit-bad' };
+  const dotMap = { 'plus2': '++ ', 'plus': '+ ', 'mixed': '± ', 'minus': '— ' };
+  el.innerHTML = `<div class="grid-2">${COMPETITORS.map(c => `
+    <div class="comp-mini">
+      <div class="comp-mini-header">
+        <div>
+          <div class="comp-mini-name">${c.name}</div>
+          <div style="font-size:11px;color:var(--text-muted);">${c.site} &nbsp;·&nbsp; <span class="badge badge-blue" style="font-size:10px;">${c.type}</span></div>
+        </div>
+        <div class="comp-mini-price">${c.price}</div>
+      </div>
+      <div class="comp-mini-criteria">
+        ${Object.entries(c.criteria).map(([k,v]) => `<span class="comp-mini-criterion ${classMap[v]}">${dotMap[v]}${criteriaNames[k]}</span>`).join('')}
+      </div>
+      <div style="font-size:11px;color:var(--green);margin-bottom:4px;">✓ ${c.pros.slice(0,2).join(' · ')}</div>
+      <div style="font-size:11px;color:var(--red);margin-bottom:6px;">✕ ${c.cons.slice(0,2).join(' · ')}</div>
+      <div class="comp-complaint">"${c.complaint}"</div>
+    </div>
+  `).join('')}</div>`;
+}
+
+// Opportunities
+function renderOpportunities() {
+  const el = document.getElementById('opportunities-container');
+  if (!el) return;
+  el.innerHTML = OPPORTUNITIES.map(o => `
+    <div class="opp-box">
+      <div class="opp-title">${o.icon} ${o.criterion}</div>
+      <div style="font-size:12px;color:var(--red);margin-bottom:4px;">Не покрыто: ${o.uncovered.join(' · ')}</div>
+      <div style="font-size:12px;color:var(--accent-dark);margin-bottom:4px;">Частично: ${o.partial.join(' · ')}</div>
+      <div class="opp-our">💡 <strong>Наша возможность:</strong> ${o.opportunity}</div>
+    </div>
+  `).join('');
+}
+
+// CJM
+function renderCJM() {
+  const el = document.getElementById('cjm-container');
+  if (!el) return;
+  el.innerHTML = CJM_STAGES.map(s => {
+    const dots = Array.from({length:10}, (_,i) => `<div class="emotion-dot${i < s.intensity ? ' active' : ''}"></div>`).join('');
+    return `
+    <div class="cjm-stage" data-num="${s.num}">
+      <div class="cjm-stage-label">Этап ${s.num}</div>
+      <div class="cjm-stage-name">${s.name}</div>
+      <div style="display:flex;gap:16px;flex-wrap:wrap;margin-bottom:10px;">
+        <div style="font-size:11px;color:var(--text-muted);">⏱ ${s.duration}</div>
+        <div class="cjm-emotion-bar">
+          <div class="cjm-emotion-label">Эмоции:</div>
+          <div class="cjm-emotion-dots">${dots}</div>
+          <div style="font-size:11px;color:var(--text-muted);">${s.intensity}/10</div>
+        </div>
+      </div>
+      <div class="cjm-cols">
+        <div>
+          <div class="cjm-col-title">Действия</div>
+          <div class="cjm-col-text">${s.actions}</div>
+        </div>
+        <div>
+          <div class="cjm-col-title">Барьеры</div>
+          <div class="cjm-col-text" style="color:var(--red);">${s.barriers}</div>
+          <div style="margin-top:8px;"><div class="cjm-col-title">Возможности</div><div class="cjm-col-text" style="color:var(--green);">${s.opportunity}</div></div>
+        </div>
+        <div>
+          <div class="cjm-col-title">KPI</div>
+          <div class="cjm-col-text" style="color:var(--blue);">${s.kpi}</div>
+        </div>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+// Channels
+function renderChannels() {
+  const el = document.getElementById('channels-container');
+  if (!el) return;
+  el.innerHTML = CHANNELS.map(c => `
+    <div class="channel-card">
+      <div class="channel-icon">${c.icon}</div>
+      <div class="channel-name">${c.name}</div>
+      <div class="channel-stages">Этапы CJM: ${c.stages}</div>
+      <div class="channel-msg">${c.msg}</div>
+      <div style="margin-top:8px;"><span class="ch-badge">${c.format}</span></div>
+      <div style="margin-top:6px;font-size:11px;font-weight:600;color:var(--accent-dark);">CTA: ${c.cta}</div>
+    </div>
+  `).join('');
+}
+
+// Automations
+function renderAutomations() {
+  const el = document.getElementById('automations-container');
+  if (!el) return;
+  el.innerHTML = AUTOMATIONS.map(a => `
+    <div class="auto-card">
+      <div class="auto-trigger">${a.icon}</div>
+      <div class="auto-content">
+        <div class="auto-trigger-text">Триггер</div>
+        <div style="font-size:12px;color:var(--text-muted);margin-bottom:6px;">${a.trigger}</div>
+        <div class="auto-action">→ ${a.action}</div>
+        <div class="auto-kpi">📊 ${a.kpi}</div>
+      </div>
+    </div>
+  `).join('');
+}
+
+// Funnel
+function renderFunnel() {
+  const el = document.getElementById('funnel-container');
+  if (!el) return;
+  el.innerHTML = FUNNEL_STAGES.map(f => `
+    <div class="funnel-row">
+      <div class="funnel-stage-label">${f.stage}</div>
+      <div class="funnel-desc">${f.desc}</div>
+      <div class="funnel-kpi">${f.kpi}</div>
+    </div>
+  `).join('');
+}
+
+// Quick Wins
+function renderQW() {
+  const el = document.getElementById('qw-container');
+  if (!el) return;
+  el.innerHTML = QW_GRID(QUICK_WINS);
+}
+
+function QW_GRID(items) {
+  return `<div class="grid-2">${items.map(q => `
+    <div class="qw-card">
+      <div class="qw-num">${q.n}</div>
+      <div class="qw-content">
+        <div class="qw-title">${q.title}</div>
+        <div class="qw-meta">
+          <span class="badge badge-blue">⏱ ${q.days}</span>
+          <span class="badge badge-yellow">💰 ${q.budget}</span>
+          <span class="badge badge-dark">CJM: ${q.cjm}</span>
+        </div>
+        <div class="qw-effect">📈 ${q.effect}</div>
+        <div class="qw-body">${q.desc}</div>
+      </div>
+    </div>
+  `).join('')}</div>`;
+}
+
+// Plan
+function renderPlan() {
+  const el = document.getElementById('plan-container');
+  if (!el) return;
+  el.innerHTML = PLAN_ROWS.map(p => `
+    <div class="plan-row">
+      <div class="plan-period">${p.period}</div>
+      <div class="plan-body">
+        <div class="plan-title">${p.title}</div>
+        <div class="plan-artifact">📦 Артефакт: ${p.artifact}</div>
+        <div class="plan-metric">📊 Метрика: ${p.metric}</div>
+        <div class="plan-risk">⚠️ Риск: ${p.risk}</div>
+      </div>
+    </div>
+  `).join('');
+}
+
+// TOV
+function renderTOV() {
+  const el = document.getElementById('tov-rows');
+  if (!el) return;
+  el.innerHTML = TOV_ROWS.map(t => `
+    <div class="tov-row">
+      <div><div style="font-size:10px;color:var(--text-muted);margin-bottom:3px;">НЕЛЬЗЯ</div><div class="tov-bad">${t.bad}</div></div>
+      <div><div style="font-size:10px;color:var(--green);margin-bottom:3px;">ГОВОРИМ</div><div class="tov-good">${t.good}</div></div>
+    </div>
+  `).join('');
+}
+
+// First screens
+function renderFirstScreens() {
+  const el = document.getElementById('first-screens');
+  if (!el) return;
+  el.innerHTML = FIRST_SCREENS.map(f => `
+    <div class="first-screen-card" style="${f.rec ? 'border: 2px solid var(--accent);' : ''}">
+      ${f.rec ? '<div style="background:var(--accent);color:var(--text);font-size:10px;font-weight:700;padding:2px 10px;border-radius:10px;display:inline-block;margin-bottom:10px;">★ РЕКОМЕНДОВАН</div>' : ''}
+      <div class="first-screen-label">${f.label}</div>
+      <div class="first-screen-h1">${f.h1}</div>
+      <div class="first-screen-sub">${f.sub}</div>
+      <div class="first-screen-cta">${f.cta}</div>
+    </div>
+  `).join('');
+}
+
+// ==================== INIT ====================
+document.addEventListener('DOMContentLoaded', () => {
+  renderSegBars();
+  renderSomBars();
+  renderSegments();
+  renderPersonas();
+  renderCompMatrix();
+  renderCompetitors();
+  renderOpportunities();
+  renderCJM();
+  renderChannels();
+  renderAutomations();
+  renderFunnel();
+  renderQW();
+  renderPlan();
+  renderTOV();
+  renderFirstScreens();
+});
+</script>
+</body>
+</html>
